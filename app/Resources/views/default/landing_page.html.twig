@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/landing_page.css') }}">
+{% endblock %}
+
+{% block navLinks %}
+    <li><a href="#" class="modal-load__register" data-toggle="modal" data-target="#register">S'inscrire</a></li>
+    <li><a href="#" class="modal-load__connect" data-toggle="modal" data-target="#connect">Se connecter</a></li>
+{% endblock %}
+
+{% block body %}
+    <div class="hero-img">
+        <div class="hero-text color-white">
+            <div class="catch-phrases">
+                <p>Partagez une offre d'emploi</p>
+                <p>ou de stage</p>
+                <div class="btn__subscribe"><a href="#" class="modal-load__register" data-toggle="modal" data-target="#register">S'inscrire</a></div>
+                <div class="btn__connect"><a href="#" class="modal-load__connect" data-toggle="modal" data-target="#connect">Se connecter</a></div>
+                <br/>
+                <div class="btn__connect--fb"><span class="fa fa-facebook-square" aria-hidden="true"></span> <a href="#">Connexion
+                        via Facebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="#registerLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="registerContent">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="connect" tabindex="-1" role="dialog" aria-labelledby="#connectLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="connectContent">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/landing_page.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,35 @@
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    overflow-y: hidden;
+}
+
+a {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.header {
+    background-color: #3F51B5;
+    border-color: #C5CAE9;
+}
+
+.color-accent {
+    color: #536DFE;
+}
+
+.color-blue--light {
+    color: #C5CAE9;
+}
+
+.color-white {
+    color: #fff;
+}
+
+.bgcolor-white {
+    background-color: #fff !important;
+}
