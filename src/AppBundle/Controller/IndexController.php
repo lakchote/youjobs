@@ -28,6 +28,6 @@ class IndexController extends Controller
      */
     public function homeAction()
     {
-
+        return $this->render('default/home.html.twig');
     }
 }

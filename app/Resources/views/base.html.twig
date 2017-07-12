@@ -29,6 +29,18 @@
                     <span class="color-blue--light">You</span><span class="color-white">Jobs</span>
                 </a>
             </div>
+            {% if app.user %}
+            <form class="navbar-form navbar-left navbar-form__border" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Rechercher une annonce">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn bgcolor-accent">
+                            <span class="fa fa-search color-white" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            {% endif %}
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="nav navbar-nav navbar-right">
                     {% block navLinks %}

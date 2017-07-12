@@ -6,20 +6,23 @@
 {% endblock %}
 
 {% block navLinks %}
-    <li><a href="#" class="modal-load__register" data-toggle="modal" data-target="#register">S'inscrire</a></li>
-    <li><a href="#" class="modal-load__connect" data-toggle="modal" data-target="#connect">Se connecter</a></li>
+    <li><a href="#" class="modal-load__register" data-toggle="modal" data-target="#register" data-url="{{ path('modal_register') }}">S'inscrire</a></li>
+    <li><a href="#" class="modal-load__connect" data-toggle="modal" data-target="#connect" data-url="{{ path('modal_login') }}">Se connecter</a></li>
 {% endblock %}
 
 {% block body %}
     <div class="hero-img">
         <div class="hero-text color-white">
             <div class="catch-phrases">
+                <noscript>
+                    <p class="lead">Vous devez activer Javascript pour profiter des fonctionnalités du site.</p>
+                </noscript>
                 <p>Partagez une offre d'emploi</p>
                 <p>ou de stage</p>
-                <div class="btn__subscribe"><a href="#" class="modal-load__register" data-toggle="modal" data-target="#register">S'inscrire</a></div>
-                <div class="btn__connect"><a href="#" class="modal-load__connect" data-toggle="modal" data-target="#connect">Se connecter</a></div>
+                <div class="btn__subscribe"><a href="#" class="modal-load__register" data-toggle="modal" data-target="#register" data-url="{{ path('modal_register') }}">S'inscrire</a></div>
+                <div class="btn__connect"><a href="#" class="modal-load__connect" data-toggle="modal" data-target="#connect" data-url="{{ path('modal_login') }}">Se connecter</a></div>
                 <br/>
-                <div class="btn__connect--fb"><span class="fa fa-facebook-square" aria-hidden="true"></span> <a href="#">Connexion
+                <div class="btn__connect--fb"><span class="fa fa-facebook-square" aria-hidden="true"></span> <a href="{{ path('connect_facebook') }}">Connexion
                         via Facebook</a>
                 </div>
             </div>

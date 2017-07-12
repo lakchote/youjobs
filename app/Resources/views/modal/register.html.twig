@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-label="close" data-dismiss="modal">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="registerLabel">Inscription</h4>
+</div>
+<div class="modal-body">
+    {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword.first) }}
+        {{ form_row(form.plainPassword.second) }}
+        <button type="submit" class="btn bgcolor-primary" id="btn-submit__register" formnovalidate>
+            <span class="fa fa-check color-white" aria-hidden="true"></span> <a href="#">Valider</a>
+        </button>
+    {{ form_end(form) }}
+</div>
+<script>
+$('#btn-submit__register').click(function (e) {
+   e.preventDefault();
+   var $formData = $('form').serializeArray();
+   $.ajax({
+       url: "{{ path('register') }}",
+       method: "POST",
+       data: $formData,
+       statusCode: {
+           400: function (jqXHR) {
+               $('#registerContent').html(jqXHR.responseText);
+           },
+           200: function(url) {
+               document.location = url;
+           }
+       }
+   });
+});
+</script>

@@ -33,3 +33,14 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+    AppBundle\EventSubscriber\Doctrine\HashPasswordSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    League\OAuth2\Client\Provider\Facebook:
+        arguments:
+            -
+                clientId: "%facebook_clientid%"
+                clientSecret: "%facebook_clientsecret%"
+                graphApiVersion: v2.8
+                redirectUri: "http://localhost:8000/connect/facebook-check"

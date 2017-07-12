@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="connectLabel">Connexion</h4>
+</div>
+<div class="modal-body">
+    {{ form_start(form) }}
+        {% if error is defined %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+        <button type="submit" class="btn bgcolor-primary" id="btn-submit__login">
+            <span class="fa fa-check color-white" aria-hidden="true"></span> <a href="#">Valider</a>
+        </button>
+    {{ form_end(form) }}
+</div>
+<script>
+    $('#btn-submit__login').click(function (e) {
+        e.preventDefault();
+        var $formData = $('form').serializeArray();
+        $.ajax({
+            url: "{{ path('login') }}",
+            method: "POST",
+            data: $formData,
+            statusCode: {
+                401: function (jqXHR) {
+                    $('#connectContent').html(jqXHR.responseText);
+                },
+                200: function(url) {
+                    document.location = url;
+                }
+            }
+        });
+    });
+</script>

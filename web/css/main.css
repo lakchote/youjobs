@@ -33,3 +33,20 @@ a {
 .bgcolor-white {
     background-color: #fff !important;
 }
+
+.bgcolor-primary {
+    background-color: #3F51B5;
+}
+
+.bgcolor-accent {
+    background-color: #536DFE;
+}
+
+.navbar-form__border {
+    border-bottom:none;
+    box-shadow: none;
+}
+
+.navbar-link--current {
+    background-color: #C5CAE9;
+}

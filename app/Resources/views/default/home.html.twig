@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    - Accueil
+{% endblock %}
+
+{% block navLinks %}
+    <li class="navbar-link--current"><a href="#"><span class="fa fa-bullhorn" aria-hidden="true"></span> Annonces</a></li>
+    <li><a href="#"><span class="fa fa-comments-o" aria-hidden="true"></span> Astuces</a></li>
+    <li><a href="#"><span class="fa fa-envelope" aria-hidden="true"></span> Messages</a></li>
+    <li><a href="#"><span class="fa fa-user" aria-hidden="true"></span> Profil</a></li>
+    <li><a href="#"><span class="fa fa-question" aria-hidden="true"></span> Contact</a></li>
+    <li><a href="{{ path('logout') }}"><span class="fa fa-sign-out" aria-hidden="true"></span>Déconnexion</a> </li>
+{% endblock %}
