@@ -5,7 +5,7 @@ html {
 
 body {
     font-family: Roboto, Helvetica, Arial, sans-serif;
-    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 a {
@@ -49,4 +49,12 @@ a {
 
 .navbar-nav>li>a:hover {
     background-color: #C5CAE9 !important;
+}
+
+label {
+    color:#3F51B5;
+}
+
+button {
+    color:#fff;
 }

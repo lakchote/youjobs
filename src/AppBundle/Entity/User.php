@@ -292,7 +292,7 @@ class User implements UserInterface, \Serializable
      */
     public function getDescription()
     {
-        return $this->description;
+        return (empty($this->description)) ? 'Renseignez votre description pour vous faire connaître !' : $this->description;
     }
 
     /**
@@ -416,6 +416,7 @@ class User implements UserInterface, \Serializable
             case $this->nbRemerciements <= 250 :
                 return self::STATUT5;
         }
+        if(empty($this->nbRemerciements)) return self::STATUT1;
     }
 
     /**

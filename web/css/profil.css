@@ -1,0 +1,46 @@
+.photo-user {
+    border: 1px solid black;
+    width: 110px;
+    height: 110px;
+    position: relative;
+    margin-bottom: 20px !important;
+}
+
+.photo-user__add {
+    position:absolute;
+    line-height:110px;
+    font-size: 0.8em;
+    left:5%;
+}
+
+.photo-user__file {
+    position:absolute;
+    top:0;
+    opacity:0;
+    width:110px;
+}
+
+.profil__heading {
+    color:#3F51B5;
+}
+
+#changePwd {
+    margin-top:15px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .profil__heading, .profil__heading--statut {
+        text-align: center;
+    }
+
+    .photo-user {
+        margin: 0 auto;
+    }
+
+    .profil__btn-submit {
+        margin-top:10px;
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+}

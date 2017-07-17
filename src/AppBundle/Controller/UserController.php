@@ -3,14 +3,17 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\Type\ProfilPersoFormType;
 use AppBundle\Form\Type\RegisterFormType;
 use AppBundle\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class UserController extends Controller
@@ -51,5 +54,23 @@ class UserController extends Controller
                 'form' => $form->createView()
             ]));
         }
+    }
+
+    /**
+     * @Route("/profil", name="profil")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function profilAction(Request $request, TokenStorage $tokenStorage, EntityManager $em)
+    {
+        $form = $this->createForm(ProfilPersoFormType::class, $tokenStorage->getToken()->getUser());
+        $form->handleRequest($request);
+        if($form->isValid()) {
+                $em->persist($form->getData());
+                $em->flush();
+                $this->addFlash('success','Vos modifications ont bien été enregistrées.');
+        }
+        return $this->render('user/profil_perso.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }
