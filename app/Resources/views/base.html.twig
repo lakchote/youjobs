@@ -44,7 +44,7 @@
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="nav navbar-nav navbar-right">
                     {% block navLinks %}
-                        <li><a href="#"><span class="fa fa-bullhorn" aria-hidden="true"></span> Annonces</a></li>
+                        <li><a href="{{ path('home') }}"><span class="fa fa-bullhorn" aria-hidden="true"></span> Annonces</a></li>
                         <li><a href="#"><span class="fa fa-comments-o" aria-hidden="true"></span> Astuces</a></li>
                         <li><a href="#"><span class="fa fa-envelope" aria-hidden="true"></span> Messages</a></li>
                         <li><a href="{{ path('profil') }}"><span class="fa fa-user" aria-hidden="true"></span> Profil</a></li>
@@ -55,13 +55,31 @@
             </div>
         </div>
     </nav>
-    {% for msg in app.session.flashBag.get('success') %}
-        <div class="alert alert-success">
-            {{ msg }}
+    {% block flash %}
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-10">
+                    {% for msg in app.session.flashBag.get('success') %}
+                        <div class="alert alert-success">
+                            {{ msg }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-    {% endfor %}
+
+    {% endblock %}
     {% block body %}
     {% endblock %}
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="text-center color-white">Copyright 2017 YouJobs - Tous droits réservés | <a href="http://localhost:8000">Mentions légales</a> | <a href="#">Contact</a> </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     {% block javascripts %}
         <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>

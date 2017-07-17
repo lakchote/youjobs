@@ -12,31 +12,36 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                <h4 class="profil__heading">Profil personnel</h4>
-                <p class="color-blue--light profil__heading--statut small"> (Rang : {{ app.user.statut }} )</p>
-                {{ form_start(form) }}
-                <div class="photo-user">
-                    <div class="photo-user__add">
-                        {{ form_widget(form.photo, { 'attr' : {'class' : 'photo-user__file'}}) }}
-                        {% if app.user.photo is null %}
-                        <span class="fa fa-plus" aria-hidden="true"></span> Ajouter une photo
-                        {% endif %}
+            <div class="col-xs-12 col-sm-10">
+                <div class="profil__container">
+                    <h1 class="profil__heading">Mon profil</h1>
+                    <p class="profil__heading--statut"> Rang : {{ app.user.statut }} <span class="small">(<span class="color-blue--light">{{ app.user.nbRemerciements }} remerciements</span>)</span></p>
+                    {{ form_start(form) }}
+                    <div class="photo-user">
+                        <div class="photo-user__add">
+                            {{ form_widget(form.photo, { 'attr' : {'class' : 'photo-user__file'}}) }}
+                            {% if app.user.photo is null %}
+                            <span class="fa fa-plus" aria-hidden="true"></span> Ajouter une photo
+                            {% endif %}
+                        </div>
                     </div>
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.email) }}
+                    <div class="color-accent margin-top">
+                        <span class="fa fa-lightbulb-o" aria-hidden="true"></span> Voir ses astuces
+                    </div>
+                    <div class="color-accent" id="changePwdToggle" data-toggle="collapse" data-target="#changePwd" aria-expanded="false" aria-controls="changePwd">
+                        <span class="fa fa-pencil-square" aria-hidden="true"></span> Changer mot de passe
+                    </div>
+                    <div id="changePwd" class="collapse">
+                    {{ form_row(form.plainPassword.first) }}
+                    {{ form_row(form.plainPassword.second) }}
+                    </div>
+                    <button type="submit" class="btn bgcolor-primary profil__btn-submit" formnovalidate>
+                        <span class="fa fa-check color-white" aria-hidden="true"></span> Valider
+                    </button>
+                    {{ form_end(form) }}
                 </div>
-                {{ form_row(form.description) }}
-                {{ form_row(form.email) }}
-                <div class="color-accent" data-toggle="collapse" data-target="#changePwd" aria-expanded="false" aria-controls="changePwd">
-                    <span class="fa fa-pencil-square" aria-hidden="true"></span> Changer mot de passe
-                </div>
-                <div id="changePwd" class="collapse">
-                {{ form_row(form.plainPassword.first) }}
-                {{ form_row(form.plainPassword.second) }}
-                </div>
-                <button type="submit" class="btn bgcolor-primary profil__btn-submit" formnovalidate>
-                    <span class="fa fa-check color-white" aria-hidden="true"></span> Valider
-                </button>
-                {{ form_end(form) }}
             </div>
         </div>
     </div>

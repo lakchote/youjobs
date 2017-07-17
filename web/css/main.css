@@ -3,9 +3,21 @@ html {
     position: relative;
 }
 
+footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:50px;
+    background-color:#7986CB;
+    line-height: 50px;
+    margin:0;
+}
+
 body {
     font-family: Roboto, Helvetica, Arial, sans-serif;
     overflow-x: hidden;
+    background-color: #3F51B5;
+    padding-bottom: 50px;
 }
 
 a {
@@ -14,8 +26,8 @@ a {
 }
 
 .header {
-    background-color: #3F51B5;
-    border-color: #C5CAE9;
+    background-color: #303F9F;
+    border-color: #fff;
 }
 
 .color-accent {
@@ -43,6 +55,7 @@ a {
 }
 
 .navbar-form__border {
+    border-top:none;
     border-bottom:none;
     box-shadow: none;
 }
@@ -55,6 +68,16 @@ label {
     color:#3F51B5;
 }
 
-button {
-    color:#fff;
+button, button:hover {
+    color:#fff !important;
+}
+
+@media screen and (max-width:768px)
+{
+    footer {
+        font-size: 0.7em;
+        height:30px;
+        padding-top:5px;
+        line-height:normal;
+    }
 }
