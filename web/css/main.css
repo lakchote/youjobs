@@ -47,6 +47,6 @@ a {
     box-shadow: none;
 }
 
-.navbar-link--current {
-    background-color: #C5CAE9;
+.navbar-nav>li>a:hover {
+    background-color: #C5CAE9 !important;
 }
