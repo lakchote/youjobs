@@ -98,6 +98,26 @@ class User implements UserInterface, \Serializable
      */
     private $astuces;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbRemerciements;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $statut;
+
+    const STATUT1 = 'Nouveau venu';
+
+    const STATUT2 = 'Contributeur occasionnel';
+
+    const STATUT3 = 'Contributeur';
+
+    const STATUT4 = 'Super contributeur';
+
+    const STATUT5 = 'Le partage c\'est la vie';
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -362,4 +382,48 @@ class User implements UserInterface, \Serializable
     {
         $this->password = $password;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNbRemerciements()
+    {
+        return $this->nbRemerciements;
+    }
+
+    /**
+     * @param mixed $nbRemerciements
+     */
+    public function setNbRemerciements($nbRemerciements)
+    {
+        $this->nbRemerciements = $nbRemerciements;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatut()
+    {
+        switch($this->nbRemerciements) {
+            case $this->nbRemerciements <= 50 :
+                return self::STATUT1;
+            case $this->nbRemerciements <= 100 :
+                return self::STATUT2;
+            case $this->nbRemerciements <= 150 :
+                return self::STATUT3;
+            case $this->nbRemerciements <= 200 :
+                return self::STATUT4;
+            case $this->nbRemerciements <= 250 :
+                return self::STATUT5;
+        }
+    }
+
+    /**
+     * @param mixed $statut
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+    }
+
 }
