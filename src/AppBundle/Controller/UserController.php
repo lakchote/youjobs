@@ -4,16 +4,14 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\RegisterFormType;
+use AppBundle\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Router;
-use Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Symfony\Component\Security\Guard\Token\PostAuthenticationGuardToken;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class UserController extends Controller
 {
@@ -34,7 +32,7 @@ class UserController extends Controller
     /**
      * @Route("/register", name="register")
      */
-    public function registerAction(Request $request, EntityManager $em, Session $session, TokenStorage $tokenStorage, Router $router, AuthenticationProviderManager $authProvider)
+    public function registerAction(Request $request, EntityManager $em, Router $router, LoginFormAuthenticator $guard, GuardAuthenticatorHandler $guardHandler)
     {
         if(!$request->isMethod('POST')) return new Response('Type de requête invalide');
         $form = $this->createForm(RegisterFormType::class);
@@ -43,9 +41,7 @@ class UserController extends Controller
             $em->persist($form->getData());
             $em->flush();
             $user = $em->getRepository(User::class)->findOneBy(['email' => $form['email']->getData()]);
-            $token = new PostAuthenticationGuardToken($user, 'main', $user->getRoles());
-            $tokenStorage->setToken($token);
-            $session->set('_security_main', serialize($token));
+            $guardHandler->authenticateUserAndHandleSuccess($user, $request, $guard, 'main');
             return (new Response())
                     ->setContent($router->generate('home'));
         } else {

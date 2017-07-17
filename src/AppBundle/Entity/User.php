@@ -6,7 +6,6 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -15,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="user")
  * @UniqueEntity(fields={"email"}, message="L'adresse mail est déjà utilisée.")
  */
-class User implements UserInterface, \Serializable, EquatableInterface
+class User implements UserInterface, \Serializable
 {
     private $imgPath = '/uploads/user/';
 
@@ -110,6 +109,8 @@ class User implements UserInterface, \Serializable, EquatableInterface
     {
         return serialize(array(
             $this->id,
+            $this->nom,
+            $this->prenom,
             $this->email,
             $this->password
         ));
@@ -119,6 +120,8 @@ class User implements UserInterface, \Serializable, EquatableInterface
     {
         list(
             $this->id,
+            $this->nom,
+            $this->prenom,
             $this->email,
             $this->password
             ) = unserialize($serialized);
@@ -358,10 +361,5 @@ class User implements UserInterface, \Serializable, EquatableInterface
     public function setPassword($password)
     {
         $this->password = $password;
-    }
-
-    public function isEqualTo(UserInterface $user)
-    {
-        return $user->getPassword() === $this->getPassword();
     }
 }
