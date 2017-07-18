@@ -6,10 +6,12 @@ use AppBundle\Entity\User;
 use AppBundle\Form\Type\ProfilPersoFormType;
 use AppBundle\Form\Type\RegisterFormType;
 use AppBundle\Security\LoginFormAuthenticator;
+use AppBundle\Service\UserPhotoDelete;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Router;
@@ -67,10 +69,19 @@ class UserController extends Controller
         if($form->isValid()) {
                 $em->persist($form->getData());
                 $em->flush();
-                $this->addFlash('success','Vos modifications ont bien été enregistrées.');
+                $this->addFlash('success','Vos modifications ont été enregistrées.');
         }
         return $this->render('user/profil_perso.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/profil/photo/delete", name="profil_photo_delete")
+     */
+    public function profilPhotoDeleteAction(UserPhotoDelete $userPhotoDelete, TokenStorage $tokenStorage, Router $router)
+    {
+        $userPhotoDelete->deleteUserPhotoData($tokenStorage->getToken()->getUser());
+        return new RedirectResponse($router->generate('profil'));
     }
 }

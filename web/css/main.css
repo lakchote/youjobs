@@ -37,6 +37,10 @@ a:hover {
     border-color: #fff;
 }
 
+.color-dark {
+    color:#1A237E;
+}
+
 .color-accent {
     color: #536DFE;
 }

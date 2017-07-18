@@ -20,3 +20,5 @@ parameters:
 
     facebook_clientId: ~
     facebook_clientSecret: ~
+
+    user_dir_photos: '%kernel.root_dir%\..\web\uploads\user'
