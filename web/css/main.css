@@ -20,9 +20,16 @@ body {
     padding-bottom: 50px;
 }
 
-a {
+nav a, footer a {
     color: #fff !important;
+}
+
+a {
     text-decoration: none !important;
+}
+
+a:hover {
+    color:#536DFE !important;
 }
 
 .header {
