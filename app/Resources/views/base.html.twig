@@ -60,14 +60,14 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-10">
                     {% for msg in app.session.flashBag.get('success') %}
-                        <div class="alert alert-success">
+                        <div class="alert alert-success alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="fermer">&times;</a>
                             {{ msg }}
                         </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
-
     {% endblock %}
     {% block body %}
     {% endblock %}

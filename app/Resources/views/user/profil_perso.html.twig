@@ -15,7 +15,7 @@
             <div class="col-xs-12 col-sm-10">
                 <div class="profil__container">
                     <h1 class="profil__heading">Mon profil</h1>
-                    <p class="profil__heading--statut"> Rang : {{ app.user.statut }} <span class="small">(<span class="color-dark">{{ app.user.nbRemerciements }} remerciements</span>)</span></p>
+                    <p class="profil__heading--statut"> Rang : {{ app.user.statut }} <br/><span class="small">(<u class="color-dark">{{ app.user.nbRemerciements }} remerciements</u>)</span></p>
                     {{ form_start(form) }}
                     <div class="photo-user">
                         {% if app.user.photo != '' %}
