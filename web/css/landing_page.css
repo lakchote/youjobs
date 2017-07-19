@@ -1,3 +1,11 @@
+footer {
+    display:none;
+}
+
+body {
+    padding-bottom: 0;
+}
+
 .btn__subscribe {
     background-color: #536DFE;
 }
