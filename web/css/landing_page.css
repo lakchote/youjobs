@@ -57,6 +57,14 @@
     font-size: 2.5em;
 }
 
+.catch-phrases a {
+    color:#fff;
+}
+
+.catch-phrases a:hover {
+    color:#fff !important;
+}
+
 @media screen and (max-width: 768px) {
 
     .catch-phrases {

@@ -388,7 +388,7 @@ class User implements UserInterface, \Serializable
      */
     public function getNbRemerciements()
     {
-        return $this->nbRemerciements;
+        return (empty($this->nbRemerciements)) ? 0 : $this->nbRemerciements;
     }
 
     /**

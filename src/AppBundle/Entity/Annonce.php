@@ -37,9 +37,30 @@ class Annonce
     private $datePublication;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Categorie", mappedBy="annonce", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Categorie")
      */
     private $categorie;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\TypeAnnonce")
+     */
+    private $type;
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
 
     /**
      * @return mixed

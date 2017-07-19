@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="categorie")
+ * @ORM\Table(name="type_annonce")
  */
-class Categorie
+class TypeAnnonce
 {
     /**
      * @ORM\Id
@@ -22,23 +22,7 @@ class Categorie
     /**
      * @ORM\Column(type="string")
      */
-    private $titre;
-
-    /**
-     * @return mixed
-     */
-    public function getTitre()
-    {
-        return $this->titre;
-    }
-
-    /**
-     * @param mixed $titre
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
-    }
+    private $type;
 
     /**
      * @return mixed
@@ -46,5 +30,21 @@ class Categorie
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 }
