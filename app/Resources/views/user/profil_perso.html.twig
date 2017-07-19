@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    - Votre Profil
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+                <div class="profil__container">
+                    <h1 class="profil__heading">Mon profil</h1>
+                    <p class="profil__heading--statut"> Rang : {{ app.user.statut }} <br/><span class="small">(<u class="color-dark">{{ app.user.nbRemerciements }} remerciements</u>)</span></p>
+                    {{ form_start(form) }}
+                    <div class="photo-user">
+                        {% if app.user.photo != '' %}
+                            <img src="{{ (app.user.photo.filename) is defined ? asset(app.user.imgPath ~ app.user.photo.filename) : asset(app.user.imgPath ~ app.user.photo) }}" alt="Votre photo de profil" class="img-responsive">
+                            <a href="{{ path('profil_photo_delete') }}" title="Supprimer la photo"><img src="{{ asset('img/trash.png') }}" alt="Supprimer photo de profil" class="img-responsive photo-user--delete"></a>
+                        {% endif %}
+                        <div class="photo-user--add">
+                            {{ form_widget(form.photo, { 'attr' : {'class' : 'photo-user__file'}}) }}
+                                {% if app.user.photo is null or app.user.photo == '' %}<span class="fa fa-plus" aria-hidden="true"></span> Ajouter une photo {% endif %}
+                        </div>
+                    </div>
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.email) }}
+                    <div class="color-accent margin-top">
+                        <span class="fa fa-lightbulb-o" aria-hidden="true"></span> <a href="#" class="color-accent">Voir ses astuces</a>
+                    </div>
+                    <div class="color-accent" id="changePwdToggle" data-toggle="collapse" data-target="#changePwd" aria-expanded="false" aria-controls="changePwd">
+                        <span class="fa fa-pencil-square" aria-hidden="true"></span> Changer mot de passe
+                    </div>
+                    <div id="changePwd" class="collapse">
+                    {{ form_row(form.plainPassword.first) }}
+                    {{ form_row(form.plainPassword.second) }}
+                    </div>
+                    <button type="submit" class="btn bgcolor-primary profil__btn-submit" formnovalidate>
+                        <span class="fa fa-check color-white" aria-hidden="true"></span> Valider
+                    </button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('#profil_perso_form_photo').change(function () {
+           $('form').submit();
+        });
+    </script>
+{% endblock %}

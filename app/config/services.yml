@@ -37,6 +37,20 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    AppBundle\EventSubscriber\Doctrine\UserPhotoUploadSubscriber:
+        arguments:
+            $directory: '%user_dir_photos%'
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    AppBundle\Service\FileUploader:
+        arguments:
+            $directory: '%user_dir_photos%'
+
+    AppBundle\Service\UserPhotoDelete:
+        arguments:
+            $directory: '%user_dir_photos%'
+
     League\OAuth2\Client\Provider\Facebook:
         arguments:
             -

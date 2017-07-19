@@ -1,0 +1,118 @@
+.photo-user {
+    border: 1px solid black;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    margin-bottom: 20px !important;
+}
+
+.photo-user--add {
+    position:absolute;
+    line-height:150px;
+    left:8%;
+    color:#536DFE;
+}
+
+.photo-user--delete {
+    position:absolute;
+    height:30px;
+    width:30px;
+    bottom:0;
+    right:0;
+    padding:2px 5px;
+    background-color: #E8EAF6;
+    z-index: 2;
+}
+
+.photo-user__file {
+    position:absolute;
+    top:0;
+    opacity:0;
+    width:150px;
+    cursor:pointer;
+}
+
+.profil__heading {
+    margin-top:0;
+    background-color: #303F9F;
+    color:#fff;
+    padding:6px 12px;
+}
+
+.profil__container {
+    border-radius:5px;
+    border:1px solid #C5CAE9;
+    margin-top:25px;
+    background-color: #E8EAF6;
+}
+
+form {
+    padding:6px 12px;
+}
+
+#changePwd {
+    margin-top:15px;
+}
+
+#changePwdToggle {
+    cursor:pointer;
+    margin-top: 5px;
+}
+
+.profil__btn-submit {
+    margin-top:10px;
+}
+
+.profil__btn-submit:hover {
+    background-color: #536DFE;;
+}
+
+.profil__heading--statut {
+    padding-left:12px;
+    color: #3F51B5;
+}
+
+@media screen and (max-width: 768px) {
+
+    .profil__heading, .profil__heading--statut {
+        text-align: center;
+    }
+
+    .profil__heading--statut {
+        font-size: 0.8em;
+    }
+
+    .profil__container {
+        margin-top:5px;
+    }
+
+    .photo-user {
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+    }
+
+    .photo-user--add {
+        left:5%;
+        line-height: 110px;
+        font-size: 0.8em;
+    }
+
+    .photo-user--delete {
+        height:25px;
+        width:25px;
+    }
+
+    .photo-user__file {
+        width:110px;
+    }
+
+    .profil__heading {
+        font-size: 1.5em;
+    }
+
+    .profil__btn-submit {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+}
