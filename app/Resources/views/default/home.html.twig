@@ -3,3 +3,24 @@
 {% block title %}
     - Accueil
 {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+                <span class="home--postAdvert bgcolor-accent color-white"> <span class="fa fa-plus" aria-hidden="true"></span> <a href="#" id="modal-load-postAdvert" class="color-white" data-toggle="modal" data-target="#postAdvert" data-url="{{ path('modal_post_advert') }}">Poster une annonce</a></span>
+            </div>
+        </div>
+        <div class="modal fade" id="postAdvert" role="dialog" tabindex="-1" aria-labelledby="postAdvertLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" id="postAdvertContent">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/home.js') }}"></script>
+{% endblock %}

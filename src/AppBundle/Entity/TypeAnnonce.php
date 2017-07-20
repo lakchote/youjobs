@@ -4,6 +4,7 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,6 +24,16 @@ class TypeAnnonce
      * @ORM\Column(type="string")
      */
     private $type;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Annonce", mappedBy="type")
+     */
+    private $annonces;
+
+    public function __construct()
+    {
+        $this->annonces = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -47,4 +58,21 @@ class TypeAnnonce
     {
         $this->type = $type;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAnnonces()
+    {
+        return $this->annonces;
+    }
+
+    /**
+     * @param mixed $annonce
+     */
+    public function setAnnonces($annonces)
+    {
+        $this->annonces = $annonces;
+    }
+
 }

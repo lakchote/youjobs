@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\Type\AnnonceFormType;
 use AppBundle\Form\Type\RegisterFormType;
 use AppBundle\Form\Type\LoginFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,7 +17,7 @@ class UserModalController extends Controller
      */
     public function modalLoginAction(Request $request)
     {
-        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide');
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
         $form = $this->createForm(LoginFormType::class);
         return $this->render('modal/login.html.twig', [
             'form' => $form->createView()
@@ -28,9 +29,21 @@ class UserModalController extends Controller
      */
     public function modalRegisterAction(Request $request)
     {
-        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide');
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
         $form = $this->createForm(RegisterFormType::class);
         return $this->render('modal/register.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/modal/postAdvert", name="modal_post_advert")
+     */
+    public function modalPostAdvertAction(Request $request)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $form = $this->createForm(AnnonceFormType::class);
+        return $this->render('modal/postAdvert.html.twig', [
             'form' => $form->createView()
         ]);
     }

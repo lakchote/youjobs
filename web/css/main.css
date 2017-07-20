@@ -28,13 +28,19 @@ a {
     text-decoration: none !important;
 }
 
-a:hover {
+footer a:hover, nav a:hover {
     color:#536DFE !important;
 }
 
 .header {
     background-color: #303F9F;
     border-color: #fff;
+}
+
+.home--postAdvert {
+    display: inline-block;
+    padding: 6px;
+    font-size:1.1em;
 }
 
 .color-dark {
@@ -50,7 +56,7 @@ a:hover {
 }
 
 .color-white {
-    color: #fff;
+    color: #fff !important;
 }
 
 .bgcolor-white {
@@ -65,6 +71,10 @@ a:hover {
     background-color: #536DFE;
 }
 
+.bgcolor-dark {
+    background-color: #303F9F;
+}
+
 .navbar-form__border {
     border-top:none;
     border-bottom:none;
@@ -75,12 +85,24 @@ a:hover {
     background-color: #C5CAE9 !important;
 }
 
-label {
-    color:#3F51B5;
+.navbar-default .navbar-toggle {
+    border-color:#fff;
 }
 
 button, button:hover {
     color:#fff !important;
+}
+
+.modal-header h4, .modal-header button {
+    color: #3F51B5 !important;
+}
+
+.modal-body a, .modal-body a:hover {
+    color:#fff !important;
+}
+
+label {
+    color:#3F51B5;
 }
 
 @media screen and (max-width:768px)
@@ -90,5 +112,9 @@ button, button:hover {
         height:30px;
         padding-top:5px;
         line-height:normal;
+    }
+
+    .home--postAdvert {
+        font-size:1em;
     }
 }

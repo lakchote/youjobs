@@ -87,7 +87,7 @@ class User implements UserInterface, \Serializable
     private $messages;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Annonce", mappedBy="userAnnonce", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Annonce", mappedBy="user", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $annonces;
