@@ -79,8 +79,10 @@ class UserController extends Controller
     /**
      * @Route("/profil/photo/delete", name="profil_photo_delete")
      */
-    public function profilPhotoDeleteAction(UserPhotoDelete $userPhotoDelete, TokenStorage $tokenStorage, Router $router)
+    public function profilPhotoDeleteAction(UserPhotoDelete $userPhotoDelete, TokenStorage $tokenStorage, Router $router, Request $request)
     {
+        $baseUrl = explode('/', $request->headers->get('referer'));
+        if(!isset($baseUrl[3]) || (isset($baseUrl[3]) && $baseUrl[3] !== substr($router->generate('profil'), 1))) return new RedirectResponse($router->generate('home'));
         $userPhotoDelete->deleteUserPhotoData($tokenStorage->getToken()->getUser());
         return new RedirectResponse($router->generate('profil'));
     }
