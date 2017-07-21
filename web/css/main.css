@@ -28,7 +28,7 @@ a {
     text-decoration: none !important;
 }
 
-footer a:hover, nav a:hover {
+nav a:hover {
     color:#536DFE !important;
 }
 

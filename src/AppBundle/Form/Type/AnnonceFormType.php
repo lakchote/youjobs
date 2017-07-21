@@ -18,13 +18,14 @@ class AnnonceFormType extends AbstractType
         $builder
             ->add('contenu', TextareaType::class, [
                 'label' => 'Description de l\'annonce',
+                'attr' => ['style' => 'height:150px;']
             ])
             ->add('categorie', EntityType::class,  [
                 'class' => Categorie::class,
                 'choice_label' => 'titre',
                 'multiple' => false,
                 'expanded' => false,
-                'label' => 'Catégorie de l\'annonce'
+                'label' => 'Secteur d\'activité'
             ])
             ->add('type', EntityType::class, [
                 'class' => TypeAnnonce::class,
