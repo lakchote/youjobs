@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    - Astuce de {{ astuce.userAstuce.username }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/astuces.css') }}">
+{% endblock %}
+
+{% block navLinks %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {{ parent() }}
+    {% else %}
+        <li><a href="{{ path('index') }}">Accueil</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+                <div class="astuces__intro">
+                    {% if astuce.userAstuce.photo is not null %}
+                        <img class="astuces__photo img img-responsive pull-left" alt="Photo de profil"
+                             src="{{ asset(astuce.userAstuce.imgPath ~ astuce.userAstuce.photo.filename) }}">
+                    {% endif %}
+                    {{ astuce.userAstuce.username }} a posté une astuce
+                    <div class="small">
+                        le {{ astuce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
+                    </div>
+                </div>
+                <div class="astuces__container">
+                    <div class="astuces__content">
+                        {{ astuce.contenu|nl2br }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

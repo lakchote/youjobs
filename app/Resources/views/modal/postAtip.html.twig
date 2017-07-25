@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="fermer">&times;</button>
+    <h4 class="modal-title" id="postAtipLabel">Publier une astuce</h4>
+</div>
+<div class="modal-body">
+    {{ form_start(form) }}
+        {{ form_row(form.contenu) }}
+    <button type="submit" class="btn bgcolor-primary" id="btn-submit__postAtip" formnovalidate><span class="fa fa-check" aria-hidden="true"></span> Valider</button>
+    {{ form_end(form) }}
+</div>
+
+<script>
+    $('#btn-submit__postAtip').click(function (e) {
+       e.preventDefault();
+       $formData = $('form').serializeArray();
+       $.ajax({
+           url: '{{ path('astuce_post') }}',
+           method: 'POST',
+           data: $formData,
+           statusCode: {
+               200: function(url) {
+                 document.location = url;
+               },
+               400: function (jqXHR) {
+                   $('#postAtipContent').html(jqXHR.responseText);
+               }
+           }
+       });
+    });
+</script>
