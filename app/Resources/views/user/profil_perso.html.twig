@@ -18,16 +18,16 @@
                     <p class="profil__heading--statut"> Rang : {{ app.user.statut }} <br/><span class="small">(<u class="color-dark">{{ app.user.nbRemerciements }} remerciements</u>)</span></p>
                     {{ form_start(form) }}
                     <div class="photo-user">
-                        {% if app.user.photo != '' %}
+                        {% if app.user.photo is not null %}
                             <img src="{{ (app.user.photo.filename) is defined ? asset(app.user.imgPath ~ app.user.photo.filename) : asset(app.user.imgPath ~ app.user.photo) }}" alt="Votre photo de profil" class="img-responsive">
                             <a href="{{ path('profil_photo_delete') }}" title="Supprimer la photo"><img src="{{ asset('img/trash.png') }}" alt="Supprimer photo de profil" class="img-responsive photo-user--delete"></a>
                         {% endif %}
                         <div class="photo-user--add">
                             {{ form_widget(form.photo, { 'attr' : {'class' : 'photo-user__file'}}) }}
-                                {% if app.user.photo is null or app.user.photo == '' %}<span class="fa fa-plus" aria-hidden="true"></span> Ajouter une photo {% endif %}
+                                {% if app.user.photo is null %}<span class="fa fa-plus" aria-hidden="true"></span> Ajouter une photo {% endif %}
                         </div>
                     </div>
-                    {{ form_row(form.description) }}
+                    {{ form_row(form.contenu) }}
                     {{ form_row(form.email) }}
                     <div class="color-accent margin-top">
                         <span class="fa fa-lightbulb-o" aria-hidden="true"></span> <a href="#" class="color-accent">Voir ses astuces</a>

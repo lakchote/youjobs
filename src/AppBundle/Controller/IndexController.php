@@ -2,14 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\Type\AnnonceFormType;
-use AppBundle\Service\PostAnnonce;
+use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Router;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class IndexController extends Controller
 {
@@ -32,29 +27,11 @@ class IndexController extends Controller
     /**
      * @Route("/home", name="home")
      */
-    public function homeAction()
+    public function homeAction(EntityManager $em)
     {
-        return $this->render('default/home.html.twig');
-    }
-
-    /**
-     * @Route("/annonce/post", name="annonce_post")
-     */
-    public function annoncePostAction(Request $request, TokenStorage $tokenStorage, PostAnnonce $postAnnonce, Router $router)
-    {
-        $form = $this->createForm(AnnonceFormType::class);
-        $form->handleRequest($request);
-        if($form->isValid()) {
-            $user = $tokenStorage->getToken()->getUser();
-            $postAnnonce->createAdvert($form, $user);
-            $this->addFlash('success', 'Votre annonce a été publiée.');
-            return (new Response())->setContent($router->generate('home'), 200);
-        } else {
-            return (new Response())
-                ->setStatusCode(400)
-                ->setContent($this->renderView('modal/postAdvert.html.twig', [
-                'form' => $form->createView()
-                ]));
-        }
+        $annonces = $em->getRepository('AppBundle:Annonce')->findBy([], ['datePublication' => 'DESC'] );
+        return $this->render('default/home.html.twig', [
+            'annonces' => $annonces
+        ]);
     }
 }

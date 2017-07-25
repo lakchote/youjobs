@@ -69,10 +69,10 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @Assert\Length(max=400, maxMessage="La description est trop volumineuse.", min=50, minMessage="La description est trop petite.")
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(max=500, maxMessage="La description est trop volumineuse.", min=50, minMessage="La description est trop petite.")
      */
-    private $description;
+    private $contenu;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -102,6 +102,16 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="integer", nullable=true)
      */
     private $nbRemerciements;
+
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $signalementsAnnonces = [];
+
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $remerciementsAnnonces = [];
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -290,17 +300,17 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getContenu()
     {
-        return (empty($this->description)) ? 'Renseignez votre description pour vous faire connaître !' : $this->description;
+        return (empty($this->contenu)) ? 'Renseignez votre description pour vous faire connaître !' : $this->contenu;
     }
 
     /**
-     * @param mixed $description
+     * @param mixed $contenu
      */
-    public function setDescription($description)
+    public function setContenu($contenu)
     {
-        $this->description = $description;
+        $this->contenu = $contenu;
     }
 
     /**
@@ -316,7 +326,12 @@ class User implements UserInterface, \Serializable
      */
     public function setPhoto($photo)
     {
-        if($photo !== null) $this->photo = $photo;
+        if ($photo !== null) $this->photo = $photo;
+    }
+
+    public function erasePhoto()
+    {
+        $this->photo = null;
     }
 
     /**
@@ -332,7 +347,7 @@ class User implements UserInterface, \Serializable
      */
     public function setMessages($messages)
     {
-        $this->messages = $messages;
+        $this->messages[] = $messages;
     }
 
     /**
@@ -348,7 +363,7 @@ class User implements UserInterface, \Serializable
      */
     public function setAnnonces($annonces)
     {
-        $this->annonces = $annonces;
+        $this->annonces[] = $annonces;
     }
 
     /**
@@ -364,7 +379,7 @@ class User implements UserInterface, \Serializable
      */
     public function setAstuces($astuces)
     {
-        $this->astuces = $astuces;
+        $this->astuces[] = $astuces;
     }
 
     /**
@@ -391,12 +406,9 @@ class User implements UserInterface, \Serializable
         return (empty($this->nbRemerciements)) ? 0 : $this->nbRemerciements;
     }
 
-    /**
-     * @param mixed $nbRemerciements
-     */
-    public function setNbRemerciements($nbRemerciements)
+    public function setNbRemerciements()
     {
-        $this->nbRemerciements = $nbRemerciements;
+        $this->nbRemerciements++;
     }
 
     /**
@@ -404,19 +416,19 @@ class User implements UserInterface, \Serializable
      */
     public function getStatut()
     {
-        switch($this->nbRemerciements) {
-            case $this->nbRemerciements <= 50 :
+        switch ($this->nbRemerciements) {
+            case $this->nbRemerciements <= 5 :
                 return self::STATUT1;
-            case $this->nbRemerciements <= 100 :
+            case $this->nbRemerciements <= 10 :
                 return self::STATUT2;
-            case $this->nbRemerciements <= 150 :
+            case $this->nbRemerciements <= 15 :
                 return self::STATUT3;
-            case $this->nbRemerciements <= 200 :
+            case $this->nbRemerciements <= 20 :
                 return self::STATUT4;
-            case $this->nbRemerciements <= 250 :
+            case $this->nbRemerciements <= 30 :
                 return self::STATUT5;
         }
-        if(empty($this->nbRemerciements)) return self::STATUT1;
+        if (empty($this->nbRemerciements)) return self::STATUT1;
     }
 
     /**
@@ -425,6 +437,33 @@ class User implements UserInterface, \Serializable
     public function setStatut($statut)
     {
         $this->statut = $statut;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSignalementsAnnonces()
+    {
+        return $this->signalementsAnnonces;
+    }
+
+
+    public function setSignalementsAnnonces($id)
+    {
+        $this->signalementsAnnonces[] = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRemerciementsAnnonces()
+    {
+        return $this->remerciementsAnnonces;
+    }
+
+    public function setRemerciementsAnnonces($id)
+    {
+        $this->remerciementsAnnonces[] = $id;
     }
 
 }

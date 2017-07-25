@@ -5,6 +5,7 @@ namespace AppBundle\Form\Type;
 use AppBundle\Entity\Annonce;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\TypeAnnonce;
+use AppBundle\EventSubscriber\Form\SanitizeUserInput;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -18,7 +19,8 @@ class AnnonceFormType extends AbstractType
         $builder
             ->add('contenu', TextareaType::class, [
                 'label' => 'Description de l\'annonce',
-                'attr' => ['style' => 'height:150px;']
+                'attr' => ['style' => 'height:150px;'],
+                'trim' => false
             ])
             ->add('categorie', EntityType::class,  [
                 'class' => Categorie::class,
@@ -34,6 +36,7 @@ class AnnonceFormType extends AbstractType
                 'expanded' => false,
                 'label' => 'Type du contrat'
             ]);
+        $builder->addEventSubscriber(new SanitizeUserInput());
     }
 
     public function configureOptions(OptionsResolver $resolver)

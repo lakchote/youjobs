@@ -27,7 +27,7 @@ class UserPhotoDelete
         chdir($this->directory);
         unlink($user->getPhoto());
         chdir($oldDir);
-        $user->setPhoto('');
+        $user->erasePhoto();
         $this->em->persist($user);
         $this->em->flush();
     }
