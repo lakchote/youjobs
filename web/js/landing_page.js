@@ -1,6 +1,7 @@
 $(function() {
     $('.modal-load__register').click(function (e) {
         e.preventDefault();
+        $('#registerContent').html(loadModalHTML);
         $.ajax({
             url: $(this).data('url'),
             method: 'GET'
@@ -10,6 +11,7 @@ $(function() {
     });
     $('.modal-load__connect').click(function (e) {
         e.preventDefault();
+        $('#connectContent').html(loadModalHTML);
         $.ajax({
             url: $(this).data('url'),
             method: 'GET'

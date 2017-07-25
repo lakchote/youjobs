@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\User;
+use AppBundle\EventSubscriber\Form\SanitizeUserInput;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -17,7 +18,9 @@ class ProfilPersoFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description', TextareaType::class)
+            ->add('contenu', TextareaType::class, [
+                'trim' => false
+            ])
             ->add('email', EmailType::class)
             ->add('photo', FileType::class)
             ->add('plainPassword', RepeatedType::class, [
@@ -26,6 +29,7 @@ class ProfilPersoFormType extends AbstractType
                 'first_options' => ['label' => 'Nouveau mot de passe'],
                 'second_options' => ['label' => 'Répétez le mot de passe'],
             ]);
+        $builder->addEventSubscriber(new SanitizeUserInput());
     }
 
     public function configureOptions(OptionsResolver $resolver)

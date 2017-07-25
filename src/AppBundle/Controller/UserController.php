@@ -2,10 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Annonce;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\ProfilPersoFormType;
 use AppBundle\Form\Type\RegisterFormType;
 use AppBundle\Security\LoginFormAuthenticator;
+use AppBundle\Service\UserAnnoncesActions;
 use AppBundle\Service\UserPhotoDelete;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -76,8 +78,10 @@ class UserController extends Controller
         ]);
     }
 
+
     /**
      * @Route("/profil/photo/delete", name="profil_photo_delete")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
     public function profilPhotoDeleteAction(UserPhotoDelete $userPhotoDelete, TokenStorage $tokenStorage, Router $router, Request $request)
     {
@@ -85,5 +89,17 @@ class UserController extends Controller
         if(!isset($baseUrl[3]) || (isset($baseUrl[3]) && $baseUrl[3] !== substr($router->generate('profil'), 1))) return new RedirectResponse($router->generate('home'));
         $userPhotoDelete->deleteUserPhotoData($tokenStorage->getToken()->getUser());
         return new RedirectResponse($router->generate('profil'));
+    }
+
+    /**
+     * @Route("/thank/user/annonce/{id}", name="thank_user_annonce")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function thankUserAnnonceAction(Request $request, Annonce $id, UserAnnoncesActions $userActions, TokenStorage $tokenStorage)
+    {
+        $currentUser = $tokenStorage->getToken()->getUser();
+        if(!$request->isXmlHttpRequest() || in_array($id->getId(), $currentUser->getRemerciementsAnnonces())) return new Response('Type de requête invalide', 400);
+        $userActions->thankUserAnnonce($currentUser, $id->getUser(), $id);
+        return new Response('', 200);
     }
 }

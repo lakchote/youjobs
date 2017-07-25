@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+ - Annonce de {{ annonce.user.username }}
+{% endblock %}
+
+{% block navLinks %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {{ parent() }}
+    {% else %}
+            <li><a href="{{ path('index') }}">Accueil</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+                <div class="advert__intro">
+                    {% if annonce.user.photo is not null %}
+                        <img class="advert__photo img img-responsive pull-left" alt="Photo de profil"
+                             src="{{ asset(annonce.user.imgPath ~ annonce.user.photo.filename) }}">
+                    {% endif %}
+                    {{ annonce.user.username }} a posté dans <span
+                            class="advert__intro-categorie">{{ annonce.categorie.titre }}</span>
+                    <div class="small">
+                        le {{ annonce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
+                        <span class="color-blue--light">({{ annonce.type.type }})</span>
+                    </div>
+                </div>
+                <div class="advert__container">
+                    <div class="advert__content">
+                        {{ annonce.contenu|nl2br }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

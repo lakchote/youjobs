@@ -3,3 +3,88 @@
 {% block title %}
     - Accueil
 {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+                <span class="home--postAdvert bgcolor-accent color-white"> <span class="fa fa-plus"
+                                                                                 aria-hidden="true"></span> <a href="#"
+                                                                                                               id="modal-load-postAdvert"
+                                                                                                               class="color-white"
+                                                                                                               data-toggle="modal"
+                                                                                                               data-target="#postAdvert"
+                                                                                                               data-url="{{ path('modal_post_advert') }}">Poster une annonce</a></span>
+                {% for annonce in annonces %}
+                    <div class="advert__intro">
+                        {% if annonce.user.photo is not null %}
+                            <img class="advert__photo img img-responsive pull-left" alt="Photo de profil"
+                                 src="{{ asset(annonce.user.imgPath ~ annonce.user.photo.filename) }}">
+                        {% endif %}
+                        {{ annonce.user.username }} a posté dans <span
+                                class="advert__intro-categorie">{{ annonce.categorie.titre }}</span>
+                        <div class="small">
+                            le {{ annonce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
+                            <span class="color-blue--light">({{ annonce.type.type }})</span>
+                        </div>
+                    </div>
+                    <div class="advert__container">
+                        <div class="advert__content">
+                            {{ annonce.contenu|truncate(400)|nl2br }}<a href="#"
+                                                                        class="loadAdvertFullText small color-accent"
+                                                                        data-url="{{ path('annonce_fulltext', {'id' : annonce.id }) }}">
+                                Lire la suite</a>
+                        </div>
+                        <div class="advert__actions">
+                            {% if app.user != annonce.user %}
+                                {% if annonce.id not in app.user.getRemerciementsAnnonces %}
+                                    <a href="#" class="thankUser"
+                                       data-url="{{ path('thank_user_annonce', {'id' : annonce.id}) }}"><span
+                                                class="fa fa-thumbs-up" aria-hidden="true"></span> Remercier</a>
+                                {% endif %}
+                                {% if annonce.id not in app.user.getSignalementsAnnonces %}
+                                    <a href="#" class="reportAdvert"
+                                       data-url="{{ path('annonce_report', {'id' : annonce.id}) }}"><span
+                                                class="fa fa-exclamation-triangle" aria-hidden="true"></span>
+                                        Signaler</a>
+                                {% endif %}
+                            {% endif %}
+                            <a href="#" class="shareAdvert" data-url="{{ path('annonce_view', {'id' : annonce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="navigation">
+                {{ knp_pagination_render(annonces) }}
+            </div>
+            <div class="modal fade" id="postAdvert" role="dialog" tabindex="-1" aria-labelledby="postAdvertLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" id="postAdvertContent">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/home.js') }}"></script>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId            : {{ fbAppId }},
+                autoLogAppEvents : false,
+                xfbml            : true,
+                version          : 'v2.10'
+            });
+        };
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/fr_FR/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+{% endblock %}

@@ -21,13 +21,14 @@ class Annonce
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="annonces")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="annonces", cascade={"persist", "remove"})
      */
-    private $userAnnonce;
+    private $user;
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\Length(max=4000, maxMessage="L'annonce est trop volumineuse.", min=250, minMessage="L'annonce est trop petite.")
+     * @ORM\Column(type="text")
+     * @Assert\Length(max=4000, maxMessage="L'annonce est trop volumineuse.", min=600, minMessage="L'annonce est trop petite.")
+     * @Assert\NotBlank(message="L'annonce ne peut être vide.")
      */
     private $contenu;
 
@@ -37,14 +38,20 @@ class Annonce
     private $datePublication;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Categorie")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categorie", inversedBy="annonces")
      */
     private $categorie;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\TypeAnnonce")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TypeAnnonce", inversedBy="annonces")
      */
     private $type;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $annonceSignalee;
+
 
     /**
      * @return mixed
@@ -65,17 +72,17 @@ class Annonce
     /**
      * @return mixed
      */
-    public function getUserAnnonce()
+    public function getUser()
     {
-        return $this->userAnnonce;
+        return $this->user;
     }
 
     /**
      * @param mixed $userAnnonce
      */
-    public function setUserAnnonce($userAnnonce)
+    public function setUser($user)
     {
-        $this->userAnnonce = $userAnnonce;
+        $this->user = $user;
     }
 
     /**
@@ -132,6 +139,22 @@ class Annonce
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getAnnonceSignalee()
+    {
+        return $this->annonceSignalee;
+    }
+
+    /**
+     * @param boolean $annonceSignalee
+     */
+    public function setAnnonceSignalee($annonceSignalee)
+    {
+        $this->annonceSignalee = $annonceSignalee;
     }
 
 }
