@@ -92,6 +92,10 @@ nav a:hover {
     margin-bottom: 2px;
 }
 
+.pagination {
+    padding:12px;
+}
+
 .color-dark {
     color:#1A237E;
 }
