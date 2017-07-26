@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Annonce;
 use AppBundle\Form\Type\AnnonceFormType;
 use AppBundle\Service\PostAnnonce;
+use AppBundle\Service\SetIntroMessagesAsRead;
 use AppBundle\Service\UserAnnoncesActions;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -72,5 +73,13 @@ class AnnonceController extends Controller
         return new Response('', 200);
     }
 
-
+    /**
+     * @Route("/annonces/read/intro-message", name="annonces_read_intro_message")
+     */
+    public function annoncesReadIntroMessageAction(Request $request, SetIntroMessagesAsRead $setIntroMessagesAsRead)
+    {
+        if (!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $setIntroMessagesAsRead->setAnnoncesMessageAsRead();
+        return new Response('', 200);
+    }
 }

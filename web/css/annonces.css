@@ -52,6 +52,11 @@
     margin-bottom: 2px;
 }
 
+.pagination > .active > span {
+    background-color: #3F51B5;
+    border-color: #3F51B5;
+}
+
 @media screen and (max-width: 768px)
 {
     .home--postAdvert {

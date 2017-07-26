@@ -100,6 +100,16 @@ label {
     color:#3F51B5;
 }
 
+.alert-info {
+    background-color: #5C6BC0;
+    color:#fff;
+    border-color: #7986CB;
+}
+
+.alert-info a:hover {
+    color:#fff !important;
+}
+
 @media screen and (max-width:768px)
 {
     footer {

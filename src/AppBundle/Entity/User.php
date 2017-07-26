@@ -133,6 +133,11 @@ class User implements UserInterface, \Serializable
      */
     private $messageAstucesLu = false;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $messageAnnoncesLu = false;
+
     const STATUT1 = 'Nouveau venu';
 
     const STATUT2 = 'Contributeur occasionnel';
@@ -529,4 +534,21 @@ class User implements UserInterface, \Serializable
     {
         $this->messageAstucesLu = $messageAstucesLu;
     }
+
+    /**
+     * @return boolean
+     */
+    public function getMessageAnnoncesLu()
+    {
+        return $this->messageAnnoncesLu;
+    }
+
+    /**
+     * @param boolean $messageAnnoncesLu
+     */
+    public function setMessageAnnoncesLu($messageAnnoncesLu)
+    {
+        $this->messageAnnoncesLu = $messageAnnoncesLu;
+    }
+
 }

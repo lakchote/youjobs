@@ -29,4 +29,15 @@ class SetIntroMessagesAsRead
         $this->em->persist($user);
         $this->em->flush();
     }
+
+    public function setAnnoncesMessageAsRead()
+    {
+        /**
+         * @var User $user
+         */
+        $user = $this->tokenStorage->getToken()->getUser();
+        $user->setMessageAnnoncesLu(true);
+        $this->em->persist($user);
+        $this->em->flush();
+    }
 }

@@ -53,3 +53,11 @@ $('.shareAdvert').click(function (e) {
         href: 'http://www.you.jobs' + $(this).data('url')
     }, function(response){});
 });
+
+$('#setAnnoncesMessageAsRead').click(function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: $(this).data('url'),
+        method: 'GET'
+    });
+});

@@ -13,6 +13,16 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-10">
+                {% if app.user.messageAnnoncesLu == false %}
+                    <div class="alert alert-info alert-dismissable" role="alert">
+                        <a href="#" class="close" id="setAnnoncesMessageAsRead"
+                           data-url="{{ path('annonces_read_intro_message') }}" aria-label="fermer" data-dismiss="alert">&times;</a>
+                        <p><strong>Contribuez et partagez des offres d'emploi !</strong></p>
+                        <p>En quelques minutes seulement, vous pouvez publier une annonce et indiquer le type de contrat et le secteur d'activité designé.</p>
+                        <p>Les autres utilisateurs pourront vous remercier, et même partager votre annonce, la solidarité et le partage font partie intégrante de l'écosystème YouJobs.</p>
+                        <p>Grâce à vous, les acteurs du site, vous contribuez ensemble à un effort commun qui est l'accès et le retour sur le marché de l'emploi.</p>
+                    </div>
+                {% endif %}
                 <span class="home--postAdvert bgcolor-accent color-white"> <span class="fa fa-plus"
                                                                                  aria-hidden="true"></span> <a href="#"
                                                                                                                id="modal-load-postAdvert"
