@@ -3,11 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Annonce;
+use AppBundle\Entity\Astuce;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\ProfilPersoFormType;
 use AppBundle\Form\Type\RegisterFormType;
 use AppBundle\Security\LoginFormAuthenticator;
 use AppBundle\Service\UserAnnoncesActions;
+use AppBundle\Service\UserAstucesActions;
 use AppBundle\Service\UserPhotoDelete;
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -100,6 +102,18 @@ class UserController extends Controller
         $currentUser = $tokenStorage->getToken()->getUser();
         if(!$request->isXmlHttpRequest() || in_array($id->getId(), $currentUser->getRemerciementsAnnonces())) return new Response('Type de requête invalide', 400);
         $userActions->thankUserAnnonce($currentUser, $id->getUser(), $id);
+        return new Response('', 200);
+    }
+
+    /**
+     * @Route("/thank/user/astuce/{id}", name="thank_user_astuce")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function thankUserAstuceAction(Request $request, Astuce $id, UserAstucesActions $userActions, TokenStorage $tokenStorage)
+    {
+        $currentUser = $tokenStorage->getToken()->getUser();
+        if(!$request->isXmlHttpRequest() || in_array($id->getId(), $currentUser->getRemerciementsAstuces())) return new Response('Type de requête invalide', 400);
+        $userActions->thankUserAstuce($currentUser, $id->getUserAstuce(), $id);
         return new Response('', 200);
     }
 }

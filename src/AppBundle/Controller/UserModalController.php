@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\Type\AnnonceFormType;
+use AppBundle\Form\Type\AstuceFormType;
 use AppBundle\Form\Type\RegisterFormType;
 use AppBundle\Form\Type\LoginFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -44,6 +45,18 @@ class UserModalController extends Controller
         if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
         $form = $this->createForm(AnnonceFormType::class);
         return $this->render('modal/postAdvert.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/modal/postAtip", name="modal_post_tip")
+     */
+    public function modalPostTipAction(Request $request)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $form = $this->createForm(AstuceFormType::class);
+        return $this->render('modal/postAtip.html.twig', [
             'form' => $form->createView()
         ]);
     }

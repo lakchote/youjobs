@@ -1,0 +1,64 @@
+#postAtip--action {
+    display: inline-block;
+    padding: 6px;
+    font-size:1.1em;
+    margin-bottom: 20px;
+}
+
+.bgcolor-astuces {
+    background-color: #8C9EFF;
+}
+
+.astuces__intro {
+    background-color: #7986CB;
+    color:#fff;
+    padding:5px 8px 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 2px solid #fff;
+}
+
+.pagination > .active > span {
+    background-color: #7986CB;
+    border-color: #7986CB;
+}
+
+.astuces__photo {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
+.astuces__container {
+    background-color: #E8EAF6;
+    color: #3F51B5;
+    padding: 5px 8px 0;
+    margin-bottom: 20px;
+    border-bottom:1px solid #7986CB;
+}
+
+.astuces__actions {
+    padding-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.astuces__content {
+    padding-bottom:20px;
+}
+
+.astuces__actions a {
+    color:#1A237E;
+    display:inline-block;
+    margin-right: 5px;
+}
+
+.astuces__actions a:hover {
+    color:#536DFE;
+}
+
+@media screen and (max-width: 768px) {
+    #postAtip--action {
+        font-size: 1em;
+    }
+}

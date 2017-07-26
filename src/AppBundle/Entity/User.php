@@ -114,9 +114,29 @@ class User implements UserInterface, \Serializable
     private $remerciementsAnnonces = [];
 
     /**
+     * @ORM\Column(type="json_array")
+     */
+    private $remerciementsAstuces = [];
+
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $signalementsAstuces = [];
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      */
     private $statut;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $messageAstucesLu = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $messageAnnoncesLu = false;
 
     const STATUT1 = 'Nouveau venu';
 
@@ -464,6 +484,71 @@ class User implements UserInterface, \Serializable
     public function setRemerciementsAnnonces($id)
     {
         $this->remerciementsAnnonces[] = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRemerciementsAstuces()
+    {
+        return $this->remerciementsAstuces;
+    }
+
+    /**
+     * @param mixed $remerciementsAstuces
+     */
+    public function setRemerciementsAstuces($remerciementsAstuces)
+    {
+        $this->remerciementsAstuces[] = $remerciementsAstuces;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSignalementsAstuces()
+    {
+        return $this->signalementsAstuces;
+    }
+
+    /**
+     * @param mixed $signalementsAstuces
+     */
+    public function setSignalementsAstuces($signalementsAstuces)
+    {
+        $this->signalementsAstuces[] = $signalementsAstuces;
+    }
+
+
+    /**
+     * @return boolean
+     */
+    public function getMessageAstucesLu()
+    {
+        return $this->messageAstucesLu;
+    }
+
+    /**
+     * @param boolean $messageAstucesLu
+     */
+    public function setMessageAstucesLu($messageAstucesLu)
+    {
+        $this->messageAstucesLu = $messageAstucesLu;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getMessageAnnoncesLu()
+    {
+        return $this->messageAnnoncesLu;
+    }
+
+    /**
+     * @param boolean $messageAnnoncesLu
+     */
+    public function setMessageAnnoncesLu($messageAnnoncesLu)
+    {
+        $this->messageAnnoncesLu = $messageAnnoncesLu;
     }
 
 }
