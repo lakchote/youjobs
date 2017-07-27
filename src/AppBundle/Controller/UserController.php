@@ -64,7 +64,7 @@ class UserController extends Controller
 
     /**
      * @Route("/profil", name="profil")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function profilAction(Request $request, TokenStorage $tokenStorage, EntityManager $em)
     {
@@ -83,7 +83,7 @@ class UserController extends Controller
 
     /**
      * @Route("/profil/photo/delete", name="profil_photo_delete")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function profilPhotoDeleteAction(UserPhotoDelete $userPhotoDelete, TokenStorage $tokenStorage, Router $router, Request $request)
     {
@@ -95,7 +95,7 @@ class UserController extends Controller
 
     /**
      * @Route("/thank/user/annonce/{id}", name="thank_user_annonce")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function thankUserAnnonceAction(Request $request, Annonce $id, UserAnnoncesActions $userActions, TokenStorage $tokenStorage)
     {
@@ -107,7 +107,7 @@ class UserController extends Controller
 
     /**
      * @Route("/thank/user/astuce/{id}", name="thank_user_astuce")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function thankUserAstuceAction(Request $request, Astuce $id, UserAstucesActions $userActions, TokenStorage $tokenStorage)
     {

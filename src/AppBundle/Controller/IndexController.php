@@ -29,7 +29,7 @@ class IndexController extends Controller
 
     /**
      * @Route("/home", name="home")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function homeAction(EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -42,7 +42,7 @@ class IndexController extends Controller
 
     /**
      * @Route("/astuces", name="astuces")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
      */
     public function astucesAction(EntityManager $em, Paginator $paginator, Request $request)
     {
