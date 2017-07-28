@@ -74,6 +74,17 @@ class AnnonceController extends Controller
     }
 
     /**
+     * @Route("/annonce/unreport/{id}", name="annonce_unreport")
+     */
+    public function annonceUnreportAction(Request $request, Annonce $id, UserAnnoncesActions $userActions, TokenStorage $tokenStorage)
+    {
+        $currentUser = $tokenStorage->getToken()->getUser();
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $userActions->unReportAdvert($currentUser, $id);
+        return new Response('', 200);
+    }
+
+    /**
      * @Route("/annonces/read/intro-message", name="annonces_read_intro_message")
      */
     public function annoncesReadIntroMessageAction(Request $request, SetIntroMessagesAsRead $setIntroMessagesAsRead)

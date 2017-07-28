@@ -431,6 +431,11 @@ class User implements UserInterface, \Serializable
         $this->nbRemerciements++;
     }
 
+    public function removeRemerciement()
+    {
+        if($this->nbRemerciements-- > 0) $this->nbRemerciements--;
+    }
+
     /**
      * @return mixed
      */
@@ -467,10 +472,14 @@ class User implements UserInterface, \Serializable
         return $this->signalementsAnnonces;
     }
 
-
     public function setSignalementsAnnonces($id)
     {
         $this->signalementsAnnonces[] = $id;
+    }
+
+    public function updateSignalementsAnnonces($signalementAnnonceId)
+    {
+        unset($this->signalementsAnnonces[$signalementAnnonceId]);
     }
 
     /**
@@ -484,6 +493,11 @@ class User implements UserInterface, \Serializable
     public function setRemerciementsAnnonces($id)
     {
         $this->remerciementsAnnonces[] = $id;
+    }
+
+    public function updateRemerciementsAnnonces($annonceIdToRemove)
+    {
+        unset($this->remerciementsAnnonces[$annonceIdToRemove]);
     }
 
     /**
@@ -502,6 +516,11 @@ class User implements UserInterface, \Serializable
         $this->remerciementsAstuces[] = $remerciementsAstuces;
     }
 
+    public function updateRemerciementsAstuces($astuceIdToRemove)
+    {
+        unset($this->remerciementsAstuces[$astuceIdToRemove]);
+    }
+
     /**
      * @return mixed
      */
@@ -518,6 +537,10 @@ class User implements UserInterface, \Serializable
         $this->signalementsAstuces[] = $signalementsAstuces;
     }
 
+    public function updateSignalementsAstuces($astuceIdToRemove)
+    {
+        unset($this->signalementsAstuces[$astuceIdToRemove]);
+    }
 
     /**
      * @return boolean

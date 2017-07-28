@@ -42,6 +42,10 @@ class Astuce
      */
     private $nbRemerciements = 0;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbSignalements;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -117,6 +121,11 @@ class Astuce
         $this->nbRemerciements++;
     }
 
+    public function removeRemerciement()
+    {
+        if($this->nbRemerciements-- > 0) $this->nbRemerciements--;
+    }
+
     /**
      * @return boolean
      */
@@ -133,4 +142,21 @@ class Astuce
         $this->astuceSignalee = $astuceSignalee;
     }
 
+    /**
+     * @return integer
+     */
+    public function getNbSignalements()
+    {
+        return $this->nbSignalements;
+    }
+
+    public function setNbSignalements()
+    {
+        $this->nbSignalements++;
+    }
+
+    public function removeSignalement()
+    {
+        if($this->nbSignalements-- > 0) $this->nbSignalements--;
+    }
 }

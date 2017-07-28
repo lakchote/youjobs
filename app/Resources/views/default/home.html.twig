@@ -51,19 +51,7 @@
                                 Lire la suite</a>
                         </div>
                         <div class="advert__actions">
-                            {% if app.user != annonce.user %}
-                                {% if annonce.id not in app.user.getRemerciementsAnnonces %}
-                                    <a href="#" class="thankUser"
-                                       data-url="{{ path('thank_user_annonce', {'id' : annonce.id}) }}"><span
-                                                class="fa fa-thumbs-up" aria-hidden="true"></span> Remercier</a>
-                                {% endif %}
-                                {% if annonce.id not in app.user.getSignalementsAnnonces %}
-                                    <a href="#" class="reportAdvert"
-                                       data-url="{{ path('annonce_report', {'id' : annonce.id}) }}"><span
-                                                class="fa fa-exclamation-triangle" aria-hidden="true"></span>
-                                        Signaler</a>
-                                {% endif %}
-                            {% endif %}
+                            {{ annonce|generateAnnoncesActionsLinks|raw }}
                             <a href="#" class="shareAdvert" data-url="{{ path('annonce_view', {'id' : annonce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
                         </div>
                     </div>

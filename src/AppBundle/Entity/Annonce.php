@@ -52,6 +52,11 @@ class Annonce
      */
     private $annonceSignalee;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbSignalements;
+
 
     /**
      * @return mixed
@@ -155,6 +160,24 @@ class Annonce
     public function setAnnonceSignalee($annonceSignalee)
     {
         $this->annonceSignalee = $annonceSignalee;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getNbSignalements()
+    {
+        return $this->nbSignalements;
+    }
+
+    public function setNbSignalements()
+    {
+        $this->nbSignalements++;
+    }
+
+    public function removeSignalement()
+    {
+        if($this->nbSignalements-- > 0) $this->nbSignalements--;
     }
 
 }

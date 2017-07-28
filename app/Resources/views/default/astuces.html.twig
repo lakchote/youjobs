@@ -47,19 +47,7 @@
                             {{ astuce.contenu|nl2br }}
                         </div>
                         <div class="astuces__actions">
-                            {% if app.user != astuce.userAstuce %}
-                                {% if astuce.id not in app.user.remerciementsAstuces %}
-                                    <a href="#" class="thankUserAstuces"
-                                       data-url="{{ path('thank_user_astuce', {'id' : astuce.id}) }}"><span
-                                                class="fa fa-thumbs-up" aria-hidden="true"></span> Remercier</a>
-                                {% endif %}
-                                {% if astuce.id not in app.user.signalementsAstuces %}
-                                    <a href="#" class="reportAstuce"
-                                       data-url="{{ path('astuce_report', {'id' : astuce.id}) }}"><span
-                                                class="fa fa-exclamation-triangle" aria-hidden="true"></span>
-                                        Signaler</a>
-                                {% endif %}
-                            {% endif %}
+                            {{ astuce|generateAstucesActionsLinks|raw }}
                             <a href="#" class="shareAstuce" data-url="{{ path('astuce_view', {'id' : astuce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
                         </div>
                     </div>

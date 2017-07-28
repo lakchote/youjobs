@@ -24,24 +24,60 @@ $('.loadAdvertFullText').click(function (e) {
 $('.thankUser').click(function (e) {
    e.preventDefault();
     var that = this;
+    var data = getProperURLForAnnonceThankAction(this, 'thankUser');
     $.ajax({
-        url: $(this).data('url'),
+        url: data['url'],
         method: 'GET'
     }).done(function () {
-        that.textContent = 'Remercié!';
-        that.style = 'color:#536DFE;';
+        (data['unThank'] === false) ?
+            $(that).removeClass('thankUser').addClass('unThankUser')
+            :
+            $(that).removeClass('unThankUser').addClass('thankUser');
+    });
+});
+
+$('.unThankUser').click(function (e) {
+    e.preventDefault();
+    var that = this;
+    var data = getProperURLForAnnonceThankAction(this, 'unThankUser');
+    $.ajax({
+        url: data['url'],
+        method: 'GET'
+    }).done(function () {
+        (data['unThank'] === false) ?
+            $(that).removeClass('thankUser').addClass('unThankUser')
+            :
+            $(that).removeClass('unThankUser').addClass('thankUser');
     });
 });
 
 $('.reportAdvert').click(function (e) {
     e.preventDefault();
     var that = this;
+    var data = getProperUrlForAnnonceReportAction(this, 'reportAdvert');
     $.ajax({
-        url: $(this).data('url'),
+        url: data['url'],
         method: 'GET'
     }).done(function () {
-        that.textContent = 'Signalé!';
-        that.style = 'color:#536DFE;';
+        (data['unReportAdvert'] === false) ?
+            $(that).removeClass('reportAdvert').addClass('unReportAdvert')
+            :
+            $(that).removeClass('unReportAdvert').addClass('reportAdvert');
+    });
+});
+
+$('.unReportAdvert').click(function (e) {
+    e.preventDefault();
+    var that = this;
+    var data = getProperUrlForAnnonceReportAction(this, 'unReportAdvert');
+    $.ajax({
+        url: data['url'],
+        method: 'GET'
+    }).done(function () {
+        (data['unReportAdvert'] === false) ?
+            $(that).removeClass('reportAdvert').addClass('unReportAdvert')
+            :
+            $(that).removeClass('unReportAdvert').addClass('reportAdvert');
     });
 });
 

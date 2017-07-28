@@ -17,27 +17,63 @@ $('#modal-load-postAtip').click(function (e) {
     })
 });
 
-$('.thankUserAstuces').click(function (e) {
+$('.thankUserAstuce').click(function (e) {
     e.preventDefault();
     var that = this;
+    var data = getProperURLForAstuceThankAction(this, 'thankUserAstuce');
     $.ajax({
-        url: $(this).data('url'),
+        url: data['url'],
         method: 'GET'
     }).done(function () {
-        that.textContent = 'Remercié!';
-        that.style = 'color:#536DFE;';
+        (data['unThank'] === false) ?
+            $(that).removeClass('thankUserAstuce').addClass('unThankUserAstuce')
+            :
+            $(that).removeClass('unThankUserAstuce').addClass('thankUserAstuce');
+    });
+});
+
+$('.unThankUserAstuce').click(function (e) {
+    e.preventDefault();
+    var that = this;
+    var data = getProperURLForAstuceThankAction(this, 'unThankUserAstuce');
+    $.ajax({
+        url: data['url'],
+        method: 'GET'
+    }).done(function () {
+        (data['unThank'] === false) ?
+            $(that).removeClass('thankUserAstuce').addClass('unThankUserAstuce')
+            :
+            $(that).removeClass('unThankUserAstuce').addClass('thankUserAstuce');
     });
 });
 
 $('.reportAstuce').click(function (e) {
     e.preventDefault();
     var that = this;
+    var data = getProperUrlForAstuceReportAction(this, 'reportAstuce');
     $.ajax({
-        url: $(this).data('url'),
+        url: data['url'],
         method: 'GET'
     }).done(function () {
-        that.textContent = 'Signalé!';
-        that.style = 'color:#536DFE;';
+        (data['unReportAstuce'] === false) ?
+            $(that).removeClass('reportAstuce').addClass('unReportAstuce')
+            :
+            $(that).removeClass('unReportAstuce').addClass('reportAstuce');
+    });
+});
+
+$('.unReportAstuce').click(function (e) {
+    e.preventDefault();
+    var that = this;
+    var data = getProperUrlForAstuceReportAction(this, 'unReportAstuce');
+    $.ajax({
+        url: data['url'],
+        method: 'GET'
+    }).done(function () {
+        (data['unReportAstuce'] === false) ?
+            $(that).removeClass('reportAstuce').addClass('unReportAstuce')
+            :
+            $(that).removeClass('unReportAstuce').addClass('reportAstuce');
     });
 });
 

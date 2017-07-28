@@ -63,6 +63,17 @@ class AstuceController extends Controller
     }
 
     /**
+     * @Route("/astuce/unreport/{id}", name="astuce_unreport")
+     */
+    public function astuceUnreportAction(Request $request, Astuce $id, UserAstucesActions $userActions, TokenStorage $tokenStorage)
+    {
+        $currentUser = $tokenStorage->getToken()->getUser();
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $userActions->unReportAstuce($currentUser, $id);
+        return new Response('', 200);
+    }
+
+    /**
      * @Route("/astuce/view/{id}", name="astuce_view")
      * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
      */
