@@ -37,7 +37,7 @@
     color:#536DFE;
 }
 
-.advert__intro-categorie {
+.advert__intro-categorie a {
     color: #9FA8DA;
 }
 
@@ -61,6 +61,10 @@
     border-color: #3F51B5;
 }
 .pac-container { z-index: 100000; }
+
+.badge__bgcolor {
+    background-color: #5C6BC0;
+}
 
 @media screen and (max-width: 768px)
 {

@@ -3,11 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Annonce;
+use AppBundle\Entity\Categorie;
 use AppBundle\Form\Type\AnnonceFormType;
 use AppBundle\Service\PostAnnonce;
 use AppBundle\Service\SetIntroMessagesAsRead;
 use AppBundle\Service\UserAnnoncesActions;
 use Doctrine\ORM\EntityManager;
+use Knp\Component\Pager\Paginator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -92,5 +94,19 @@ class AnnonceController extends Controller
         if (!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
         $setIntroMessagesAsRead->setAnnoncesMessageAsRead();
         return new Response('', 200);
+    }
+
+    /**
+     * @Route("/annonces/categorie/{id}", name="annonces_categorie")
+     */
+    public function annoncesCategorieAction(Categorie $id, EntityManager $em, Paginator $paginator, Request $request)
+    {
+        $annoncesForACategorie = $em->getRepository('AppBundle:Annonce')->getAnnoncesForACategorie($id->getTitre());
+        $categories = $em->getRepository('AppBundle:Categorie')->findAll();
+        $annonces = $paginator->paginate($annoncesForACategorie, $request->query->getInt('page', 1),  5);
+        return $this->render('default/home.html.twig', [
+            'annonces' => $annonces,
+            'categories' => $categories
+        ]);
     }
 }

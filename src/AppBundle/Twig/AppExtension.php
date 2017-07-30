@@ -6,6 +6,8 @@ namespace AppBundle\Twig;
 
 use AppBundle\Entity\Annonce;
 use AppBundle\Entity\Astuce;
+use AppBundle\Entity\Categorie;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -14,18 +16,21 @@ class AppExtension extends \Twig_Extension
 
     private $router;
     private $tokenStorage;
+    private $em;
 
-    public function __construct(Router $router, TokenStorage $tokenStorage)
+    public function __construct(Router $router, TokenStorage $tokenStorage, EntityManager $em)
     {
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;
+        $this->em = $em;
     }
 
     public function getFilters()
     {
         return [
             new \Twig_SimpleFilter('generateAnnoncesActionsLinks', [$this, 'generateAnnoncesActionsLinks']),
-            new \Twig_SimpleFilter('generateAstucesActionsLinks', [$this, 'generateAstucesActionsLinks'])
+            new \Twig_SimpleFilter('generateAstucesActionsLinks', [$this, 'generateAstucesActionsLinks']),
+            new \Twig_SimpleFilter('countAnnoncesForACategorie', [$this, 'countAnnoncesForACategorie'])
         ];
     }
 
@@ -71,5 +76,10 @@ class AppExtension extends \Twig_Extension
                                                 class="fa fa-exclamation-triangle" aria-hidden="true"></span> Signaler</a>';
         }
         return $toReturn;
+    }
+
+    public function countAnnoncesForACategorie(Categorie $categorie)
+    {
+        return $this->em->getRepository('AppBundle:Annonce')->countAnnoncesForACategorie($categorie->getTitre());
     }
 }

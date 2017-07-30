@@ -34,9 +34,11 @@ class IndexController extends Controller
     public function homeAction(EntityManager $em, Paginator $paginator, Request $request)
     {
         $sortAnnoncesByDatePublication = $em->getRepository('AppBundle:Annonce')->findBy([], ['datePublication' => 'DESC'] );
+        $categories = $em->getRepository('AppBundle:Categorie')->findAll();
         $annonces = $paginator->paginate($sortAnnoncesByDatePublication, $request->query->getInt('page', 1),  5);
         return $this->render('default/home.html.twig', [
-            'annonces' => $annonces
+            'annonces' => $annonces,
+            'categories' => $categories
         ]);
     }
 
