@@ -21,6 +21,8 @@ class PostAnnonce
     public function createAdvert($formData, User $user)
     {
         $advert = new Annonce();
+        $advert->setIntitulePoste($formData['intitulePoste']->getData());
+        $advert->setLocalisation($formData['localisation']->getData());
         $advert->setContenu($formData['contenu']->getData());
         $advert->setCategorie($formData['categorie']->getData());
         $advert->setType($formData['type']->getData());

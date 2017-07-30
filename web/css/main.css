@@ -38,6 +38,10 @@ nav a:hover {
     border-color: #fff;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .color-dark {
     color:#1A237E;
 }

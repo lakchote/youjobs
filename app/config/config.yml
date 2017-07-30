@@ -41,6 +41,7 @@ twig:
         - bootstrap_3_layout.html.twig
     globals:
         fbAppId: '%facebook_clientid%'
+        googleApiPlaces: '%google_api_places_key%'
 
 # Doctrine Configuration
 doctrine:

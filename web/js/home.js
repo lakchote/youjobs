@@ -6,6 +6,7 @@ $('#modal-load-postAdvert').click(function (e) {
         method: 'GET'
     }).done(function (content) {
         $('#postAdvertContent').html(content);
+        initLocalisationAutocomplete();
     });
 });
 
@@ -97,3 +98,12 @@ $('#setAnnoncesMessageAsRead').click(function (e) {
         method: 'GET'
     });
 });
+
+function initLocalisationAutocomplete()
+{
+    var localisation = new google.maps.places.Autocomplete(document.getElementById('annonce_form_localisation'), {types: ['(cities)'], componentRestrictions: {'country': 'fr'}});
+    localisation.addListener('place_changed', function () {
+       var place = localisation.getPlace();
+        document.getElementById('annonce_form_localisation').value = place.address_components[0].short_name;
+    });
+}

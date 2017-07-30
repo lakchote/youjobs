@@ -57,6 +57,20 @@ class Annonce
      */
     private $nbSignalements;
 
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3, minMessage="Le nom de la ville n'est pas correct.")
+     */
+    private $localisation;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min=7, minMessage="L'intitulé du poste est trop court.")
+     */
+    private $intitulePoste;
+
 
     /**
      * @return mixed
@@ -75,7 +89,7 @@ class Annonce
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getUser()
     {
@@ -83,9 +97,9 @@ class Annonce
     }
 
     /**
-     * @param mixed $userAnnonce
+     * @param User $user
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
@@ -123,7 +137,7 @@ class Annonce
     }
 
     /**
-     * @return mixed
+     * @return Categorie
      */
     public function getCategorie()
     {
@@ -131,7 +145,7 @@ class Annonce
     }
 
     /**
-     * @param mixed $categorie
+     * @param Categorie $categorie
      */
     public function setCategorie($categorie)
     {
@@ -178,6 +192,38 @@ class Annonce
     public function removeSignalement()
     {
         if($this->nbSignalements-- > 0) $this->nbSignalements--;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocalisation()
+    {
+        return $this->localisation;
+    }
+
+    /**
+     * @param mixed $localisation
+     */
+    public function setLocalisation($localisation)
+    {
+        $this->localisation = $localisation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIntitulePoste()
+    {
+        return $this->intitulePoste;
+    }
+
+    /**
+     * @param mixed $intitulePoste
+     */
+    public function setIntitulePoste($intitulePoste)
+    {
+        $this->intitulePoste = $intitulePoste;
     }
 
 }

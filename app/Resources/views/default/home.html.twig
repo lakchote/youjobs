@@ -38,6 +38,7 @@
                         {% endif %}
                         {{ annonce.user.username }} a posté dans <span
                                 class="advert__intro-categorie">{{ annonce.categorie.titre }}</span>
+                        <div>Offre d'emploi : <span class="bold">{{ annonce.intitulePoste }}</span> à <span class="bold">{{ annonce.localisation }}</span></div>
                         <div class="small">
                             le {{ annonce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
                             <span class="color-blue--light">({{ annonce.type.type }})</span>
@@ -90,4 +91,5 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ googleApiPlaces }}&libraries=places"></script>
 {% endblock %}

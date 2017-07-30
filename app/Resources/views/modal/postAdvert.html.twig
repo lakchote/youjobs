@@ -6,6 +6,8 @@
 </div>
 <div class="modal-body">
     {{ form_start(form) }}
+        {{ form_row(form.intitulePoste) }}
+        {{ form_row(form.localisation) }}
         {{ form_row(form.contenu) }}
         {{ form_row(form.categorie) }}
         {{ form_row(form.type) }}
