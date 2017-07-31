@@ -18,6 +18,10 @@
     border-bottom: 2px solid #fff;
 }
 
+.astuces__intro a {
+    color: #fff;
+}
+
 .pagination > .active > span {
     background-color: #7986CB;
     border-color: #7986CB;

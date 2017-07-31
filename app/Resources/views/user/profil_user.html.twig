@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    - Profil de {{ user.username }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10">
+                <div class="profil__container">
+                    <h1 class="profil__heading">Profil de {{ user.username }}</h1>
+                    <p class="profil__heading--statut"> Rang : {{ user.statut }} <br/><span class="small">(<u class="color-dark">{{ user.nbRemerciements }} remerciements</u>)</span></p>
+                    <div class="profil__container--padding">
+                        {% if user.photo is not null %}
+                            <div class="photo-user">
+                                <img src="{{ asset(user.imgPath ~ user.photo.filename) }}" alt="Photo de profil de l'utilisateur" class="img-responsive">
+                            </div>
+                        {% endif %}
+                        <span class="color-primary bold">Description</span>
+                        <div class="profil__description">
+                            {{ user|displayUserDescription }}
+                        </div>
+                        <div class="color-accent profil__actions">
+                            <span class="fa fa-envelope color-accent" aria-hidden="true"></span> <a href="#" class="color-accent">Envoyer un message</a>
+                        </div>
+                        <div class="color-accent profil__actions">
+                            <span class="fa fa-bullhorn" aria-hidden="true"></span> <a href="#" class="color-accent">Voir ses annonces <span class="small">({{ user.annonces|length }})</span></a>
+                        </div>
+                        <div class="color-accent profil__actions">
+                            <span class="fa fa-lightbulb-o" aria-hidden="true"></span> <a href="#" class="color-accent">Voir ses astuces <span class="small">({{ user.astuces|length }})</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

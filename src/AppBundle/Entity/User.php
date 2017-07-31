@@ -148,6 +148,8 @@ class User implements UserInterface, \Serializable
 
     const STATUT5 = 'Le partage c\'est la vie';
 
+    const DESCRIPTION = 'Renseignez votre description pour vous faire connaître !';
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -322,7 +324,7 @@ class User implements UserInterface, \Serializable
      */
     public function getContenu()
     {
-        return (empty($this->contenu)) ? 'Renseignez votre description pour vous faire connaître !' : $this->contenu;
+        return (empty($this->contenu)) ? self::DESCRIPTION : $this->contenu;
     }
 
     /**
@@ -433,7 +435,7 @@ class User implements UserInterface, \Serializable
 
     public function removeRemerciement()
     {
-        if($this->nbRemerciements-- > 0) $this->nbRemerciements--;
+        if($this->nbRemerciements > 0) $this->nbRemerciements--;
     }
 
     /**

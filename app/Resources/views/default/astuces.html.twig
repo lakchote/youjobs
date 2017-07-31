@@ -33,11 +33,7 @@
                             data-target="#postAtip" data-url="{{ path('modal_post_tip') }}">Poster une astuce</a></span>
                 {% for astuce in astuces %}
                     <div class="astuces__intro">
-                        {% if astuce.userAstuce.photo is not null %}
-                            <img class="astuces__photo img img-responsive pull-left" alt="Photo de profil"
-                                 src="{{ asset(astuce.userAstuce.imgPath ~ astuce.userAstuce.photo.filename) }}">
-                        {% endif %}
-                        {{ astuce.userAstuce.username }} a posté une astuce
+                        {{ astuce|generateAstucesProfilLink|raw }} a posté une astuce
                         <div class="small">
                             le {{ astuce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
                         </div>

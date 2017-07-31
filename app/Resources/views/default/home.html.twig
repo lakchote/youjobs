@@ -42,11 +42,7 @@
                                                                                                                data-url="{{ path('modal_post_advert') }}">Poster une annonce</a></span>
                 {% for annonce in annonces %}
                     <div class="advert__intro">
-                        {% if annonce.user.photo is not null %}
-                            <img class="advert__photo img img-responsive pull-left" alt="Photo de profil"
-                                 src="{{ asset(annonce.user.imgPath ~ annonce.user.photo.filename) }}">
-                        {% endif %}
-                        {{ annonce.user.username }} a posté dans <span
+                        {{ annonce|generateAnnoncesProfilLink|raw }} a posté dans <span
                                 class="advert__intro-categorie"><a href="{{ path('annonces_categorie', {'id' : annonce.categorie.id}) }}">{{ annonce.categorie.titre }}</a></span>
                         <div>Offre d'emploi : <span class="bold">{{ annonce.intitulePoste }}</span> à <span class="bold">{{ annonce.localisation }}</span></div>
                         <div class="small">

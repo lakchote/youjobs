@@ -22,6 +22,10 @@
     border-bottom: 2px solid #fff;
 }
 
+.advert__intro a {
+    color: #fff;
+}
+
 .advert__actions {
     padding-bottom: 10px;
     font-size: 0.9em;

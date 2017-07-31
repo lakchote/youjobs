@@ -191,7 +191,7 @@ class Annonce
 
     public function removeSignalement()
     {
-        if($this->nbSignalements-- > 0) $this->nbSignalements--;
+        if($this->nbSignalements > 0) $this->nbSignalements--;
     }
 
     /**

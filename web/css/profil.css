@@ -46,7 +46,7 @@
     background-color: #E8EAF6;
 }
 
-form {
+form, .profil__container--padding {
     padding:6px 12px;
 }
 
@@ -70,6 +70,19 @@ form {
 .profil__heading--statut {
     padding-left:12px;
     color: #3F51B5;
+}
+
+.profil__description {
+    background-color: #fff;
+    color:#000;
+    height:100px;
+    border: 1px solid lightgrey;
+    padding:5px;
+    margin-bottom: 10px;
+}
+
+.profil__actions {
+    margin-bottom: 5px;
 }
 
 @media screen and (max-width: 768px) {
@@ -114,5 +127,9 @@ form {
     .profil__btn-submit {
         padding: 5px 10px;
         font-size: 0.8em;
+    }
+
+    .profil__actions {
+        font-size: 0.9em;
     }
 }

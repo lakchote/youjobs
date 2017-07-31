@@ -140,4 +140,15 @@ class UserController extends Controller
         $userActions->unThankUserAstuce($currentUser, $id);
         return new Response('', 200);
     }
+
+    /**
+     * @Route("/profil/user/{id}", name="profil_user")
+     */
+    public function profilUserAction(User $id, TokenStorage $tokenStorage)
+    {
+        return ($tokenStorage->getToken()->getUser() == $id) ? $this->redirectToRoute('profil') :
+        $this->render('user/profil_user.html.twig', [
+            'user' => $id
+        ]);
+    }
 }

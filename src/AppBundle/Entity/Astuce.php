@@ -123,7 +123,7 @@ class Astuce
 
     public function removeRemerciement()
     {
-        if($this->nbRemerciements-- > 0) $this->nbRemerciements--;
+        if($this->nbRemerciements > 0) $this->nbRemerciements--;
     }
 
     /**
@@ -157,6 +157,6 @@ class Astuce
 
     public function removeSignalement()
     {
-        if($this->nbSignalements-- > 0) $this->nbSignalements--;
+        if($this->nbSignalements > 0) $this->nbSignalements--;
     }
 }

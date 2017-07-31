@@ -54,6 +54,10 @@ nav a:hover {
     color: #C5CAE9;
 }
 
+.color-primary {
+    color: #3F51B5;
+}
+
 .color-white {
     color: #fff !important;
 }
