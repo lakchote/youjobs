@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block navLinks %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         {{ parent() }}
     {% else %}
             <li><a href="{{ path('index') }}">Accueil</a></li>
