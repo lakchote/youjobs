@@ -30,10 +30,10 @@
                             <span class="fa fa-envelope color-accent" aria-hidden="true"></span> <a href="#" class="color-accent">Envoyer un message</a>
                         </div>
                         <div class="color-accent profil__actions">
-                            <span class="fa fa-bullhorn" aria-hidden="true"></span> <a href="#" class="color-accent">Voir ses annonces <span class="small">({{ user.annonces|length }})</span></a>
+                            <span class="fa fa-bullhorn" aria-hidden="true"></span> <a href="{{ path('annonces_user', {'id' : user.id }) }}" class="color-accent">Voir ses annonces <span class="small">({{ user.annonces|length }})</span></a>
                         </div>
                         <div class="color-accent profil__actions">
-                            <span class="fa fa-lightbulb-o" aria-hidden="true"></span> <a href="#" class="color-accent">Voir ses astuces <span class="small">({{ user.astuces|length }})</span></a>
+                            <span class="fa fa-lightbulb-o" aria-hidden="true"></span> <a href="{{ path('astuces_user', {'id' : user.id}) }}" class="color-accent">Voir ses astuces <span class="small">({{ user.astuces|length }})</span></a>
                         </div>
                     </div>
                 </div>

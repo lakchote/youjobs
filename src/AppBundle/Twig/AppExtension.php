@@ -35,6 +35,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFilter('generateAnnoncesProfilLink', [$this, 'generateAnnoncesProfilLink']),
             new \Twig_SimpleFilter('generateAstucesProfilLink', [$this, 'generateAstucesProfilLink']),
             new \Twig_SimpleFilter('displayUserDescription', [$this, 'displayUserDescription']),
+            new \Twig_SimpleFilter('countAnnoncesForACategorieAndAUser', [$this, 'countAnnoncesForACategorieAndAUser']),
         ];
     }
 
@@ -108,5 +109,10 @@ class AppExtension extends \Twig_Extension
     public function displayUserDescription(User $user)
     {
         return ($user->getContenu() == User::DESCRIPTION) ? 'L\'utilisateur n\'a pas renseigné de description pour l\'instant.' : $user->getContenu();
+    }
+
+    public function countAnnoncesForACategorieAndAUser(Categorie $categorie, User $id)
+    {
+        return $this->em->getRepository('AppBundle:Annonce')->countAnnoncesForACategorieAndAUser($categorie->getTitre(), $id);
     }
 }

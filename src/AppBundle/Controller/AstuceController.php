@@ -3,10 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Astuce;
+use AppBundle\Entity\User;
 use AppBundle\Form\Type\AstuceFormType;
 use AppBundle\Service\PostAstuce;
 use AppBundle\Service\SetIntroMessagesAsRead;
 use AppBundle\Service\UserAstucesActions;
+use Doctrine\ORM\EntityManager;
+use Knp\Component\Pager\Paginator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -77,10 +80,23 @@ class AstuceController extends Controller
      * @Route("/astuce/view/{id}", name="astuce_view")
      * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
      */
-    public function annonceViewAction(Astuce $id)
+    public function astuceViewAction(Astuce $id)
     {
         return $this->render('default/astuce_view.html.twig', [
             'astuce' => $id
+        ]);
+    }
+
+    /**
+     * @Route("/astuces/user/{id}", name="astuces_user")
+     */
+    public function astucesUserAction(User $id, EntityManager $em, Paginator $paginator, Request $request)
+    {
+        $astucesForUser = $em->getRepository('AppBundle:Astuce')->findBy(['userAstuce' => $id]);
+        $astuces = $paginator->paginate($astucesForUser, $request->query->getInt('page', 1),  5);
+        return $this->render('default/astuces.html.twig', [
+            'astuces' => $astuces,
+            'user' => $id
         ]);
     }
 }

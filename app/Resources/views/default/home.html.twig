@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    - Accueil
+    {% if user is defined %}
+        - Annonces de {{ user.username }}
+    {% else %}
+        - Accueil
+    {% endif %}
 {% endblock %}
 
 {% block stylesheets %}
@@ -16,8 +20,13 @@
                 <ul class="list-group">
                     {% for categorie in categories %}
                         <li class="list-group-item">
-                            <span class="badge badge__bgcolor">{{ categorie|countAnnoncesForACategorie }}</span>
-                            <a href="{{ path('annonces_categorie', {'id' : categorie.id }) }}">{{ categorie.titre }}</a>
+                            {% if user is defined %}
+                                <span class="badge badge__bgcolor">{{ categorie|countAnnoncesForACategorieAndAUser(user) }}</span>
+                                <a href="{{ path('annonces_categorie_user', {'categorie' : categorie.id, 'id' : user.id }) }}">{{ categorie.titre }}</a>
+                            {% else %}
+                                <span class="badge badge__bgcolor">{{ categorie|countAnnoncesForACategorie }}</span>
+                                <a href="{{ path('annonces_categorie', {'id' : categorie.id }) }}">{{ categorie.titre }}</a>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
@@ -33,6 +42,13 @@
                         <p>Grâce à vous, les acteurs du site, vous contribuez ensemble à un effort commun qui est l'accès et le retour sur le marché de l'emploi.</p>
                     </div>
                 {% endif %}
+                {% if user is defined %}
+                    {% if categorie is defined %}
+                        <h4 class="adverts__user">Annonces de {{ user.username }} <span class="small adverts__userCategorie"> (Catégorie :  {{ categorie.titre }} )</span></h4>
+                    {% else %}
+                        <h4 class="adverts__user">Annonces de {{ user.username }}</h4>
+                    {% endif %}
+                {% else %}
                 <span class="home--postAdvert bgcolor-accent color-white"> <span class="fa fa-plus"
                                                                                  aria-hidden="true"></span> <a href="#"
                                                                                                                id="modal-load-postAdvert"
@@ -40,6 +56,7 @@
                                                                                                                data-toggle="modal"
                                                                                                                data-target="#postAdvert"
                                                                                                                data-url="{{ path('modal_post_advert') }}">Poster une annonce</a></span>
+                {% endif %}
             {{ include('blocks/annonces.html.twig') }}
             <div class="navigation">
                 {{ knp_pagination_render(annonces) }}

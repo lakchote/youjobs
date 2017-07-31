@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Annonce;
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\User;
 use AppBundle\Form\Type\AnnonceFormType;
 use AppBundle\Service\PostAnnonce;
 use AppBundle\Service\SetIntroMessagesAsRead;
@@ -107,6 +108,37 @@ class AnnonceController extends Controller
         return $this->render('default/home.html.twig', [
             'annonces' => $annonces,
             'categories' => $categories
+        ]);
+    }
+
+    /**
+     * @Route("/annonces/user/{id}", name="annonces_user")
+     */
+    public function annoncesUserAction(User $id, EntityManager $em, Paginator $paginator, Request $request)
+    {
+        $annoncesForUser = $em->getRepository('AppBundle:Annonce')->findBy(['user' => $id]);
+        $categories = $em->getRepository('AppBundle:Categorie')->findAll();
+        $annonces = $paginator->paginate($annoncesForUser, $request->query->getInt('page', 1),  5);
+        return $this->render('default/home.html.twig', [
+            'annonces' => $annonces,
+            'categories' => $categories,
+            'user' => $id
+        ]);
+    }
+
+    /**
+     * @Route("/annonces/categorie/{categorie}/user/{id}", name="annonces_categorie_user")
+     */
+    public function annoncesCategorieUserAction(Categorie $categorie, User $id, EntityManager $em, Paginator $paginator, Request $request)
+    {
+        $annoncesForUser = $em->getRepository('AppBundle:Annonce')->getAnnoncesForACategorieAndAUser($categorie->getTitre(), $id);
+        $categories = $em->getRepository('AppBundle:Categorie')->findAll();
+        $annonces = $paginator->paginate($annoncesForUser, $request->query->getInt('page', 1),  5);
+        return $this->render('default/home.html.twig', [
+            'annonces' => $annonces,
+            'categories' => $categories,
+            'user' => $id,
+            'categorie' => $categorie
         ]);
     }
 }

@@ -13,6 +13,14 @@
     border-bottom:1px solid #7986CB;
 }
 
+.adverts__user, .adverts__user--none {
+    color: #fff;
+}
+
+.adverts__user--none {
+    font-size: 1.1em;
+}
+
 .advert__intro {
     background-color: #303F9F;
     color:#fff;
@@ -41,8 +49,8 @@
     color:#536DFE;
 }
 
-.advert__intro-categorie a {
-    color: #9FA8DA;
+.advert__intro-categorie a, .adverts__userCategorie {
+    color: #9FA8DA !important;
 }
 
 .advert__content {

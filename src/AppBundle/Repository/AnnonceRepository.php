@@ -4,6 +4,7 @@
 namespace AppBundle\Repository;
 
 
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 class AnnonceRepository extends EntityRepository
@@ -31,4 +32,33 @@ class AnnonceRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function countAnnoncesForACategorieAndAUser($titreCategorie, User $id)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.user = :id')
+            ->leftJoin('a.categorie', 'c')
+            ->andWhere('c.titre = :titreCategorie')
+            ->setParameter('id', $id)
+            ->setParameter('titreCategorie', $titreCategorie)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getAnnoncesForACategorieAndAUser($titreCategorie, User $id)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.user = :id')
+            ->orderBy('a.datePublication', 'DESC')
+            ->leftJoin('a.categorie', 'c')
+            ->andWhere('c.titre = :titreCategorie')
+            ->setParameter('id', $id)
+            ->setParameter('titreCategorie', $titreCategorie)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

@@ -1,23 +1,34 @@
-{% for annonce in annonces %}
-    <div class="advert__intro">
-        {{ annonce|generateAnnoncesProfilLink|raw }} a posté dans <span
-                class="advert__intro-categorie"><a href="{{ path('annonces_categorie', {'id' : annonce.categorie.id}) }}">{{ annonce.categorie.titre }}</a></span>
-        <div>Offre d'emploi : <span class="bold">{{ annonce.intitulePoste }}</span> à <span class="bold">{{ annonce.localisation }}</span></div>
-        <div class="small">
-            le {{ annonce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
-            <span class="color-blue--light">({{ annonce.type.type }})</span>
+{% if annonces|length > 0 %}
+    {% for annonce in annonces %}
+        <div class="advert__intro">
+            {{ annonce|generateAnnoncesProfilLink|raw }} a posté dans <span
+                    class="advert__intro-categorie">
+                {% if user is defined %}
+                    <a href="{{ path('annonces_categorie_user', {'categorie' : annonce.categorie.id, 'id' : user.id }) }}">{{ annonce.categorie.titre }}</a>
+                {% else %}
+                    <a href="{{ path('annonces_categorie', {'id' : annonce.categorie.id}) }}">{{ annonce.categorie.titre }}</a>
+                {% endif %}
+            </span>
+            <div>Offre d'emploi : <span class="bold">{{ annonce.intitulePoste }}</span> à <span class="bold">{{ annonce.localisation }}</span></div>
+            <div class="small">
+                le {{ annonce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
+                <span class="color-blue--light">({{ annonce.type.type }})</span>
+            </div>
         </div>
-    </div>
-    <div class="advert__container">
-        <div class="advert__content">
-            {{ annonce.contenu|truncate(400)|nl2br }}<a href="#"
-                                                        class="loadAdvertFullText small color-accent"
-                                                        data-url="{{ path('annonce_fulltext', {'id' : annonce.id }) }}">
-                Lire la suite</a>
+        <div class="advert__container">
+            <div class="advert__content">
+                {{ annonce.contenu|truncate(400)|nl2br }}<a href="#"
+                                                            class="loadAdvertFullText small color-accent"
+                                                            data-url="{{ path('annonce_fulltext', {'id' : annonce.id }) }}">
+                    Lire la suite</a>
+            </div>
+            <div class="advert__actions">
+                {{ annonce|generateAnnoncesActionsLinks|raw }}
+                <a href="#" class="shareAdvert" data-url="{{ path('annonce_view', {'id' : annonce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
+            </div>
         </div>
-        <div class="advert__actions">
-            {{ annonce|generateAnnoncesActionsLinks|raw }}
-            <a href="#" class="shareAdvert" data-url="{{ path('annonce_view', {'id' : annonce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
-        </div>
-    </div>
-{% endfor %}
+    {% endfor %}
+{% else %}
+    <p class="adverts__user--none">Pas d'annonces publiées pour l'instant.</p>
+    <a href="{{ path('home') }}" class="color-white"><span class="fa fa-home" aria-hidden="true"></span> Retourner à l'accueil</a>
+{% endif %}

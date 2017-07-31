@@ -1,0 +1,22 @@
+{% if astuces|length > 0 %}
+    {% for astuce in astuces %}
+        <div class="astuces__intro">
+            {{ astuce|generateAstucesProfilLink|raw }} a posté une astuce
+            <div class="small">
+                le {{ astuce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
+            </div>
+        </div>
+        <div class="astuces__container">
+            <div class="astuces__content">
+                {{ astuce.contenu|nl2br }}
+            </div>
+            <div class="astuces__actions">
+                {{ astuce|generateAstucesActionsLinks|raw }}
+                <a href="#" class="shareAstuce" data-url="{{ path('astuce_view', {'id' : astuce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p class="astuces__user--none">Pas d'astuces publiées pour l'instant.</p>
+    <a href="{{ path('home') }}" class="color-white"><span class="fa fa-home" aria-hidden="true"></span> Retourner à l'accueil</a>
+{% endif %}
