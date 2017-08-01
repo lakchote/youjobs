@@ -59,6 +59,13 @@ class Astuce
      */
     private $astuceSignalee = false;
 
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Vous devez renseigner le sujet de l'astuce.")
+     * @Assert\Length(min=11, minMessage="L'intitulé de l'astuce est trop court.")
+     */
+    private $intituleAstuce;
+
     public function __construct()
     {
         $this->usersAstucesFavorites = new ArrayCollection();
@@ -186,6 +193,22 @@ class Astuce
     public function setUsersAstucesFavorites($userAstucesFavorites)
     {
         $this->usersAstucesFavorites[] = $userAstucesFavorites;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIntituleAstuce()
+    {
+        return $this->intituleAstuce;
+    }
+
+    /**
+     * @param string $intituleAstuce
+     */
+    public function setIntituleAstuce($intituleAstuce)
+    {
+        $this->intituleAstuce = $intituleAstuce;
     }
 
 }

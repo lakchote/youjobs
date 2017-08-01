@@ -2,6 +2,7 @@
     {% for astuce in astuces %}
         <div class="astuces__intro">
             {{ astuce|generateAstucesProfilLink|raw }} a posté une astuce
+            <div class="bold"> {{ astuce.intituleAstuce }}</div>
             <div class="small">
                 le {{ astuce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
             </div>
