@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Astuce;
+use AppBundle\Entity\CategorieAstuce;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\AstuceFormType;
 use AppBundle\Service\PostAstuce;
@@ -93,9 +94,11 @@ class AstuceController extends Controller
     public function astucesUserAction(User $id, EntityManager $em, Paginator $paginator, Request $request)
     {
         $astucesForUser = $em->getRepository('AppBundle:Astuce')->findBy(['userAstuce' => $id]);
+        $categoriesAstuces = $em->getRepository('AppBundle:CategorieAstuce')->findAll();
         $astuces = $paginator->paginate($astucesForUser, $request->query->getInt('page', 1),  5);
         return $this->render('default/astuces.html.twig', [
             'astuces' => $astuces,
+            'categoriesAstuces' => $categoriesAstuces,
             'user' => $id
         ]);
     }
@@ -133,6 +136,36 @@ class AstuceController extends Controller
         return $this->render('default/astuces.html.twig', [
             'astuces' => $astuces,
             'astucesFavorites' => true
+        ]);
+    }
+
+    /**
+     * @Route("/astuces/categorie/{categorie}/user/{id}", name="astuces_categorie_user")
+     */
+    public function astucesCategorieUserAction(CategorieAstuce $categorie, User $id, EntityManager $em, Paginator $paginator, Request $request)
+    {
+        $astucesForUser = $em->getRepository('AppBundle:Astuce')->getAstucesForACategorieAndAUser($categorie->getTitre(), $id);
+        $categoriesAstuces = $em->getRepository('AppBundle:CategorieAstuce')->findAll();
+        $astuces = $paginator->paginate($astucesForUser, $request->query->getInt('page', 1),  5);
+        return $this->render('default/astuces.html.twig', [
+            'astuces' => $astuces,
+            'categoriesAstuces' => $categoriesAstuces,
+            'user' => $id,
+            'categorie' => $categorie
+        ]);
+    }
+
+    /**
+     * @Route("/astuces/categorie/{id}", name="astuces_categorie")
+     */
+    public function astucesCategorieAction(CategorieAstuce $id, EntityManager $em, Paginator $paginator, Request $request)
+    {
+        $astucesForACategorie = $em->getRepository('AppBundle:Astuce')->getAstucesForACategorie($id->getTitre());
+        $categoriesAstuces = $em->getRepository('AppBundle:CategorieAstuce')->findAll();
+        $astuces = $paginator->paginate($astucesForACategorie, $request->query->getInt('page', 1),  5);
+        return $this->render('default/astuces.html.twig', [
+            'astuces' => $astuces,
+            'categoriesAstuces' => $categoriesAstuces
         ]);
     }
 }

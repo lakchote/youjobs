@@ -49,9 +49,11 @@ class IndexController extends Controller
     public function astucesAction(EntityManager $em, Paginator $paginator, Request $request)
     {
         $sortAstucesByDatePublication = $em->getRepository('AppBundle:Astuce')->findBy([], ['datePublication' => 'DESC']);
+        $categoriesAstuces = $em->getRepository('AppBundle:CategorieAstuce')->findAll();
         $astuces = $paginator->paginate($sortAstucesByDatePublication, $request->query->getInt('page', 1), 5);
         return $this->render('default/astuces.html.twig', [
-            'astuces' => $astuces
+            'astuces' => $astuces,
+            'categoriesAstuces' => $categoriesAstuces
         ]);
     }
 }

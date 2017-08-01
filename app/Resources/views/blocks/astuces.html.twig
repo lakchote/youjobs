@@ -1,7 +1,13 @@
 {% if astuces|length > 0 %}
     {% for astuce in astuces %}
         <div class="astuces__intro">
-            {{ astuce|generateAstucesProfilLink|raw }} a posté dans <span class="color-blue--light">{{ astuce.categorieAstuce.titre }}</span>
+            {{ astuce|generateAstucesProfilLink|raw }} a posté dans <span class="color-blue--light">
+                {% if user is defined %}
+                    <a href="{{ path('astuces_categorie_user', {'categorie' : astuce.categorieAstuce.id, 'id' : user.id }) }}">{{ astuce.categorieAstuce.titre }}</a>
+                {% else %}
+                    <a href="{{ path('astuces_categorie', {'id' : astuce.categorieAstuce.id}) }}">{{ astuce.categorieAstuce.titre }}</a>
+                {% endif %}
+            </span>
             <div class="bold"> {{ astuce.intituleAstuce }}</div>
             <div class="small">
                 le {{ astuce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}

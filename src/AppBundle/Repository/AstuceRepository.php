@@ -38,4 +38,56 @@ class AstuceRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function countAstucesForACategorie($titreCategorie)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->leftJoin('a.categorieAstuce', 'c')
+            ->andWhere('c.titre = :titreCategorie')
+            ->setParameter('titreCategorie', $titreCategorie)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countAstucesForACategorieAndAUser($titreCategorie, User $id)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.userAstuce = :id')
+            ->leftJoin('a.categorieAstuce', 'c')
+            ->andWhere('c.titre = :titreCategorie')
+            ->setParameter('id', $id)
+            ->setParameter('titreCategorie', $titreCategorie)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getAstucesForACategorieAndAUser($titreCategorie, User $id)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.userAstuce = :id')
+            ->orderBy('a.datePublication', 'DESC')
+            ->leftJoin('a.categorieAstuce', 'c')
+            ->andWhere('c.titre = :titreCategorie')
+            ->setParameter('id', $id)
+            ->setParameter('titreCategorie', $titreCategorie)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAstucesForACategorie($titreCategorie)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->orderBy('a.datePublication', 'DESC')
+            ->leftJoin('a.categorieAstuce', 'c')
+            ->andWhere('c.titre = :titreCategorie')
+            ->setParameter('titreCategorie', $titreCategorie)
+            ->getQuery()
+            ->getResult();
+    }
 }

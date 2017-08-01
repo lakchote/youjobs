@@ -7,6 +7,7 @@ namespace AppBundle\Twig;
 use AppBundle\Entity\Annonce;
 use AppBundle\Entity\Astuce;
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\CategorieAstuce;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Routing\Router;
@@ -32,10 +33,12 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFilter('generateAnnoncesActionsLinks', [$this, 'generateAnnoncesActionsLinks']),
             new \Twig_SimpleFilter('generateAstucesActionsLinks', [$this, 'generateAstucesActionsLinks']),
             new \Twig_SimpleFilter('countAnnoncesForACategorie', [$this, 'countAnnoncesForACategorie']),
+            new \Twig_SimpleFilter('countAstucesForACategorie', [$this, 'countAstucesForACategorie']),
             new \Twig_SimpleFilter('generateAnnoncesProfilLink', [$this, 'generateAnnoncesProfilLink']),
             new \Twig_SimpleFilter('generateAstucesProfilLink', [$this, 'generateAstucesProfilLink']),
             new \Twig_SimpleFilter('displayUserDescription', [$this, 'displayUserDescription']),
             new \Twig_SimpleFilter('countAnnoncesForACategorieAndAUser', [$this, 'countAnnoncesForACategorieAndAUser']),
+            new \Twig_SimpleFilter('countAstucesForACategorieAndAUser', [$this, 'countAstucesForACategorieAndAUser']),
         ];
     }
 
@@ -95,6 +98,11 @@ class AppExtension extends \Twig_Extension
         return $this->em->getRepository('AppBundle:Annonce')->countAnnoncesForACategorie($categorie->getTitre());
     }
 
+    public function countAstucesForACategorie(CategorieAstuce $categorie)
+    {
+        return $this->em->getRepository('AppBundle:Astuce')->countAstucesForACategorie($categorie->getTitre());
+    }
+
     public function generateAnnoncesProfilLink(Annonce $annonce)
     {
         $toReturn = '';
@@ -121,5 +129,10 @@ class AppExtension extends \Twig_Extension
     public function countAnnoncesForACategorieAndAUser(Categorie $categorie, User $id)
     {
         return $this->em->getRepository('AppBundle:Annonce')->countAnnoncesForACategorieAndAUser($categorie->getTitre(), $id);
+    }
+
+    public function countAstucesForACategorieAndAUser(CategorieAstuce $categorie, User $id)
+    {
+        return $this->em->getRepository('AppBundle:Astuce')->countAstucesForACategorieAndAUser($categorie->getTitre(), $id);
     }
 }
