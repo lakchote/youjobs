@@ -83,3 +83,24 @@ function getProperUrlForAstuceReportAction(obj, classSelector)
     }
     return data;
 }
+
+function getProperUrlForAstuceBookmarkAction(obj, classSelector)
+{
+    var dataBookmark, dataUnbookmark = undefined;
+    var data = [];
+    if(classSelector === 'bookmarkAstuce') {
+        dataBookmark = $(obj).data('url');
+        dataUnbookmark = $(obj).data('unbookmarkastuce');
+    } else {
+        dataBookmark = $(obj).data('bookmarkastuce');
+        dataUnbookmark = $(obj).data('url');
+    }
+    if($(obj).hasClass('unBookmarkAstuce')) {
+        data['url'] = dataUnbookmark;
+        data['unBookmarkAstuce'] = true;
+    } else {
+        data['url'] = dataBookmark;
+        data['unBookmarkAstuce'] = false;
+    }
+    return data;
+}

@@ -4,6 +4,7 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,9 +22,15 @@ class Astuce
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="astuces", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="astuces", cascade={"persist"})
      */
     private $userAstuce;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", inversedBy="astucesFavorites", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $usersAstucesFavorites;
 
     /**
      * @ORM\Column(type="text")
@@ -51,6 +58,11 @@ class Astuce
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $astuceSignalee = false;
+
+    public function __construct()
+    {
+        $this->usersAstucesFavorites = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -159,4 +171,21 @@ class Astuce
     {
         if($this->nbSignalements > 0) $this->nbSignalements--;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUsersAstucesFavorites()
+    {
+        return $this->usersAstucesFavorites;
+    }
+
+    /**
+     * @param mixed $usersAstucesFavorites
+     */
+    public function setUsersAstucesFavorites($userAstucesFavorites)
+    {
+        $this->usersAstucesFavorites[] = $userAstucesFavorites;
+    }
+
 }

@@ -99,4 +99,40 @@ class AstuceController extends Controller
             'user' => $id
         ]);
     }
+
+    /**
+     * @Route("/astuce/bookmark/{id}", name="astuce_bookmark")
+     */
+    public function astuceBookmarkAction(Astuce $id, TokenStorage $tokenStorage, Request $request, UserAstucesActions $userAstuces)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $currentUser = $tokenStorage->getToken()->getUser();
+        $userAstuces->bookmarkAstuce($currentUser, $id);
+        return new Response('', 200);
+    }
+
+    /**
+     * @Route("/astuce/unbookmark/{id}", name="astuce_unbookmark")
+     */
+    public function astuceUnbookmarkAction(Astuce $id, TokenStorage $tokenStorage, Request $request, UserAstucesActions $userAstuces)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $currentUser = $tokenStorage->getToken()->getUser();
+        $userAstuces->unBookmarkAstuce($currentUser, $id);
+        return new Response('', 200);
+    }
+
+    /**
+     * @Route("/astuces/favorites", name="astuces_favorites")
+     */
+    public function astucesFavoritesAction(TokenStorage $tokenStorage, EntityManager $em, Paginator $paginator, Request $request)
+    {
+        $currentUser = $tokenStorage->getToken()->getUser();
+        $astucesFavorites = $em->getRepository('AppBundle:Astuce')->getAstucesFavoritesForCurrentUser($currentUser);
+        $astuces = $paginator->paginate($astucesFavorites, $request->query->getInt('page', 1),  5);
+        return $this->render('default/astuces.html.twig', [
+            'astuces' => $astuces,
+            'astucesFavorites' => true
+        ]);
+    }
 }

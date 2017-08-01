@@ -27,4 +27,15 @@ class AstuceRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getAstucesFavoritesForCurrentUser(User $id)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->leftJoin('a.usersAstucesFavorites', 'favoris')
+            ->where('favoris.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+    }
 }

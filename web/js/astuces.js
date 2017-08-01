@@ -85,3 +85,33 @@ $('.shareAstuce').click(function (e) {
         href: 'http://www.you.jobs' + $(this).data('url')
     }, function(response){});
 });
+
+$('.bookmarkAstuce').click(function (e) {
+    e.preventDefault();
+    var that = this;
+    var data = getProperUrlForAstuceBookmarkAction(this, 'bookmarkAstuce');
+    $.ajax({
+        url: data['url'],
+        method: 'GET'
+    }).done(function () {
+        (data['unBookmarkAstuce'] === false) ?
+            $(that).removeClass('bookmarkAstuce').addClass('unBookmarkAstuce')
+            :
+            $(that).removeClass('unBookmarkAstuce').addClass('bookmarkAstuce');
+    });
+});
+
+$('.unBookmarkAstuce').click(function (e) {
+    e.preventDefault();
+    var that = this;
+    var data = getProperUrlForAstuceBookmarkAction(this, 'unBookmarkAstuce');
+    $.ajax({
+        url: data['url'],
+        method: 'GET'
+    }).done(function () {
+        (data['unBookmarkAstuce'] === false) ?
+            $(that).removeClass('bookmarkAstuce').addClass('unBookmarkAstuce')
+            :
+            $(that).removeClass('unBookmarkAstuce').addClass('bookmarkAstuce');
+    });
+});

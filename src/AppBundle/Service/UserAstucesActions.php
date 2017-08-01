@@ -42,7 +42,7 @@ class UserAstucesActions
         $this->em->flush();
     }
 
-    public function reportAstuce($currentUser, Astuce $astuce)
+    public function reportAstuce(User $currentUser, Astuce $astuce)
     {
         /**
          * @var User $currentUser
@@ -54,7 +54,7 @@ class UserAstucesActions
         $this->em->persist($currentUser);
         $this->em->flush();
     }
-    public function unReportAstuce($currentUser, Astuce $astuce)
+    public function unReportAstuce(User $currentUser, Astuce $astuce)
     {
         foreach($currentUser->getSignalementsAstuces() as $key => $value) {
             if($astuce->getId() == $value) {
@@ -68,4 +68,17 @@ class UserAstucesActions
         $this->em->flush();
     }
 
+    public function bookmarkAstuce(User $currentUser, Astuce $astuce)
+    {
+        $astuce->setUsersAstucesFavorites($currentUser);
+        $this->em->persist($astuce);
+        $this->em->flush();
+    }
+
+    public function unBookmarkAstuce(User $currentUser, Astuce $astuce)
+    {
+        $astuce->getUsersAstucesFavorites()->removeElement($currentUser);
+        $this->em->persist($astuce);
+        $this->em->flush();
+    }
 }

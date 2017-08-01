@@ -99,6 +99,12 @@ class User implements UserInterface, \Serializable
     private $astuces;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Astuce", mappedBy="usersAstucesFavorites", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $astucesFavorites;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $nbRemerciements;
@@ -155,6 +161,7 @@ class User implements UserInterface, \Serializable
         $this->messages = new ArrayCollection();
         $this->annonces = new ArrayCollection();
         $this->astuces = new ArrayCollection();
+        $this->astucesFavorites = new ArrayCollection();
     }
 
     public function serialize()
@@ -575,5 +582,22 @@ class User implements UserInterface, \Serializable
     {
         $this->messageAnnoncesLu = $messageAnnoncesLu;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAstucesFavorites()
+    {
+        return $this->astucesFavorites;
+    }
+
+    /**
+     * @param mixed $astucesFavorites
+     */
+    public function setAstucesFavorites($astucesFavorites)
+    {
+        $this->astucesFavorites[] = $astucesFavorites;
+    }
+
 
 }

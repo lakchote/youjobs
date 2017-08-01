@@ -80,6 +80,13 @@ class AppExtension extends \Twig_Extension
             $toReturn = $toReturn . '<a href="#" class="unReportAstuce" data-url="' . $this->router->generate('astuce_unreport', ['id' => $astuce->getId()]) . '" data-report="' . $this->router->generate('astuce_report', ['id' => $astuce->getId()]) . '"><span
                                                 class="fa fa-exclamation-triangle" aria-hidden="true"></span> Signaler</a>';
         }
+        if(!$currentUser->getAstucesFavorites()->contains($astuce)) {
+            $toReturn = $toReturn . '<a href="#" class="bookmarkAstuce" data-url="' . $this->router->generate('astuce_bookmark', ['id' => $astuce->getId()]) . '" data-unbookmarkastuce="' . $this->router->generate('astuce_unbookmark', ['id' => $astuce->getId()]) . '"><span
+                                                class="fa fa-star" aria-hidden="true"></span> Favori</a>';
+        } else {
+            $toReturn = $toReturn . '<a href="#" class="unBookmarkAstuce" data-url="' . $this->router->generate('astuce_unbookmark', ['id' => $astuce->getId()]) . '" data-bookmarkastuce="' . $this->router->generate('astuce_bookmark', ['id' => $astuce->getId()]) . '"><span
+                                                class="fa fa-star" aria-hidden="true"></span> Favori</a>';
+        }
         return $toReturn;
     }
 

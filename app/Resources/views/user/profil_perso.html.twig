@@ -29,18 +29,21 @@
                     </div>
                     {{ form_row(form.contenu) }}
                     {{ form_row(form.email) }}
-                    <div class="color-accent profil__actions">
-                        <span class="fa fa-bullhorn" aria-hidden="true"></span> <a href="{{ path('annonces_user', {'id' : app.user.id }) }}" class="color-accent">Voir mes annonces <span class="small">({{ app.user.annonces|length }})</span></a>
-                    </div>
-                    <div class="color-accent profil__actions">
-                        <span class="fa fa-lightbulb-o" aria-hidden="true"></span> <a href="{{ path('astuces_user', {'id' : app.user.id}) }}" class="color-accent">Voir mes astuces <span class="small">({{ app.user.astuces|length }})</span></a>
-                    </div>
                     <div class="color-accent" id="changePwdToggle" data-toggle="collapse" data-target="#changePwd" aria-expanded="false" aria-controls="changePwd">
                         <span class="fa fa-pencil-square" aria-hidden="true"></span> Changer mot de passe
                     </div>
                     <div id="changePwd" class="collapse">
                     {{ form_row(form.plainPassword.first) }}
                     {{ form_row(form.plainPassword.second) }}
+                    </div>
+                    <div class="color-accent profil__actions">
+                        <span class="fa fa-bullhorn" aria-hidden="true"></span> <a href="{{ path('annonces_user', {'id' : app.user.id }) }}" class="color-accent">Voir mes annonces <span class="small">({{ app.user.annonces|length }})</span></a>
+                    </div>
+                    <div class="color-accent profil__actions">
+                        <span class="fa fa-lightbulb-o" aria-hidden="true"></span> <a href="{{ path('astuces_user', {'id' : app.user.id}) }}" class="color-accent">Voir mes astuces <span class="small">({{ app.user.astuces|length }})</span></a>
+                    </div>
+                    <div class="color-accent profil__actions">
+                        <span class="fa fa-star" aria-hidden="true"></span> <a href="{{ path('astuces_favorites') }}" class="color-accent">Astuces favorites <span class="small">({{ app.user.astucesFavorites|length }})</span></a>
                     </div>
                     <button type="submit" class="btn bgcolor-primary profil__btn-submit" formnovalidate>
                         <span class="fa fa-check color-white" aria-hidden="true"></span> Valider
