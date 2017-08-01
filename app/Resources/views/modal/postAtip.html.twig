@@ -5,6 +5,7 @@
 <div class="modal-body">
     {{ form_start(form) }}
         {{ form_row(form.intituleAstuce) }}
+        {{ form_row(form.categorieAstuce) }}
         {{ form_row(form.contenu) }}
     <button type="submit" class="btn bgcolor-primary" id="btn-submit__postAtip" formnovalidate><span class="fa fa-check" aria-hidden="true"></span> Valider</button>
     {{ form_end(form) }}

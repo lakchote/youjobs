@@ -25,6 +25,7 @@ class PostAstuce
     {
         $astuce = new Astuce();
         $astuce->setIntituleAstuce($formData['intituleAstuce']->getData());
+        $astuce->setCategorieAstuce($formData['categorieAstuce']->getData());
         $astuce->setContenu($formData['contenu']->getData());
         $astuce->setDatePublication(new \DateTime());
         $astuce->setUserAstuce($this->tokenStorage->getToken()->getUser());

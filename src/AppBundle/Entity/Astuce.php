@@ -33,6 +33,11 @@ class Astuce
     private $usersAstucesFavorites;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CategorieAstuce", inversedBy="astuces")
+     */
+    private $categorieAstuce;
+
+    /**
      * @ORM\Column(type="text")
      * @Assert\Length(max=1000, maxMessage="L'astuce est trop volumineuse.", min=200, minMessage="L'astuce est trop petite.")
      * @Assert\NotBlank(message="L'astuce ne peut être vide.")
@@ -209,6 +214,22 @@ class Astuce
     public function setIntituleAstuce($intituleAstuce)
     {
         $this->intituleAstuce = $intituleAstuce;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorieAstuce()
+    {
+        return $this->categorieAstuce;
+    }
+
+    /**
+     * @param mixed $typeAstuce
+     */
+    public function setCategorieAstuce($categorieAstuce)
+    {
+        $this->categorieAstuce = $categorieAstuce;
     }
 
 }

@@ -1,7 +1,7 @@
 {% if astuces|length > 0 %}
     {% for astuce in astuces %}
         <div class="astuces__intro">
-            {{ astuce|generateAstucesProfilLink|raw }} a posté une astuce
+            {{ astuce|generateAstucesProfilLink|raw }} a posté dans <span class="color-blue--light">{{ astuce.categorieAstuce.titre }}</span>
             <div class="bold"> {{ astuce.intituleAstuce }}</div>
             <div class="small">
                 le {{ astuce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
