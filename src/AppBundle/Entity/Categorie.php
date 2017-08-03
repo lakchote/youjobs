@@ -6,6 +6,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -29,6 +30,12 @@ class Categorie
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Annonce", mappedBy="categorie")
      */
     private $annonces;
+
+    /**
+     * @Gedmo\Slug(fields={"titre"})
+     * @ORM\Column(type="string")
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -73,6 +80,14 @@ class Categorie
     public function setAnnonces($annonces)
     {
         $this->annonces = $annonces;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
 }

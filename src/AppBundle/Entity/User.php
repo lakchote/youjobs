@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -149,6 +150,12 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="boolean")
      */
     private $messageAnnoncesLu = false;
+
+    /**
+     * @Gedmo\Slug(fields={"nom", "prenom"})
+     * @ORM\Column(type="string")
+     */
+    private $slug;
 
     const STATUT1 = 'Nouveau venu';
 
@@ -620,6 +627,14 @@ class User implements UserInterface, \Serializable
     public function setCommentaires($commentaire)
     {
         $this->commentaires[] = $commentaire;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
 }

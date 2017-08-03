@@ -6,6 +6,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -29,6 +30,12 @@ class CategorieAstuce
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Astuce", mappedBy="categorieAstuce")
      */
     private $astuces;
+
+    /**
+     * @Gedmo\Slug(fields={"titre"})
+     * @ORM\Column(type="string")
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -81,5 +88,13 @@ class CategorieAstuce
     public function setAstuces(Astuce $astuce)
     {
         $this->astuces[] = $astuce;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

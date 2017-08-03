@@ -142,7 +142,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/profil/user/{id}", name="profil_user")
+     * @Route("/profil/user/{slug}", name="profil_user")
      */
     public function profilUserAction(User $id, TokenStorage $tokenStorage)
     {

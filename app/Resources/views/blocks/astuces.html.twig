@@ -3,9 +3,9 @@
         <div class="astuces__intro">
             {{ astuce|generateAstucesProfilLink|raw }} a posté dans <span class="color-blue--light">
                 {% if user is defined %}
-                    <a href="{{ path('astuces_categorie_user', {'categorie' : astuce.categorieAstuce.id, 'id' : user.id }) }}">{{ astuce.categorieAstuce.titre }}</a>
+                    <a href="{{ path('astuces_categorie_user', {'slug' : astuce.categorieAstuce.slug, 'slug_user' : user.slug }) }}">{{ astuce.categorieAstuce.titre }}</a>
                 {% else %}
-                    <a href="{{ path('astuces_categorie', {'id' : astuce.categorieAstuce.id}) }}">{{ astuce.categorieAstuce.titre }}</a>
+                    <a href="{{ path('astuces_categorie', {'slug' : astuce.categorieAstuce.slug}) }}">{{ astuce.categorieAstuce.titre }}</a>
                 {% endif %}
             </span>
             <div class="bold"> {{ astuce.intituleAstuce }}</div>

@@ -11,6 +11,7 @@ use AppBundle\Service\SetIntroMessagesAsRead;
 use AppBundle\Service\UserAstucesActions;
 use Doctrine\ORM\EntityManager;
 use Knp\Component\Pager\Paginator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -89,7 +90,7 @@ class AstuceController extends Controller
     }
 
     /**
-     * @Route("/astuces/user/{id}", name="astuces_user")
+     * @Route("/astuces/user/{slug}", name="astuces_user")
      */
     public function astucesUserAction(User $id, EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -140,23 +141,25 @@ class AstuceController extends Controller
     }
 
     /**
-     * @Route("/astuces/categorie/{categorie}/user/{id}", name="astuces_categorie_user")
+     * @Route("/astuces/categorie/{slug}/user/{slug_user}", name="astuces_categorie_user")
+     * @ParamConverter("categorie", options={"mapping" : {"slug" : "slug"}})
+     * @ParamConverter("user", options={"mapping" : {"slug_user" : "slug"}})
      */
-    public function astucesCategorieUserAction(CategorieAstuce $categorie, User $id, EntityManager $em, Paginator $paginator, Request $request)
+    public function astucesCategorieUserAction(CategorieAstuce $categorie, User $user, EntityManager $em, Paginator $paginator, Request $request)
     {
-        $astucesForUser = $em->getRepository('AppBundle:Astuce')->getAstucesForACategorieAndAUser($categorie->getTitre(), $id);
+        $astucesForUser = $em->getRepository('AppBundle:Astuce')->getAstucesForACategorieAndAUser($categorie->getTitre(), $user);
         $categoriesAstuces = $em->getRepository('AppBundle:CategorieAstuce')->findAll();
         $astuces = $paginator->paginate($astucesForUser, $request->query->getInt('page', 1),  5);
         return $this->render('default/astuces.html.twig', [
             'astuces' => $astuces,
             'categoriesAstuces' => $categoriesAstuces,
-            'user' => $id,
+            'user' => $user,
             'categorie' => $categorie
         ]);
     }
 
     /**
-     * @Route("/astuces/categorie/{id}", name="astuces_categorie")
+     * @Route("/astuces/categorie/{slug}", name="astuces_categorie")
      */
     public function astucesCategorieAction(CategorieAstuce $id, EntityManager $em, Paginator $paginator, Request $request)
     {

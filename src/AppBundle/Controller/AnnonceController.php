@@ -11,6 +11,7 @@ use AppBundle\Service\SetIntroMessagesAsRead;
 use AppBundle\Service\UserAnnoncesActions;
 use Doctrine\ORM\EntityManager;
 use Knp\Component\Pager\Paginator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -97,7 +98,7 @@ class AnnonceController extends Controller
     }
 
     /**
-     * @Route("/annonces/categorie/{id}", name="annonces_categorie")
+     * @Route("/annonces/categorie/{slug}", name="annonces_categorie")
      */
     public function annoncesCategorieAction(Categorie $id, EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -111,7 +112,7 @@ class AnnonceController extends Controller
     }
 
     /**
-     * @Route("/annonces/user/{id}", name="annonces_user")
+     * @Route("/annonces/user/{slug}", name="annonces_user")
      */
     public function annoncesUserAction(User $id, EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -126,17 +127,19 @@ class AnnonceController extends Controller
     }
 
     /**
-     * @Route("/annonces/categorie/{categorie}/user/{id}", name="annonces_categorie_user")
+     * @Route("/annonces/categorie/{slug}/user/{slug_user}", name="annonces_categorie_user")
+     * @ParamConverter("categorie", options={"mapping": {"slug" : "slug"}})
+     * @ParamConverter("user", options={"mapping" : {"slug_user" : "slug"}})
      */
-    public function annoncesCategorieUserAction(Categorie $categorie, User $id, EntityManager $em, Paginator $paginator, Request $request)
+    public function annoncesCategorieUserAction(Categorie $categorie, User $user, EntityManager $em, Paginator $paginator, Request $request)
     {
-        $annoncesForUser = $em->getRepository('AppBundle:Annonce')->getAnnoncesForACategorieAndAUser($categorie->getTitre(), $id);
+        $annoncesForUser = $em->getRepository('AppBundle:Annonce')->getAnnoncesForACategorieAndAUser($categorie->getTitre(), $user);
         $categories = $em->getRepository('AppBundle:Categorie')->findAll();
         $annonces = $paginator->paginate($annoncesForUser, $request->query->getInt('page', 1),  5);
         return $this->render('default/home.html.twig', [
             'annonces' => $annonces,
             'categories' => $categories,
-            'user' => $id,
+            'user' => $user,
             'categorie' => $categorie
         ]);
     }

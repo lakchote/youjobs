@@ -4,9 +4,9 @@
             {{ annonce|generateAnnoncesProfilLink|raw }} a posté dans <span
                     class="advert__intro-categorie">
                 {% if user is defined %}
-                    <a href="{{ path('annonces_categorie_user', {'categorie' : annonce.categorie.id, 'id' : user.id }) }}">{{ annonce.categorie.titre }}</a>
+                    <a href="{{ path('annonces_categorie_user', {'slug' : annonce.categorie.slug, 'slug_user' : user.slug }) }}">{{ annonce.categorie.titre }}</a>
                 {% else %}
-                    <a href="{{ path('annonces_categorie', {'id' : annonce.categorie.id}) }}">{{ annonce.categorie.titre }}</a>
+                    <a href="{{ path('annonces_categorie', {'slug' : annonce.categorie.slug}) }}">{{ annonce.categorie.titre }}</a>
                 {% endif %}
             </span>
             <div>Offre d'emploi : <span class="bold">{{ annonce.intitulePoste }}</span> à <span class="bold">{{ annonce.localisation }}</span></div>

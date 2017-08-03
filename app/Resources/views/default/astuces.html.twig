@@ -18,10 +18,10 @@
                         <li class="list-group-item">
                             {% if user is defined %}
                                 <span class="badge badge__bgcolorAstuce">{{ categorie|countAstucesForACategorieAndAUser(user) }}</span>
-                                <a href="{{ path('astuces_categorie_user', {'categorie' : categorie.id, 'id' : user.id }) }}">{{ categorie.titre }}</a>
+                                <a href="{{ path('astuces_categorie_user', {'slug' : categorie.slug, 'slug_user' : user.slug }) }}">{{ categorie.titre }}</a>
                             {% else %}
                                 <span class="badge badge__bgcolorAstuce">{{ categorie|countAstucesForACategorie }}</span>
-                                <a href="{{ path('astuces_categorie', {'id' : categorie.id }) }}">{{ categorie.titre }}</a>
+                                <a href="{{ path('astuces_categorie', {'slug' : categorie.slug }) }}">{{ categorie.titre }}</a>
                             {% endif %}
                         </li>
                     {% endfor %}
