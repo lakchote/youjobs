@@ -7,28 +7,25 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Annonce;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class PostAnnonce
 {
 
     private $em;
+    private $tokenStorage;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, TokenStorage $tokenStorage)
     {
         $this->em = $em;
+        $this->tokenStorage = $tokenStorage;
     }
 
-    public function createAdvert($formData, User $user)
+    public function createAdvert(Annonce $annonce)
     {
-        $advert = new Annonce();
-        $advert->setIntitulePoste($formData['intitulePoste']->getData());
-        $advert->setLocalisation($formData['localisation']->getData());
-        $advert->setContenu($formData['contenu']->getData());
-        $advert->setCategorie($formData['categorie']->getData());
-        $advert->setType($formData['type']->getData());
-        $advert->setDatePublication(new \DateTime());
-        $advert->setUser($user);
-        $this->em->persist($advert);
+        $annonce->setDatePublication(new \DateTime());
+        $annonce->setUser($this->tokenStorage->getToken()->getUser());
+        $this->em->persist($annonce);
         $this->em->flush();
     }
 }

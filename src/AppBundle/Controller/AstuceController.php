@@ -43,7 +43,7 @@ class AstuceController extends Controller
         $form = $this->createForm(AstuceFormType::class);
         $form->handleRequest($request);
         if($form->isValid()) {
-            $postAstuce->createAstuce($form);
+            $postAstuce->createAstuce($form->getData());
             $this->addFlash('success', 'Votre astuce a été publiée.');
             return (new Response)->setContent($router->generate('astuces'), 200);
         } else {

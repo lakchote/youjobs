@@ -21,12 +21,8 @@ class PostAstuce
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function createAstuce(Form $formData)
+    public function createAstuce(Astuce $astuce)
     {
-        $astuce = new Astuce();
-        $astuce->setIntituleAstuce($formData['intituleAstuce']->getData());
-        $astuce->setCategorieAstuce($formData['categorieAstuce']->getData());
-        $astuce->setContenu($formData['contenu']->getData());
         $astuce->setDatePublication(new \DateTime());
         $astuce->setUserAstuce($this->tokenStorage->getToken()->getUser());
         $this->em->persist($astuce);

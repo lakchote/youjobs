@@ -32,8 +32,7 @@ class AnnonceController extends Controller
         $form = $this->createForm(AnnonceFormType::class);
         $form->handleRequest($request);
         if($form->isValid()) {
-            $user = $tokenStorage->getToken()->getUser();
-            $postAnnonce->createAdvert($form, $user);
+            $postAnnonce->createAdvert($form->getData());
             $this->addFlash('success', 'Votre annonce a été publiée.');
             return (new Response())->setContent($router->generate('home'), 200);
         } else {
