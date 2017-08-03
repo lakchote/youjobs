@@ -38,6 +38,12 @@ class Astuce
     private $categorieAstuce;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentaires", mappedBy="astuceCommentaires", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $commentaires;
+
+    /**
      * @ORM\Column(type="text")
      * @Assert\Length(max=1000, maxMessage="L'astuce est trop volumineuse.", min=200, minMessage="L'astuce est trop petite.")
      * @Assert\NotBlank(message="L'astuce ne peut être vide.")
@@ -74,6 +80,7 @@ class Astuce
     public function __construct()
     {
         $this->usersAstucesFavorites = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     /**
@@ -230,6 +237,22 @@ class Astuce
     public function setCategorieAstuce($categorieAstuce)
     {
         $this->categorieAstuce = $categorieAstuce;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
+
+    /**
+     * @param mixed $commentaire
+     */
+    public function setCommentaires($commentaire)
+    {
+        $this->commentaires[] = $commentaire;
     }
 
 }

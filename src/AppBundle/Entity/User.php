@@ -105,6 +105,12 @@ class User implements UserInterface, \Serializable
     private $astucesFavorites;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentaires", mappedBy="userCommentaires", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $commentaires;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $nbRemerciements;
@@ -162,6 +168,7 @@ class User implements UserInterface, \Serializable
         $this->annonces = new ArrayCollection();
         $this->astuces = new ArrayCollection();
         $this->astucesFavorites = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function serialize()
@@ -599,5 +606,20 @@ class User implements UserInterface, \Serializable
         $this->astucesFavorites[] = $astucesFavorites;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
+
+    /**
+     * @param mixed $commentaire
+     */
+    public function setCommentaires($commentaire)
+    {
+        $this->commentaires[] = $commentaire;
+    }
 
 }
