@@ -21,7 +21,7 @@ class Annonce
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="annonces", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="annonces", cascade={"persist"})
      */
     private $user;
 

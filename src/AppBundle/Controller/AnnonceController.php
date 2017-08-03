@@ -140,4 +140,13 @@ class AnnonceController extends Controller
             'categorie' => $categorie
         ]);
     }
+
+    /**
+     * @Route("/annonce/delete/{id}", name="annonce_delete")
+     */
+    public function annonceDeleteAction(Annonce $id, UserAnnoncesActions $userActions)
+    {
+        $userActions->deleteAdvert($id);
+        return $this->redirectToRoute('home');
+    }
 }

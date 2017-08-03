@@ -25,6 +25,9 @@
             <div class="advert__actions">
                 {{ annonce|generateAnnoncesActionsLinks|raw }}
                 <a href="#" class="shareAdvert" data-url="{{ path('annonce_view', {'id' : annonce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
+                {% if app.user == annonce.user or is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('annonce_delete', {'id' : annonce.id}) }}"><span class="fa fa-times" aria-hidden="true"></span> Supprimer</a>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
