@@ -49,8 +49,17 @@
     color:#536DFE;
 }
 
-.advert__intro-categorie a, .adverts__userCategorie {
+.advert__intro-categorie a {
     color: #9FA8DA !important;
+}
+
+.adverts__userCategorie {
+    color: #8C9EFF !important;
+}
+
+.adverts__homeLink {
+    display:inline-block;
+    margin-bottom: 10px;
 }
 
 .advert__content {

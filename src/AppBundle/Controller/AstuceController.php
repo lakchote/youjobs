@@ -168,7 +168,8 @@ class AstuceController extends Controller
         $astuces = $paginator->paginate($astucesForACategorie, $request->query->getInt('page', 1),  5);
         return $this->render('default/astuces.html.twig', [
             'astuces' => $astuces,
-            'categoriesAstuces' => $categoriesAstuces
+            'categoriesAstuces' => $categoriesAstuces,
+            'astucesFiltre' => $id
         ]);
     }
 }

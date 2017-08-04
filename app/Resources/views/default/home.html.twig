@@ -48,6 +48,11 @@
                     {% else %}
                         <h4 class="adverts__user">Annonces de {{ user.username }}</h4>
                     {% endif %}
+                {% elseif categorieFiltre is defined %}
+                    <h4 class="adverts__user">Annonces <span class="small adverts__userCategorie"> (Catégorie : {{ categorieFiltre.titre }} )</span></h4>
+                {% endif %}
+                {% if user is defined or categorie is defined or categorieFiltre is defined %}
+                    <a href="{{ path('home') }}" class="color-white adverts__homeLink"><span class="fa fa-home" aria-hidden="true"></span> Retourner au flux d'annonces général</a>
                 {% else %}
                 <span class="home--postAdvert bgcolor-accent color-white"> <span class="fa fa-plus"
                                                                                  aria-hidden="true"></span> <a href="#"

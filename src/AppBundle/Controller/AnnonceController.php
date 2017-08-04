@@ -107,7 +107,8 @@ class AnnonceController extends Controller
         $annonces = $paginator->paginate($annoncesForACategorie, $request->query->getInt('page', 1),  5);
         return $this->render('default/home.html.twig', [
             'annonces' => $annonces,
-            'categories' => $categories
+            'categories' => $categories,
+            'categorieFiltre' => $id
         ]);
     }
 
