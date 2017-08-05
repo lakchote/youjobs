@@ -35,7 +35,7 @@ class Commentaires
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Le commentaire ne peut être vide.")
-     * @Assert\Length(min=3, minMessage="Le commentaire doit faire au moins 3 caractères.")
+     * @Assert\Length(min=3, minMessage="Le commentaire doit faire au moins 3 caractères.", max=1000, maxMessage="Le commentaire est trop volumineux.")
      */
     private $contenu;
 

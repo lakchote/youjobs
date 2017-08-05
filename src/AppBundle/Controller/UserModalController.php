@@ -2,10 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Astuce;
+use AppBundle\Entity\Commentaires;
 use AppBundle\Form\Type\AnnonceFormType;
 use AppBundle\Form\Type\AstuceFormType;
+use AppBundle\Form\Type\NewCommentFormType;
 use AppBundle\Form\Type\RegisterFormType;
 use AppBundle\Form\Type\LoginFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +62,33 @@ class UserModalController extends Controller
         $form = $this->createForm(AstuceFormType::class);
         return $this->render('modal/postAtip.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/modal/astuce/{id}/postAcomment", name="modal_post_comment")
+     */
+    public function modalPostCommentAction(Astuce $id, Request $request)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $form = $this->createForm(NewCommentFormType::class);
+        return $this->render('modal/postAcomment.html.twig', [
+            'form' => $form->createView(),
+            'astuce' => $id->getId()
+        ]);
+    }
+
+    /**
+     * @Route("/modal/astuce/{id}/answerComment/{comment_id}", name="modal_answer_comment")
+     */
+    public function modalAnswerCommentAction(Astuce $id, Commentaires $comment_id, Request $request)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $form = $this->createForm(NewCommentFormType::class);
+        return $this->render('modal/answerComment.html.twig', [
+            'form' => $form->createView(),
+            'commentaire' => $comment_id,
+            'astuce' => $id->getId()
         ]);
     }
 }

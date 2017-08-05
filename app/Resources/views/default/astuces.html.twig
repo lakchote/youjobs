@@ -38,8 +38,8 @@
                             N'hésitez pas, peut être que pour vous certaines astuces vous paraissent évidentes cependant
                             elles peuvent s'avérer utiles pour les autres.</p>
                         <p>Grâce à cet effort de solidarité commun, l'accès et le retour sur le marché de
-                                l'emploi
-                                sera facilité pour tous.</p>
+                            l'emploi
+                            sera facilité pour tous.</p>
                     </div>
                 {% endif %}
                 {% if user is defined %}
@@ -47,15 +47,19 @@
                 {% elseif astucesFavorites is defined %}
                     <h4 class="astuces__user">Vos astuces favorites</h4>
                 {% elseif astucesFiltre is defined %}
-                    <h4 class="astuces__user">Astuces <span class="small astuces__userCategorie">(Catégorie : {{ astucesFiltre.titre }})</span></h4>
+                    <h4 class="astuces__user">Astuces <span
+                                class="small astuces__userCategorie">(Catégorie : {{ astucesFiltre.titre }})</span></h4>
                 {% endif %}
                 {% if user is defined or astucesFavorites is defined or astucesFiltre is defined %}
-                    <a href="{{ path('astuces') }}" class="color-white astuces__homeLink"><span class="fa fa-home" aria-hidden="true"></span> Retourner au flux d'astuces général</a>
+                    <a href="{{ path('astuces') }}" class="color-white astuces__homeLink"><span class="fa fa-home"
+                                                                                                aria-hidden="true"></span>
+                        Retourner au flux d'astuces général</a>
                 {% else %}
                     <span class="bgcolor-astuces color-white" id="postAtip--action"><span class="fa fa-plus"
                                                                                           aria-hidden="true"></span> <a
                                 href="#" id="modal-load-postAtip" class="color-white" data-toggle="modal"
-                                data-target="#postAtip" data-url="{{ path('modal_post_tip') }}">Poster une astuce</a></span>
+                                data-target="#postAtip"
+                                data-url="{{ path('modal_post_tip') }}">Poster une astuce</a></span>
                 {% endif %}
                 {{ include('blocks/astuces.html.twig') }}
                 <div class="navigation">
@@ -64,6 +68,13 @@
                 <div class="modal fade" id="postAtip" tabindex="-1" role="dialog" aria-labelledby="postAtipLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content" id="postAtipContent">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="postAcomment" tabindex="-1" role="dialog"
+                     aria-labelledby="postAcommentLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" id="postAcommentContent">
                         </div>
                     </div>
                 </div>

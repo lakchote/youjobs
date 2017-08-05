@@ -17,6 +17,13 @@
             <div class="astuces__content">
                 {{ astuce.contenu|nl2br }}
             </div>
+            <div class="astuces__comments">
+                {% if astuce.commentaires.empty == false %}
+                    <a href="{{ path('astuce_view', {'id' : astuce.id}) }}" class="color-accent">Voir les commentaires ({{ astuce.commentaires|length }})</a>
+                {% else %}
+                    <a href="#" data-toggle="modal" data-target="#postAcomment" class="modal-load-postAcomment color-accent" data-url="{{ path('modal_post_comment', {'id' : astuce.id}) }}">Poster un commentaire</a>
+                {% endif %}
+            </div>
             <div class="astuces__actions">
                 {{ astuce|generateAstucesActionsLinks|raw }}
                 <a href="#" class="shareAstuce" data-url="{{ path('astuce_view', {'id' : astuce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>

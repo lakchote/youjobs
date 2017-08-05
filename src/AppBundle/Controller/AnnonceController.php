@@ -28,8 +28,9 @@ class AnnonceController extends Controller
     /**
      * @Route("/annonce/post", name="annonce_post")
      */
-    public function annoncePostAction(Request $request, TokenStorage $tokenStorage, PostAnnonce $postAnnonce, Router $router)
+    public function annoncePostAction(Request $request, PostAnnonce $postAnnonce, Router $router)
     {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
         $form = $this->createForm(AnnonceFormType::class);
         $form->handleRequest($request);
         if($form->isValid()) {

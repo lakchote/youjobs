@@ -40,6 +40,10 @@
     margin-bottom: 10px;
 }
 
+.astuces-comments__userName {
+    color: #000;
+}
+
 .astuces__photo {
     width: 40px;
     height: 40px;
@@ -61,7 +65,11 @@
 }
 
 .astuces__content {
-    padding-bottom:20px;
+    padding-bottom:10px;
+}
+
+.astuces__comments {
+    margin-bottom: 10px;
 }
 
 .astuces__actions a {
@@ -74,7 +82,7 @@
     color:#536DFE;
 }
 
-.unThankUserAstuce, .unReportAstuce, .unBookmarkAstuce {
+.unThankUserAstuce, .unReportAstuce, .unBookmarkAstuce, .astuces__comments--answer {
     color:#536DFE !important;
 }
 
@@ -86,8 +94,19 @@
     background-color: #7986CB;
 }
 
+.comments > .comments
+{
+    margin-left:5%;
+    margin-top:10px;
+}
+
 @media screen and (max-width: 768px) {
     #postAtip--action {
         font-size: 1em;
+    }
+
+    .comments > .comments
+    {
+        margin-left: 15%;
     }
 }

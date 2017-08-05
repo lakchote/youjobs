@@ -46,8 +46,8 @@ nav a:hover {
     color:#1A237E;
 }
 
-.color-accent {
-    color: #536DFE;
+.color-accent, .color-accent a:hover {
+    color: #536DFE !important;
 }
 
 .color-blue--light {

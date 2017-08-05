@@ -17,6 +17,17 @@ $('#modal-load-postAtip').click(function (e) {
     })
 });
 
+$('.modal-load-postAcomment').click(function (e) {
+    e.preventDefault();
+    $('#postAcommentContent').html(loadModalHTML);
+    $.ajax({
+        url: $(this).data('url'),
+        method: 'GET'
+    }).done(function (content) {
+        $('#postAcommentContent').html(content)
+    })
+});
+
 $('.thankUserAstuce').click(function (e) {
     e.preventDefault();
     var that = this;

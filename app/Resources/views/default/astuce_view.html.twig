@@ -20,7 +20,7 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-10">
+            <div class="col-xs-12 col-sm-12">
                 <div class="astuces__intro">
                     {% if astuce.userAstuce.photo is not null %}
                         <img class="astuces__photo img img-responsive pull-left" alt="Photo de profil"
@@ -35,8 +35,30 @@
                     <div class="astuces__content">
                         {{ astuce.contenu|nl2br }}
                     </div>
+                    <p><a href="{{ path('astuces') }}" class="color-accent"><span class="fa fa-arrow-left" aria-hidden="true"></span> Retourner au flux d'astuces</a></p>
+                    <h4>Commentaires</h4>
+                    {% from 'macros/recursive_comment.html.twig' import recursiveComment %}
+                    <div class="astuces__comments">
+                        {% for commentaire in astuce.commentaires %}
+                            {% if commentaire.parent == null %}
+                                {{ recursiveComment(commentaire) }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="modal fade" id="postAcomment" tabindex="-1" role="dialog"
+                     aria-labelledby="postAcommentLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" id="postAcommentContent">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/astuces.js') }}"></script>
 {% endblock %}

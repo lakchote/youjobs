@@ -1,0 +1,19 @@
+{% macro recursiveComment(commentaire) %}
+    <div class="comments">
+        {% import _self as self %}
+        {% if commentaire.userCommentaires.photo %}
+            <img src="{{ asset(commentaire.userCommentaires.imgPath ~ commentaire.userCommentaires.photo.filename) }}" alt="" class="img-responsive pull-left astuces__photo">
+        {% endif %}
+        <div>
+            <span class="astuces-comments__userName">{{ commentaire.userCommentaires.username }}</span><br/>
+        {{ commentaire.contenu }}
+                <span class="pull-right user-actions">
+                            {% if commentaire.lvl < 3 %}
+                                <a href="#" class="modal-load-postAcomment astuces__comments--answer" data-url="{{ path('modal_answer_comment', {'id' : commentaire.astuceCommentaires.id, 'comment_id' : commentaire.id }) }}" data-toggle="modal" data-target="#postAcomment"> Répondre </a>
+                            {% endif %}
+                        </span></div>
+        {% for child in commentaire.children %}
+            {{ self.recursiveComment(child) }}
+        {% endfor %}
+    </div>
+{% endmacro %}

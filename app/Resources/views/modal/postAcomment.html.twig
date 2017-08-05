@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="fermer">
+        <span aria-hidden="true" class="color-accent">&times;</span>
+    </button>
+    <h4 class="modal-title" id="postAcommentLabel">Poster un commentaire</h4>
+</div>
+<div class="modal-body">
+    {{ form_start(form) }}
+    {{ form_row(form.contenu) }}
+    <button type="submit" class="btn bgcolor-primary" id="btn-submit__postAcomment" formnovalidate>
+        <span class="fa fa-check color-white" aria-hidden="true"></span> <a href="#" class="color-white">Valider</a>
+    </button>
+    {{ form_end(form) }}
+</div>
+
+<script>
+    $('#btn-submit__postAcomment').click(function (e) {
+        e.preventDefault();
+        var $formData = $('form').serializeArray();
+        $.ajax({
+            url: '{{ path('astuce_post_comment', {'id' : astuce}) }}',
+            method: "POST",
+            data: $formData,
+            statusCode: {
+                400: function(jqXHR) {
+                    $('#postAcommentContent').html(jqXHR.responseText);
+                },
+                200: function(url) {
+                    document.location = url;
+                }
+            }
+        });
+    });
+</script>
+

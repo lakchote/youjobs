@@ -4,8 +4,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Astuce;
 use AppBundle\Entity\CategorieAstuce;
+use AppBundle\Entity\Commentaires;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\AstuceFormType;
+use AppBundle\Form\Type\NewCommentFormType;
+use AppBundle\Manager\CommentairesManager;
 use AppBundle\Service\PostAstuce;
 use AppBundle\Service\SetIntroMessagesAsRead;
 use AppBundle\Service\UserAstucesActions;
@@ -171,5 +174,49 @@ class AstuceController extends Controller
             'categoriesAstuces' => $categoriesAstuces,
             'astucesFiltre' => $id
         ]);
+    }
+
+    /**
+     * @Route("/astuce/{id}/post/comment", name="astuce_post_comment")
+     */
+    public function astucePostCommentAction(Astuce $id, Request $request, CommentairesManager $commentsManager, Router $router)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $form = $this->createForm(NewCommentFormType::class);
+        $form->handleRequest($request);
+        if($form->isValid()) {
+            $commentsManager->postComment($id, $form->getData());
+            $this->addFlash('success', 'Votre commentaire a été publié.');
+            return (new Response())->setContent($router->generate('astuces'), 200);
+        } else {
+            return (new Response())
+                ->setStatusCode(400)
+                ->setContent($this->renderView('modal/postAcomment.html.twig', [
+                    'form' => $form->createView()
+                ]));
+        }
+    }
+
+    /**
+     * @Route("/astuce/{id}/answer/comment/{comment_id}", name="astuce_answer_comment")
+     */
+    public function astuceAnswerCommentAction(Astuce $id, Commentaires $comment_id, Request $request, CommentairesManager $commentsManager, Router $router)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $form = $this->createForm(NewCommentFormType::class);
+        $form->handleRequest($request);
+        if($form->isValid()) {
+            $commentsManager->answerComment($comment_id, $form->getData(), $id);
+            $this->addFlash('success', 'Votre commentaire a été publié.');
+            return (new Response())->setContent($router->generate('astuce_view', ['id' => $id->getId()]), 200);
+        } else {
+            return (new Response())
+                ->setStatusCode(400)
+                ->setContent($this->renderView('modal/answerComment.html.twig', [
+                    'form' => $form->createView(),
+                    'commentaire' => $comment_id,
+                    'astuce' => $id->getId()
+                ]));
+        }
     }
 }
