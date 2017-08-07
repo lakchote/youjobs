@@ -71,7 +71,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(max=500, maxMessage="La description est trop volumineuse.", min=50, minMessage="La description est trop petite.")
+     * @Assert\Length(max=1000, maxMessage="La description est trop volumineuse.", min=50, minMessage="La description est trop petite.")
      */
     private $contenu;
 

@@ -48,7 +48,7 @@
                         <li><a href="{{ path('astuces') }}"><span class="fa fa-comments-o" aria-hidden="true"></span> Astuces</a></li>
                         <li><a href="{{ path('messages') }}"><span class="fa fa-envelope" aria-hidden="true"></span> Messages</a></li>
                         <li><a href="{{ path('profil') }}"><span class="fa fa-user" aria-hidden="true"></span> Profil</a></li>
-                        <li><a href="#"><span class="fa fa-question" aria-hidden="true"></span> Contact</a></li>
+                        <li><a href="{{ path('contact') }}"><span class="fa fa-question" aria-hidden="true"></span> Contact</a></li>
                         <li><a href="{{ path('logout') }}"><span class="fa fa-sign-out" aria-hidden="true"></span>Déconnexion</a></li>
                     {% endblock %}
                 </ul>
@@ -59,12 +59,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    {% for msg in app.session.flashBag.get('success') %}
-                        <div class="alert alert-success alert-dismissable">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="fermer">&times;</a>
-                                <span class="fa fa-check" aria-hidden="true"></span> {{ msg }}
+                    <div class="row">
+                        <div class="col-sm-6">
+                        {% for msg in app.session.flashBag.get('success') %}
+                            <div class="alert alert-success alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="fermer">&times;</a>
+                                    <span class="fa fa-check" aria-hidden="true"></span> {{ msg }}
+                            </div>
+                        {% endfor %}
                         </div>
-                    {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,7 +79,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="text-center color-white">Copyright 2017 YouJobs - Tous droits réservés | <a href="http://localhost:8000">Mentions légales</a> | <a href="#">Contact</a> </div>
+                    <div class="text-center color-white">Copyright 2017 YouJobs - Tous droits réservés | <a href="http://localhost:8000">Mentions légales</a> | <a href="{{ path('contact') }}">Contact</a> </div>
                 </div>
             </div>
         </div>

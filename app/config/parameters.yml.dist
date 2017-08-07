@@ -24,3 +24,5 @@ parameters:
     user_dir_photos: '%kernel.root_dir%\..\web\uploads\user'
 
     google_api_places_key: ~
+
+    contact_mail: your@email.com

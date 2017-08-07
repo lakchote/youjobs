@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\Type\ContactFormType;
+use AppBundle\Service\SendMail;
 use Doctrine\ORM\EntityManager;
 use Knp\Component\Pager\Paginator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -54,6 +56,25 @@ class IndexController extends Controller
         return $this->render('default/astuces.html.twig', [
             'astuces' => $astuces,
             'categoriesAstuces' => $categoriesAstuces
+        ]);
+    }
+
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contactAction(Request $request, SendMail $sendMail)
+    {
+        $form = $this->createForm(ContactFormType::class);
+        $form->handleRequest($request);
+        if($form->isValid())
+        {
+            $data = $form->getData();
+            $sendMail->sendContactMail($data);
+            $this->addFlash('success', 'Nous avons reçu votre mail et vous répondrons dans les plus brefs délais.');
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('default/contact.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }

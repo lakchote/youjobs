@@ -20,7 +20,8 @@ class ProfilPersoFormType extends AbstractType
         $builder
             ->add('contenu', TextareaType::class, [
                 'trim' => false,
-                'attr' => ['style' => 'height:100px;']
+                'attr' => ['style' => 'height:100px;'],
+                'label' =>  'Votre description'
             ])
             ->add('email', EmailType::class)
             ->add('photo', FileType::class)

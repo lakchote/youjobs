@@ -68,3 +68,7 @@ services:
                 clientSecret: "%facebook_clientsecret%"
                 graphApiVersion: v2.8
                 redirectUri: "http://localhost:8000/connect/facebook-check"
+
+    AppBundle\Service\SendMail:
+        arguments:
+            $contactMail: '%contact_mail%'
