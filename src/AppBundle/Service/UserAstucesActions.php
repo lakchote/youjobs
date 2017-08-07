@@ -6,14 +6,20 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Astuce;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class UserAstucesActions
 {
     private $em;
+    private $tokenStorage;
+    private $authorizationChecker;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, TokenStorage $tokenStorage, AuthorizationChecker $authorizationChecker)
     {
         $this->em = $em;
+        $this->tokenStorage = $tokenStorage;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function thankUserAstuce(User $currentUser, User $user, Astuce $astuce)
@@ -79,6 +85,15 @@ class UserAstucesActions
     {
         $astuce->getUsersAstucesFavorites()->removeElement($currentUser);
         $this->em->persist($astuce);
+        $this->em->flush();
+    }
+
+    public function deleteAstuce(Astuce $astuce)
+    {
+        if($this->tokenStorage->getToken()->getUser() !== $astuce->getUserAstuce()) {
+            if(!$this->authorizationChecker->isGranted('ROLE_ADMIN')) return;
+        }
+        $this->em->remove($astuce);
         $this->em->flush();
     }
 }

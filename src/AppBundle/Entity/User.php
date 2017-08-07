@@ -88,6 +88,12 @@ class User implements UserInterface, \Serializable
     private $messages;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="auteurMessage", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $expediteurMessages;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Annonce", mappedBy="user", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
      */
@@ -176,6 +182,7 @@ class User implements UserInterface, \Serializable
         $this->astuces = new ArrayCollection();
         $this->astucesFavorites = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
+        $this->expediteurMessages = new ArrayCollection();
     }
 
     public function serialize()
@@ -635,6 +642,22 @@ class User implements UserInterface, \Serializable
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExpediteurMessages()
+    {
+        return $this->expediteurMessages;
+    }
+
+    /**
+     * @param Message $message
+     */
+    public function setExpediteurMessages(Message $message)
+    {
+        $this->expediteurMessages[] = $message;
     }
 
 }

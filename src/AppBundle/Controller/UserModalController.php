@@ -4,8 +4,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Astuce;
 use AppBundle\Entity\Commentaires;
+use AppBundle\Entity\Message;
+use AppBundle\Entity\User;
 use AppBundle\Form\Type\AnnonceFormType;
 use AppBundle\Form\Type\AstuceFormType;
+use AppBundle\Form\Type\MessageFormType;
 use AppBundle\Form\Type\NewCommentFormType;
 use AppBundle\Form\Type\RegisterFormType;
 use AppBundle\Form\Type\LoginFormType;
@@ -89,6 +92,34 @@ class UserModalController extends Controller
             'form' => $form->createView(),
             'commentaire' => $comment_id,
             'astuce' => $id->getId()
+        ]);
+    }
+
+    /**
+     * @Route("/modal/message/beneficiaire/{slug}", name="modal_message")
+     */
+    public function modalMessageAction(User $id, Request $request)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $form = $this->createForm(MessageFormType::class);
+        return $this->render('modal/send_message.html.twig', [
+            'form' => $form->createView(),
+            'user' => $id
+        ]);
+    }
+
+    /**
+     * @Route("/modal/answer/{id}/message/{slug}", name="modal_answer_message")
+     * @ParamConverter("user", options={"mapping" : {"slug" : "slug"}})
+     */
+    public function modalAnswerMessageAction(Message $id, User $user, Request $request)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $form = $this->createForm(MessageFormType::class);
+        return $this->render('modal/send_message.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user,
+            'message' => $id
         ]);
     }
 }

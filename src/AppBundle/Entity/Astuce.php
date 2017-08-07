@@ -27,7 +27,7 @@ class Astuce
     private $userAstuce;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", inversedBy="astucesFavorites", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", inversedBy="astucesFavorites", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $usersAstucesFavorites;
@@ -38,7 +38,7 @@ class Astuce
     private $categorieAstuce;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentaires", mappedBy="astuceCommentaires", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentaires", mappedBy="astuceCommentaires", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $commentaires;

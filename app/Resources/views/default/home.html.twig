@@ -35,43 +35,54 @@
                 {% if app.user.messageAnnoncesLu == false %}
                     <div class="alert alert-info alert-dismissable" role="alert">
                         <a href="#" class="close" id="setAnnoncesMessageAsRead"
-                           data-url="{{ path('annonces_read_intro_message') }}" aria-label="fermer" data-dismiss="alert">&times;</a>
+                           data-url="{{ path('annonces_read_intro_message') }}" aria-label="fermer"
+                           data-dismiss="alert">&times;</a>
                         <p><strong>Contribuez et partagez des offres d'emploi !</strong></p>
-                        <p>En quelques minutes seulement, vous pouvez publier une annonce et indiquer le type de contrat et le secteur d'activité designé.</p>
-                        <p>Les autres utilisateurs pourront vous remercier, et même partager votre annonce, la solidarité et le partage font partie intégrante de l'écosystème YouJobs.</p>
-                        <p>Grâce à vous, les acteurs du site, vous contribuez ensemble à un effort commun qui est l'accès et le retour sur le marché de l'emploi.</p>
+                        <p>En quelques minutes seulement, vous pouvez publier une annonce et indiquer le type de contrat
+                            et le secteur d'activité designé.</p>
+                        <p>Les autres utilisateurs pourront vous remercier, et même partager votre annonce, la
+                            solidarité et le partage font partie intégrante de l'écosystème YouJobs.</p>
+                        <p>Grâce à vous, les acteurs du site, vous contribuez ensemble à un effort commun qui est
+                            l'accès et le retour sur le marché de l'emploi.</p>
                     </div>
                 {% endif %}
                 {% if user is defined %}
                     {% if categorie is defined %}
-                        <h4 class="adverts__user">Annonces de {{ user.username }} <span class="small adverts__userCategorie"> (Catégorie :  {{ categorie.titre }} )</span></h4>
+                        <h4 class="adverts__user">Annonces de {{ user.username }} <span
+                                    class="small adverts__userCategorie"> (Catégorie : {{ categorie.titre }} )</span>
+                        </h4>
                     {% else %}
                         <h4 class="adverts__user">Annonces de {{ user.username }}</h4>
                     {% endif %}
                 {% elseif categorieFiltre is defined %}
-                    <h4 class="adverts__user">Annonces <span class="small adverts__userCategorie"> (Catégorie : {{ categorieFiltre.titre }} )</span></h4>
+                    <h4 class="adverts__user">Annonces <span
+                                class="small adverts__userCategorie"> (Catégorie : {{ categorieFiltre.titre }} )</span>
+                    </h4>
                 {% endif %}
                 {% if user is defined or categorie is defined or categorieFiltre is defined %}
-                    <a href="{{ path('home') }}" class="color-white adverts__homeLink"><span class="fa fa-home" aria-hidden="true"></span> Retourner au flux d'annonces général</a>
+                    <a href="{{ path('home') }}" class="color-white adverts__homeLink"><span class="fa fa-home"
+                                                                                             aria-hidden="true"></span>
+                        Retourner au flux d'annonces général</a>
                 {% else %}
-                <span class="home--postAdvert bgcolor-accent color-white"> <span class="fa fa-plus"
-                                                                                 aria-hidden="true"></span> <a href="#"
-                                                                                                               id="modal-load-postAdvert"
-                                                                                                               class="color-white"
-                                                                                                               data-toggle="modal"
-                                                                                                               data-target="#postAdvert"
-                                                                                                               data-url="{{ path('modal_post_advert') }}">Poster une annonce</a></span>
+                    <span class="home--postAdvert bgcolor-accent color-white"> <span class="fa fa-plus"
+                                                                                     aria-hidden="true"></span> <a
+                                href="#"
+                                id="modal-load-postAdvert"
+                                class="color-white"
+                                data-toggle="modal"
+                                data-target="#postAdvert"
+                                data-url="{{ path('modal_post_advert') }}">Poster une annonce</a></span>
                 {% endif %}
-            {{ include('blocks/annonces.html.twig') }}
-            <div class="navigation">
-                {{ knp_pagination_render(annonces) }}
-            </div>
-            <div class="modal fade" id="postAdvert" role="dialog" tabindex="-1" aria-labelledby="postAdvertLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content" id="postAdvertContent">
+                {{ include('blocks/annonces.html.twig') }}
+                <div class="navigation">
+                    {{ knp_pagination_render(annonces) }}
+                </div>
+                <div class="modal fade" id="postAdvert" role="dialog" tabindex="-1" aria-labelledby="postAdvertLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" id="postAdvertContent">
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -81,21 +92,25 @@
     {{ parent() }}
     <script src="{{ asset('js/home.js') }}"></script>
     <script>
-        window.fbAsyncInit = function() {
+        window.fbAsyncInit = function () {
             FB.init({
-                appId            : {{ fbAppId }},
-                autoLogAppEvents : false,
-                xfbml            : true,
-                version          : 'v2.10'
+                appId: {{ fbAppId }},
+                autoLogAppEvents: false,
+                xfbml: true,
+                version: 'v2.10'
             });
         };
-        (function(d, s, id){
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
             js.src = "//connect.facebook.net/fr_FR/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{ googleApiPlaces }}&libraries=places"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key={{ googleApiPlaces }}&libraries=places"></script>
 {% endblock %}

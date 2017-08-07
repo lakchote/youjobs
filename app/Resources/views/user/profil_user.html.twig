@@ -27,7 +27,7 @@
                             {{ user|displayUserDescription }}
                         </div>
                         <div class="color-accent profil__actions">
-                            <span class="fa fa-envelope color-accent" aria-hidden="true"></span> <a href="#" class="color-accent">Envoyer un message</a>
+                            <span class="fa fa-envelope color-accent" aria-hidden="true"></span> <a href="#" class="color-accent" id="modal-load-sendMessage" data-toggle="modal" data-target="#sendMessage" data-url="{{ path('modal_message', {'slug' : user.slug}) }}">Envoyer un message</a>
                         </div>
                         <div class="color-accent profil__actions">
                             <span class="fa fa-bullhorn" aria-hidden="true"></span> <a href="{{ path('annonces_user', {'slug' : user.slug }) }}" class="color-accent">Voir ses annonces <span class="small">({{ user.annonces|length }})</span></a>
@@ -37,7 +37,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" tabindex="-1" role="dialog" id="sendMessage" aria-labelledby="sendMessageLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" id="sendMessageContent">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/profil.js') }}"></script>
 {% endblock %}

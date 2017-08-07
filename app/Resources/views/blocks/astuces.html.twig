@@ -27,6 +27,9 @@
             <div class="astuces__actions">
                 {{ astuce|generateAstucesActionsLinks|raw }}
                 <a href="#" class="shareAstuce" data-url="{{ path('astuce_view', {'id' : astuce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
+                {% if app.user == astuce.userAstuce or is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('astuce_delete', {'id' : astuce.id}) }}"><span class="fa fa-times" aria-hidden="true"></span> Supprimer</a>
+                {% endif %}
             </div>
         </div>
     {% endfor %}

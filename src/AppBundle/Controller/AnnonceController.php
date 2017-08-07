@@ -152,6 +152,7 @@ class AnnonceController extends Controller
     public function annonceDeleteAction(Annonce $id, UserAnnoncesActions $userActions)
     {
         $userActions->deleteAdvert($id);
+        $this->addFlash('success', 'L\'annonce a été supprimée.');
         return $this->redirectToRoute('home');
     }
 }

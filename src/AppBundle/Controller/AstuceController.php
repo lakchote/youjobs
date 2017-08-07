@@ -219,4 +219,14 @@ class AstuceController extends Controller
                 ]));
         }
     }
+
+    /**
+     * @Route("/astuce/delete/{id}", name="astuce_delete")
+     */
+    public function annonceDeleteAction(Astuce $id, UserAstucesActions $userActions)
+    {
+        $userActions->deleteAstuce($id);
+        $this->addFlash('success', 'L\'astuce a été supprimée.');
+        return $this->redirectToRoute('astuces');
+    }
 }

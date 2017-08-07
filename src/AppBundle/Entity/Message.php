@@ -22,24 +22,18 @@ class Message
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="messages")
-     * @Assert\NotBlank(message="Vous devez spécifier un destinataire.")
      */
     private $user;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="expediteurMessages")
      */
-    private $expediteur;
-
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Vous devez indiquer le titre du message.")
-     */
-    private $titre;
+    private $auteurMessage;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\Length(max=2000, maxMessage="Le message est trop volumineux pour être envoyé.", min=3, minMessage="Le message doit faire au moins 3 caractères.")
+     * @Assert\NotBlank(message="Le message ne peut être vide.")
      */
     private $contenu;
 
@@ -62,38 +56,6 @@ class Message
     public function setUser($user)
     {
         $this->user = $user;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getExpediteur()
-    {
-        return $this->expediteur;
-    }
-
-    /**
-     * @param mixed $expediteur
-     */
-    public function setExpediteur($expediteur)
-    {
-        $this->expediteur = $expediteur;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTitre()
-    {
-        return $this->titre;
-    }
-
-    /**
-     * @param mixed $titre
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
     }
 
     /**
@@ -134,6 +96,22 @@ class Message
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuteurMessage()
+    {
+        return $this->auteurMessage;
+    }
+
+    /**
+     * @param User $auteurMessage
+     */
+    public function setAuteurMessage(User $auteurMessage)
+    {
+        $this->auteurMessage = $auteurMessage;
     }
 
 }

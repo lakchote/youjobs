@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    - Vos messages
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/messages.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <h4 class="messages__heading">Messages</h4>
+                {% if user.messages.empty %}
+                    <h5 class="messages__heading">Vous n'avez pas de messages pour l'instant.</h5>
+                {% else %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                    {% for message in messages %}
+                        <div class="message-intro">
+                            <a href="{{ path('profil_user', {'slug' : message.auteurMessage.slug}) }}">
+                                {% if message.auteurMessage.photo %}
+                                    <img src="{{ asset(message.auteurMessage.imgPath ~ message.auteurMessage.photo.filename) }}" alt="Photo de profil de l'utilisateur"
+                                         class="img img-responsive messages__user-photo pull-left">
+                                {% endif %}
+                                {{ message.auteurMessage.username }}
+                            </a>
+                        </div>
+                        <div class="message-container">
+                            <a href="{{ path('message_view', {'id' : message.id })  }}" class="color-primary">{{ message.contenu|truncate(75) }} <span class="color-accent">Lire</span></a>
+                            <br/>
+                            <a href="{{ path('message_delete', {'id' : message.id}) }}" class="color-accent"><span class="fa fa-times" aria-hidden="true"></span> Supprimer</a>
+                        </div>
+                    {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="navigation">
+                    {{ knp_pagination_render(messages) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
