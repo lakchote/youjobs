@@ -104,3 +104,10 @@ function getProperUrlForAstuceBookmarkAction(obj, classSelector)
     }
     return data;
 }
+
+$('#searchAction').click(function (e) {
+    if(this.parentNode.parentNode.children[0].value.length < 4) {
+        e.preventDefault();
+        alert('Le terme à recherche est trop court.');
+    }
+});
