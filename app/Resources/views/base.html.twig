@@ -32,9 +32,9 @@
             {% if app.user %}
             <form class="navbar-form navbar-left navbar-form__border" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher une annonce">
+                    <input type="text" class="form-control" name="searchTerm" placeholder="Rechercher...">
                     <div class="input-group-btn">
-                        <button type="submit" class="btn bgcolor-accent">
+                        <button type="submit" class="btn bgcolor-accent" formaction="{{ path('search') }}">
                             <span class="fa fa-search color-white" aria-hidden="true"></span>
                         </button>
                     </div>

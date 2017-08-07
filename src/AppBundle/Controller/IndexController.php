@@ -77,4 +77,20 @@ class IndexController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/search", name="search")
+     */
+    public function searchAction(Request $request, EntityManager $em, Paginator $paginator)
+    {
+        $searchTerm = $request->query->get('searchTerm');
+        $nbResults = $em->getRepository('AppBundle:Annonce')->countSearchResultsForTerm($searchTerm);
+        $searchResults = $em->getRepository('AppBundle:Annonce')->getSearchResultsForTerm($searchTerm);
+        $annonces = $paginator->paginate($searchResults, $request->query->getInt('page', 1), 5);
+        return $this->render('default/search_results.html.twig', [
+            'nbResults' => $nbResults,
+            'annonces' => $annonces,
+            'searchTerm' => $searchTerm
+        ]);
+    }
 }

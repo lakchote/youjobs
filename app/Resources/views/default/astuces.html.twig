@@ -51,6 +51,7 @@
                                 class="small astuces__userCategorie">(Catégorie : {{ astucesFiltre.titre }})</span></h4>
                 {% endif %}
                 {% if user is defined or astucesFavorites is defined or astucesFiltre is defined %}
+                    <p class="color-white">Pas d'astuces publiées pour l'instant.</p>
                     <a href="{{ path('astuces') }}" class="color-white astuces__homeLink"><span class="fa fa-home"
                                                                                                 aria-hidden="true"></span>
                         Retourner au flux d'astuces général</a>

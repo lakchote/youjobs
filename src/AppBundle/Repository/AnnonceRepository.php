@@ -61,4 +61,25 @@ class AnnonceRepository extends EntityRepository
             ->getResult();
     }
 
+    public function countSearchResultsForTerm($searchTerm)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->andWhere('a.intitulePoste LIKE :searchTerm')
+            ->setParameter('searchTerm', $searchTerm . '%')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getSearchResultsForTerm($searchTerm)
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->where('a.intitulePoste LIKE :searchTerm')
+            ->setParameter('searchTerm', $searchTerm . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
 }
