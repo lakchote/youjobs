@@ -9,7 +9,7 @@
                     <a href="{{ path('annonces_categorie', {'slug' : annonce.categorie.slug}) }}">{{ annonce.categorie.titre }}</a>
                 {% endif %}
             </span>
-            <div>Offre d'emploi : <span class="bold">{{ annonce.intitulePoste }}</span> à <span class="bold">{{ annonce.localisation }}</span></div>
+            <div>Offre d'emploi : <span class="bold"><a href="{{ path('search', {'searchTerm' : annonce.intitulePoste }) }}">{{ annonce.intitulePoste }}</a></span> à <span class="bold">{{ annonce.localisation }}</span></div>
             <div class="small">
                 le {{ annonce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
                 <span class="color-blue--light">({{ annonce.type.type }})</span>
