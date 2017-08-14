@@ -32,7 +32,7 @@ class HashPasswordSubscriber implements EventSubscriber
         if(!$entity instanceof User || $entity->getPlainPassword() === null) return;
         $this->encodePassword($entity);
         $em = $args->getEntityManager();
-        $metaData = $em->getClassMetadata($entity);
+        $metaData = $em->getClassMetadata(get_class($entity));
         $em->getUnitOfWork()->recomputeSingleEntityChangeSet($metaData, $entity);
     }
 

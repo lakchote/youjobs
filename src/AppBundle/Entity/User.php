@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
- * @UniqueEntity(fields={"email"}, message="L'adresse mail est déjà utilisée.")
+ * @UniqueEntity(fields={"email"}, groups={"registration"}, message="L'adresse mail est déjà utilisée.")
  */
 class User implements UserInterface, \Serializable
 {

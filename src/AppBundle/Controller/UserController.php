@@ -5,9 +5,13 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Annonce;
 use AppBundle\Entity\Astuce;
 use AppBundle\Entity\User;
+use AppBundle\Form\Type\ForgottenPasswordFormType;
 use AppBundle\Form\Type\ProfilPersoFormType;
 use AppBundle\Form\Type\RegisterFormType;
+use AppBundle\Form\Type\ResetPasswordFormType;
 use AppBundle\Security\LoginFormAuthenticator;
+use AppBundle\Service\ResetPassword;
+use AppBundle\Service\SendMail;
 use AppBundle\Service\UserAnnoncesActions;
 use AppBundle\Service\UserAstucesActions;
 use AppBundle\Service\UserPhotoDelete;
@@ -15,6 +19,7 @@ use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,6 +64,28 @@ class UserController extends Controller
                 ->setContent($this->renderView('modal/register.html.twig', [
                 'form' => $form->createView()
             ]));
+        }
+    }
+
+    /**
+     * @Route("/mdpOublieSend", name="mdp_oublie_send")
+     */
+    public function mdpOublieSendAction(Request $request, SendMail $sendMail)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $form = $this->createForm(ForgottenPasswordFormType::class);
+        $form->handleRequest($request);
+        if($form->isValid()) {
+            $data = $form->getData();
+            $sendMail->sendResetPasswordMail($data);
+            return (new Response())->setContent('Un email contenant les instructions à suivre pour réinitialiser votre mot de passe vous a été envoyé.');
+        }
+        else {
+            return (new Response())
+                ->setStatusCode(401)
+                ->setContent($this->renderView('modal/mdp_oublie.html.twig', [
+                    'form' => $form->createView()
+                ]));
         }
     }
 
@@ -149,6 +176,30 @@ class UserController extends Controller
         return ($tokenStorage->getToken()->getUser() == $id) ? $this->redirectToRoute('profil') :
         $this->render('user/profil_user.html.twig', [
             'user' => $id
+        ]);
+    }
+
+    /**
+     * @Route("/resetPassword", name="reset_password")
+     */
+    public function resetPasswordAction(Request $request, EntityManager $em, GuardAuthenticatorHandler $guard, LoginFormAuthenticator $authenticator, ResetPassword $resetPassword)
+    {
+        $form = $this->createForm(ResetPasswordFormType::class);
+        $form->handleRequest($request);
+        if($form->isValid()) {
+            $data = $form->getData();
+            $user = $em->getRepository('AppBundle:User')->findOneBy(['email' => $data['email']]);
+            if(!$resetPassword->changePassword($user, $data)) {
+                $error = new FormError('La chaîne de caractères n\'est pas la bonne. Veuillez vérifier votre email.');
+                $form->get('resetPassword')->addError($error);
+            } else {
+                $guard->authenticateUserAndHandleSuccess($user, $request, $authenticator, 'main');
+                $this->addFlash('success', 'Votre mot de passe a été changé.');
+                return $this->redirectToRoute('home');
+            }
+        }
+        return $this->render('default/reset_password.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }

@@ -8,6 +8,7 @@ use AppBundle\Entity\Message;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\AnnonceFormType;
 use AppBundle\Form\Type\AstuceFormType;
+use AppBundle\Form\Type\ForgottenPasswordFormType;
 use AppBundle\Form\Type\MessageFormType;
 use AppBundle\Form\Type\NewCommentFormType;
 use AppBundle\Form\Type\RegisterFormType;
@@ -28,6 +29,18 @@ class UserModalController extends Controller
         if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
         $form = $this->createForm(LoginFormType::class);
         return $this->render('modal/login.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/modal/mdpOublie", name="modal_mdpOublie")
+     */
+    public function modalMdpOublieAction(Request $request)
+    {
+        if(!$request->isXmlHttpRequest()) return new Response('Type de requête invalide', 400);
+        $form = $this->createForm(ForgottenPasswordFormType::class);
+        return $this->render('modal/mdp_oublie.html.twig', [
             'form' => $form->createView()
         ]);
     }

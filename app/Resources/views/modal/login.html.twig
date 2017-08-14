@@ -14,7 +14,15 @@
         <button type="submit" class="btn bgcolor-primary" id="btn-submit__login">
             <span class="fa fa-check color-white" aria-hidden="true"></span> <a href="#">Valider</a>
         </button>
+        <p id="mdpOublieModal" data-url="{{ path('modal_mdpOublie') }}" data-toggle="modal" data-target="#mdpOublie" style="text-decoration: underline; margin-top:10px; cursor:pointer;">Mot de passe oublié ?</p>
     {{ form_end(form) }}
+
+</div>
+<div class="modal fade" id="mdpOublie" tabindex="-1" role="dialog" aria-labelledby="mdpOublieLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="mdpOublieContent">
+        </div>
+    </div>
 </div>
 <script>
     $('#btn-submit__login').click(function (e) {
@@ -32,6 +40,15 @@
                     document.location = url;
                 }
             }
+        });
+    });
+    $('#mdpOublieModal').click(function () {
+        $('#mdpOublieContent').html(loadModalHTML);
+        $.ajax({
+           url:  $(this).data('url'),
+            method: 'GET'
+        }).done(function (response) {
+            $('#mdpOublieContent').html(response);
         });
     });
 </script>

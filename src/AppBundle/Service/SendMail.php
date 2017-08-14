@@ -35,4 +35,22 @@ class SendMail
             ]), 'text/html');
         $this->mailer->send($message);
     }
+
+    public function sendResetPasswordMail($data)
+    {
+        $resetPassword = md5(uniqid());
+        $user = $this->em->getRepository('AppBundle:User')->findOneBy(['email' => $data['email']]);
+        $user->setResetPassword($resetPassword);
+        $this->em->persist($user);
+        $this->em->flush();
+        $message = new \Swift_Message();
+        $message
+            ->setSubject('Réinitialisation du mot de passe YouJobs')
+            ->setFrom('noreply@youjobs.com')
+            ->setTo($data['email'])
+            ->setBody($this->twig->render('mail/reset_password.html.twig', [
+                'resetPassword' => $resetPassword
+            ]), 'text/html');
+        $this->mailer->send($message);
+    }
 }

@@ -6,21 +6,21 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
 {% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-6">
-                <h4 class="contact__heading">Contact</h4>
+                <h4 class="heading">Contact</h4>
                 {{ form_start(form) }}
-                {{ form_row(form.sujet) }}
-                {{ form_row(form.nom) }}
-                {{ form_row(form.prenom) }}
-                {{ form_row(form.email) }}
-                {{ form_row(form.message) }}
-                <button type="submit" class="btn bgcolor-accent" formnovalidate>Envoyer</button>
+                    {{ form_row(form.sujet) }}
+                    {{ form_row(form.nom) }}
+                    {{ form_row(form.prenom) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.message) }}
+                    <button type="submit" class="btn bgcolor-accent" formnovalidate>Envoyer</button>
                 {{ form_end(form) }}
             </div>
         </div>
