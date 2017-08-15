@@ -42,6 +42,14 @@ class AppExtension extends \Twig_Extension
         ];
     }
 
+    public function getFunctions()
+    {
+        return [
+            new \Twig_SimpleFunction('countAnnoncesSignalees', [$this, 'countAnnoncesSignalees' ], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('countAstucesSignalees', [$this, 'countAstucesSignalees' ], ['is_safe' => ['html']]),
+        ];
+    }
+
     public function generateAnnoncesActionsLinks(Annonce $annonce)
     {
         $toReturn = '';
@@ -134,5 +142,15 @@ class AppExtension extends \Twig_Extension
     public function countAstucesForACategorieAndAUser(CategorieAstuce $categorie, User $id)
     {
         return $this->em->getRepository('AppBundle:Astuce')->countAstucesForACategorieAndAUser($categorie->getTitre(), $id);
+    }
+
+    public function countAnnoncesSignalees()
+    {
+        return '<span class="badge" style="background-color:#5C6BC0;">' . $this->em->getRepository('AppBundle:Annonce')->countAnnoncesSignalees() . '</span>';
+    }
+
+    public function countAstucesSignalees()
+    {
+        return '<span class="badge" style="background-color: #7986CB;">' . $this->em->getRepository('AppBundle:Astuce')->countAstucesSignalees() . '</span>';
     }
 }

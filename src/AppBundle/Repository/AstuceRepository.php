@@ -90,4 +90,15 @@ class AstuceRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function countAstucesSignalees()
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.astuceSignalee = true')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

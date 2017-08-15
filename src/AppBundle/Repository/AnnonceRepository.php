@@ -82,4 +82,14 @@ class AnnonceRepository extends EntityRepository
             ->getResult();
     }
 
+    public function countAnnoncesSignalees()
+    {
+        return $this
+            ->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.annonceSignalee = true')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
 }

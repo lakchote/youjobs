@@ -70,8 +70,8 @@ nav a:hover {
     background-color: #3F51B5;
 }
 
-.bgcolor-accent {
-    background-color: #536DFE;
+.bgcolor-accent, .navbar-default .navbar-nav>.open>a  {
+    background-color: #536DFE !important;
 }
 
 .bgcolor-dark {
@@ -85,14 +85,14 @@ nav a:hover {
 }
 
 .navbar-nav>li>a:hover {
-    background-color: #C5CAE9 !important;
+    color: #C5CAE9 !important;
 }
 
 .navbar-default .navbar-toggle {
     border-color:#fff;
 }
 
-button, button:hover {
+button, button:hover, .open>a:hover {
     color:#fff !important;
 }
 
@@ -114,8 +114,12 @@ label {
     border-color: #7986CB;
 }
 
-.alert-info a:hover {
+.alert-info a:hover, #adminMenu:hover {
     color:#fff !important;
+}
+
+.dropdown-menu li a {
+    color:#000 !important;
 }
 
 @media screen and (max-width:768px)
@@ -125,5 +129,9 @@ label {
         height:30px;
         padding-top:10px;
         line-height:normal;
+    }
+
+    .dropdown-menu li a, .dropdown-header {
+        color:#fff !important;
     }
 }
