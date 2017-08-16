@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+ - Page introuvable
+{% endblock %}
+
+{% block navLinks %}
+    {% if app.user %}
+        <li><a href="{{ path('home') }}"><span class="fa fa-bullhorn" aria-hidden="true"></span> Annonces</a></li>
+        <li><a href="{{ path('astuces') }}"><span class="fa fa-comments-o" aria-hidden="true"></span> Astuces</a></li>
+        <li><a href="{{ path('messages') }}"><span class="fa fa-envelope" aria-hidden="true"></span> Messages</a></li>
+        <li><a href="{{ path('profil') }}"><span class="fa fa-user" aria-hidden="true"></span> Profil</a></li>
+        <li><a href="{{ path('contact') }}"><span class="fa fa-question" aria-hidden="true"></span> Contact</a></li>
+        <li><a href="{{ path('logout') }}"><span class="fa fa-sign-out" aria-hidden="true"></span>Déconnexion</a></li>
+    {% else %}
+        <li><a href="#" class="modal-load__register" data-toggle="modal" data-target="#register" data-url="{{ path('modal_register') }}">S'inscrire</a></li>
+        <li><a href="#" class="modal-load__connect" data-toggle="modal" data-target="#connect" data-url="{{ path('modal_login') }}">Se connecter</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 color-white">
+                <h2>Page introuvable.</h2>
+                <p>La page que vous avez demandé n'existe pas. Vérifiez que l'URL est correcte, si vous pensez qu'il s'agit d'une erreur merci de nous <u><a href="{{ path('contact') }}" class="color-white">contacter</a></u>.</p>
+                <p><span class="fa fa-home" aria-hidden="true"></span> <a href="{{ path('index') }}" class="color-white">Retourner à l'accueil</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
