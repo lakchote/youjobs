@@ -32,7 +32,7 @@
             {% if app.user %}
             <form class="navbar-form navbar-left navbar-form__border" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="searchTerm" placeholder="Rechercher...">
+                    <input type="text" class="form-control" name="searchTerm" placeholder="Rechercher une annonce...">
                     <div class="input-group-btn">
                         <button type="submit" id="searchAction" class="btn bgcolor-accent" formaction="{{ path('search') }}">
                             <span class="fa fa-search color-white" aria-hidden="true"></span>
@@ -44,6 +44,20 @@
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="nav navbar-nav navbar-right">
                     {% block navLinks %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="dropdown">
+                                <a href="#" class="btn bgcolor-accent dropdown-toggle" type="button" id="adminMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Admin
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminMenu">
+                                    <li class="dropdown-header">Signalements</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ path('signalements_annonces') }}">Annonces {{ countAnnoncesSignalees() }} </a></li>
+                                    <li><a href="{{ path('signalements_astuces') }}">Astuces {{ countAstucesSignalees() }}</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
                         <li><a href="{{ path('home') }}"><span class="fa fa-bullhorn" aria-hidden="true"></span> Annonces</a></li>
                         <li><a href="{{ path('astuces') }}"><span class="fa fa-comments-o" aria-hidden="true"></span> Astuces</a></li>
                         <li><a href="{{ path('messages') }}"><span class="fa fa-envelope" aria-hidden="true"></span> Messages</a></li>
@@ -59,16 +73,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <div class="row">
-                        <div class="col-sm-6">
                         {% for msg in app.session.flashBag.get('success') %}
                             <div class="alert alert-success alert-dismissable">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="fermer">&times;</a>
                                     <span class="fa fa-check" aria-hidden="true"></span> {{ msg }}
                             </div>
                         {% endfor %}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
