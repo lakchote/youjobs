@@ -111,3 +111,9 @@ $('#searchAction').click(function (e) {
         alert('Le terme à recherche est trop court.');
     }
 });
+
+$(window).scroll(function () {
+    if($(window).scrollTop() + $(window).height() > $(document).height()-100) {
+        $('#showScrollToTop').addClass('scrollToTop').html('<a href="#scrollTopPosition"><span class="fa fa-2x fa-arrow-up color-white" aria-label="Remonter en haut de page"></span></a>');
+    }
+});

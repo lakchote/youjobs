@@ -16,7 +16,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-    <nav class="navbar navbar-default navbar-static-top header">
+    <nav class="navbar navbar-default navbar-static-top header" id="scrollTopPosition">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
@@ -25,7 +25,7 @@
                     <span class="icon-bar bgcolor-white"></span>
                     <span class="icon-bar bgcolor-white"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('index') }}" >
+                <a class="navbar-brand" href="{{ path('index') }}">
                     <span class="color-blue--light">You</span><span class="color-white">Jobs</span>
                 </a>
             </div>
@@ -85,12 +85,11 @@
     {% endblock %}
     {% block body %}
     {% endblock %}
+    <div class="col-xs-12 visible-xs" id="showScrollToTop"></div>
     <footer>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="text-center color-white">Copyright 2017 YouJobs - Tous droits réservés | <a href="http://localhost:8000">Mentions légales</a> | <a href="{{ path('contact') }}">Contact</a> </div>
-                </div>
+                <div class="text-center color-white">Copyright 2017 YouJobs - Tous droits réservés | <a href="http://localhost:8000">Mentions légales</a> | <a href="{{ path('contact') }}">Contact</a> </div>
             </div>
         </div>
     </footer>
