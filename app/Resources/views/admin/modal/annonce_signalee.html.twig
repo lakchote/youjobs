@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="fermer">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="signalementLabel">Annonce signalée</h4>
+</div>
+<div class="modal-body">
+    <p>Utilisateur : <strong>{{ annonce.user.username }}</strong></p>
+    <blockquote>
+        {{ annonce.contenu|nl2br }}
+    </blockquote>
+    <div class="text-center">
+        <a href="{{ path('remove_user', {'id' : annonce.user.id, 'referrer' : 'annonce'}) }}" class="btn btn-danger btn-sm"><span class="fa fa-times" aria-hidden="true"></span> Supprimer utilisateur</a>
+        <div class="visible-xs"><br/></div>
+        <a href="{{ path('remove_annonce', {'id' : annonce.id}) }}" class="btn btn-warning btn-sm"><span class="fa fa-times" aria-hidden="true"></span> Effacer annonce</a>
+        <div class="visible-xs"><br/></div>
+        <a href="{{ path('remove_signalement_annonce', {'id' : annonce.id}) }}" class="btn btn-success btn-sm"><span class="fa fa-times" aria-hidden="true"></span> Enlever signalement</a>
+    </div>
+</div>

@@ -32,7 +32,7 @@
             {% if app.user %}
             <form class="navbar-form navbar-left navbar-form__border" role="search">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="searchTerm" placeholder="Rechercher...">
+                    <input type="text" class="form-control" name="searchTerm" placeholder="Rechercher une annonce...">
                     <div class="input-group-btn">
                         <button type="submit" id="searchAction" class="btn bgcolor-accent" formaction="{{ path('search') }}">
                             <span class="fa fa-search color-white" aria-hidden="true"></span>
@@ -53,8 +53,8 @@
                                 <ul class="dropdown-menu" aria-labelledby="adminMenu">
                                     <li class="dropdown-header">Signalements</li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#">Annonces {{ countAnnoncesSignalees() }} </a></li>
-                                    <li><a href="#">Astuces {{ countAstucesSignalees() }}</a></li>
+                                    <li><a href="{{ path('signalements_annonces') }}">Annonces {{ countAnnoncesSignalees() }} </a></li>
+                                    <li><a href="{{ path('signalements_astuces') }}">Astuces {{ countAstucesSignalees() }}</a></li>
                                 </ul>
                             </li>
                         {% endif %}

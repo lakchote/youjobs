@@ -1,0 +1,10 @@
+.dataTables_length label, .dataTables_filter label, .dataTables_info, .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color:#fff !important;
+}
+select[name^="signalements"], input[type="search"] {
+    color:#000 !important;
+}
+
+#signalementsAstuces__content thead tr {
+    background-color: #7986CB;
+}

@@ -122,6 +122,14 @@ label {
     color:#000 !important;
 }
 
+.badge__bgcolorAstuce {
+    background-color: #7986CB;
+}
+
+.badge__bgcolorAnnonce {
+    background-color: #5C6BC0;
+}
+
 @media screen and (max-width:768px)
 {
     footer {

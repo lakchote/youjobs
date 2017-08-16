@@ -21,10 +21,10 @@
                     {% for categorie in categories %}
                         <li class="list-group-item">
                             {% if user is defined %}
-                                <span class="badge badge__bgcolor">{{ categorie|countAnnoncesForACategorieAndAUser(user) }}</span>
+                                <span class="badge badge__bgcolorAnnonce">{{ categorie|countAnnoncesForACategorieAndAUser(user) }}</span>
                                 <a href="{{ path('annonces_categorie_user', {'slug' : categorie.slug, 'slug_user' : user.slug }) }}">{{ categorie.titre }}</a>
                             {% else %}
-                                <span class="badge badge__bgcolor">{{ categorie|countAnnoncesForACategorie }}</span>
+                                <span class="badge badge__bgcolorAnnonce">{{ categorie|countAnnoncesForACategorie }}</span>
                                 <a href="{{ path('annonces_categorie', {'slug' : categorie.slug }) }}">{{ categorie.titre }}</a>
                             {% endif %}
                         </li>

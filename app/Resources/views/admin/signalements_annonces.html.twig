@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    - Annonces signalées
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="{{ asset('css/dataTables.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <h4 class="color-white">Annonces signalées</h4>
+                <div class="table-responsive">
+                    <table class="table compact table-bordered table-condensed color-white" id="signalementsAnnonces__content">
+                        <thead>
+                            <tr>
+                                <th>Signalements</th>
+                                <th>Utilisateur</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for annonce in annonces %}
+                                <tr>
+                                    <td> <span class="badge badge__bgcolorAnnonce">{{ annonce.nbSignalements }}</span></td>
+                                    <td> <a href="{{ path('profil_user', {'slug' : annonce.user.slug}) }}" target="_blank" class="">{{ annonce.user.username }}</a></td>
+                                    <td>
+                                        <a href="#" class="color-accent modal-load-annonceSignalee" data-toggle="modal" data-target="#signalementAnnonce" data-url="{{ path('admin_modal_signalement_annonce', {'id' : annonce.id}) }}"><span class="fa fa-arrow-right" aria-hidden="true"></span> Lire</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="modal fade" id="signalementAnnonce" tabindex="-1" aria-labelledby="signalementLabel" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" id="signalementAnnonceContent">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(function()
+        {
+            console.log('test');
+            $('#signalementsAnnonces__content').DataTable
+            ({
+                "language":
+                    {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/French.json"
+                    }
+            });
+        });
+        $('.modal-load-annonceSignalee').click(function (e) {
+            e.preventDefault();
+            $('#signalementAnnonceContent').html(loadModalHTML);
+            $.ajax({
+                url: $(this).data('url'),
+                method: 'GET'
+            }).done(function (response) {
+                $('#signalementAnnonceContent').html(response);
+            });
+        });
+    </script>
+{% endblock %}

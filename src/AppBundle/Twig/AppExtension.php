@@ -146,11 +146,11 @@ class AppExtension extends \Twig_Extension
 
     public function countAnnoncesSignalees()
     {
-        return '<span class="badge" style="background-color:#5C6BC0;">' . $this->em->getRepository('AppBundle:Annonce')->countAnnoncesSignalees() . '</span>';
+        return '<span class="badge badge__bgcolorAnnonce">' . $this->em->getRepository('AppBundle:Annonce')->countAnnoncesSignalees() . '</span>';
     }
 
     public function countAstucesSignalees()
     {
-        return '<span class="badge" style="background-color: #7986CB;">' . $this->em->getRepository('AppBundle:Astuce')->countAstucesSignalees() . '</span>';
+        return '<span class="badge badge__bgcolorAstuce">' . $this->em->getRepository('AppBundle:Astuce')->countAstucesSignalees() . '</span>';
     }
 }
