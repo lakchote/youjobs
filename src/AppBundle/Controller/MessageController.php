@@ -77,8 +77,9 @@ class MessageController extends Controller
     /**
      * @Route("/message/view/{id}", name="message_view")
      */
-    public function messageViewAction(Message $id)
+    public function messageViewAction(Message $id, MessageManager $messageManager)
     {
+        $messageManager->viewMessage($id);
         return $this->render('default/message_view.html.twig', [
             'message' => $id
         ]);

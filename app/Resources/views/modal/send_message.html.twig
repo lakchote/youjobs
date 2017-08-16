@@ -3,6 +3,12 @@
     <h4 class="modal-title" id="sendMessageLabel">Envoyer un message à {{ user.username }}</h4>
 </div>
 <div class="modal-body">
+    {% if message is defined %}
+        <p>Répondre à {{ message.auteurMessage.username }}</p>
+        <blockquote>
+            {{ message.contenu }}
+        </blockquote>
+    {% endif %}
     {{ form_start(form) }}
     {{ form_row(form.contenu) }}
     <button type="submit" class="btn bgcolor-primary" id="btn-submit__sendMessage" formnovalidate><span class="fa fa-check" aria-hidden="true"></span> Valider</button>

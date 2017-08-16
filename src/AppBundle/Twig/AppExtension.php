@@ -8,6 +8,7 @@ use AppBundle\Entity\Annonce;
 use AppBundle\Entity\Astuce;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\CategorieAstuce;
+use AppBundle\Entity\Message;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Routing\Router;
@@ -39,6 +40,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFilter('displayUserDescription', [$this, 'displayUserDescription']),
             new \Twig_SimpleFilter('countAnnoncesForACategorieAndAUser', [$this, 'countAnnoncesForACategorieAndAUser']),
             new \Twig_SimpleFilter('countAstucesForACategorieAndAUser', [$this, 'countAstucesForACategorieAndAUser']),
+            new \Twig_SimpleFilter('showMessageStatus', [$this, 'showMessageStatus'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -47,6 +49,7 @@ class AppExtension extends \Twig_Extension
         return [
             new \Twig_SimpleFunction('countAnnoncesSignalees', [$this, 'countAnnoncesSignalees' ], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('countAstucesSignalees', [$this, 'countAstucesSignalees' ], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('countUnreadMessages', [$this, 'countUnreadMessages'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -152,5 +155,25 @@ class AppExtension extends \Twig_Extension
     public function countAstucesSignalees()
     {
         return '<span class="badge badge__bgcolorAstuce">' . $this->em->getRepository('AppBundle:Astuce')->countAstucesSignalees() . '</span>';
+    }
+
+    public function showMessageStatus(Message $message)
+    {
+        switch($message->getStatus())
+        {
+            case Message::MESSAGE_ANSWERED :
+                return '<p style="color:green;">Status : Répondu</p>';
+            case Message::MESSAGE_READ :
+                return '<p style="color:#000;">Status : Lu</p>';
+            default:
+                return '<p style="color:red;">Status : Non lu</p>';
+        }
+    }
+
+    public function countUnreadMessages()
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        $result = $this->em->getRepository('AppBundle:Message')->countUnreadMessages($user);
+        return ($result > 0) ? 'Messages (<span style="color:red;">' . $result . '</span>)' : 'Messages';
     }
 }

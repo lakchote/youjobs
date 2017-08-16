@@ -8,11 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageRepository")
  * @ORM\Table(name="message")
  */
 class Message
 {
+    const MESSAGE_READ = 'READ';
+    const MESSAGE_UNREAD = 'UNREAD';
+    const MESSAGE_ANSWERED = 'ANSWERED';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -41,6 +45,11 @@ class Message
      * @ORM\Column(type="datetime")
      */
     private $dateEnvoi;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $status = self::MESSAGE_UNREAD;
 
     /**
      * @return mixed
@@ -112,6 +121,22 @@ class Message
     public function setAuteurMessage(User $auteurMessage)
     {
         $this->auteurMessage = $auteurMessage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 
 }

@@ -30,6 +30,7 @@
                             </a>
                         </div>
                         <div class="message-container">
+                            {{ message|showMessageStatus }}
                             <a href="{{ path('message_view', {'id' : message.id })  }}" class="color-primary">{{ message.contenu|truncate(75) }} <span class="color-accent">Lire</span></a>
                             <br/>
                             <a href="{{ path('message_delete', {'id' : message.id}) }}" class="color-accent"><span class="fa fa-times" aria-hidden="true"></span> Supprimer</a>

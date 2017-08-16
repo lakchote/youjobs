@@ -36,6 +36,7 @@ class MessageManager
     public function answerMessage(Message $message, User $user, Message $data)
     {
         if($message->getAuteurMessage() !== $user) return;
+        $message->setStatus(Message::MESSAGE_ANSWERED);
         $data->setDateEnvoi(new \DateTime());
         $data->setAuteurMessage($this->tokenStorage->getToken()->getUser());
         $data->setUser($user);
@@ -49,6 +50,13 @@ class MessageManager
             if(!$this->authorizationChecker->isGranted('ROLE_ADMIN')) return;
         }
         $this->em->remove($message);
+        $this->em->flush();
+    }
+
+    public function viewMessage(Message $message)
+    {
+        $message->setStatus(Message::MESSAGE_READ);
+        $this->em->persist($message);
         $this->em->flush();
     }
 }
