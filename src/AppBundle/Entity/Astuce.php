@@ -45,7 +45,7 @@ class Astuce
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\Length(max=1000, maxMessage="L'astuce est trop volumineuse.", min=200, minMessage="L'astuce est trop petite.")
+     * @Assert\Length(max=1500, maxMessage="L'astuce est trop volumineuse.", min=200, minMessage="L'astuce est trop petite.")
      * @Assert\NotBlank(message="L'astuce ne peut être vide.")
      */
     private $contenu;
