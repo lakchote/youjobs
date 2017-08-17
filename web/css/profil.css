@@ -1,7 +1,6 @@
 .photo-user {
     border: 1px solid black;
     width: 150px;
-    height: 150px;
     position: relative;
     margin-bottom: 20px !important;
 }
@@ -106,7 +105,6 @@ form, .profil__container--padding {
 
     .photo-user {
         width: 110px;
-        height: 110px;
         margin: 0 auto;
     }
 
