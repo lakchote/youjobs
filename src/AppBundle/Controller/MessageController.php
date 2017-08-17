@@ -27,7 +27,7 @@ class MessageController extends Controller
     public function messagesAction(TokenStorage $tokenStorage, EntityManager $em, Paginator $paginator, Request $request)
     {
         $user = $tokenStorage->getToken()->getUser();
-        $sortMessages = $em->getRepository('AppBundle:Message')->findBy(['user' => $user]);
+        $sortMessages = $em->getRepository('AppBundle:Message')->findBy(['user' => $user], ['dateEnvoi' => 'DESC']);
         $messages = $paginator->paginate($sortMessages, $request->query->getInt('page', 1), 5);
         return $this->render('default/messages.html.twig', [
             'user' => $user,
