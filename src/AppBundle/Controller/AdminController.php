@@ -21,7 +21,7 @@ class AdminController extends Controller
      */
     public function signalementsAnnoncesAction(EntityManager $em)
     {
-        $annoncesSignalees = $em->getRepository('AppBundle:Annonce')->findBy(['annonceSignalee' => true], ['nbSignalements' => 'DESC']);
+        $annoncesSignalees = $em->getRepository('AppBundle:Annonce')->findBy(['annonceSignalee' => true]);
         return $this->render('admin/signalements_annonces.html.twig', [
             'annonces' => $annoncesSignalees
         ]);
@@ -32,7 +32,7 @@ class AdminController extends Controller
      */
     public function signalementsAstucesAction(EntityManager $em)
     {
-        $astucesSignalees = $em->getRepository('AppBundle:Astuce')->findBy(['astuceSignalee' => true], ['nbSignalements' => 'DESC']);
+        $astucesSignalees = $em->getRepository('AppBundle:Astuce')->findBy(['astuceSignalee' => true]);
         return $this->render('admin/signalements_astuces.html.twig', [
             'astuces' => $astucesSignalees
         ]);
