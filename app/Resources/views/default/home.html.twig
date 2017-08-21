@@ -59,12 +59,6 @@
                                 class="small adverts__userCategorie"> (Catégorie : {{ categorieFiltre.titre }} )</span>
                     </h4>
                 {% endif %}
-                {% if user is defined or categorie is defined or categorieFiltre is defined %}
-                    <p class="color-white">Pas d'annonces publiées pour l'instant.</p>
-                    <a href="{{ path('home') }}" class="color-white adverts__homeLink"><span class="fa fa-home"
-                                                                                             aria-hidden="true"></span>
-                        Retourner au flux d'annonces général</a>
-                {% else %}
                     <span class="home--postAdvert bgcolor-accent color-white"> <span class="fa fa-plus"
                                                                                      aria-hidden="true"></span> <a
                                 href="#"
@@ -73,7 +67,6 @@
                                 data-toggle="modal"
                                 data-target="#postAdvert"
                                 data-url="{{ path('modal_post_advert') }}">Poster une annonce</a></span>
-                {% endif %}
                 {{ include('blocks/annonces.html.twig') }}
                 <div class="navigation">
                     {{ knp_pagination_render(annonces) }}

@@ -39,7 +39,9 @@ If you want to start with a virgin project (without fixtures providing adverts, 
 
 `php bin/console doctrine:fixtures:load` (it will create the default advert categories, tips categories and job types categories)
 
-Else, I have created a SQL file for the fixtures "youjobs.sql", you just need to import it.
+Else, I have created a SQL file for the fixtures "youjobs.sql", you need to : 
+* import it
+* create a directory named "/uploads/user" inside the /web directory of the project with 4 different photos : "woman_a.jpeg", "woman_b.jpeg", "profil.jpeg", "man.jpeg".
 
 Here are the login/password for the users, **log in with "l.akchote@gmail.com" to gain access to the backoffice** and view an example of the messages feature :
 
@@ -59,4 +61,4 @@ Improvements to bring
 * Provide a reason for reporting adverts / comments / messages
 * Block other users
 * Messages history with other users
-* Search feature for tips
+* Search feature for tips, sorting job opportunies by city and/or type of contract (CDI, CDD, internship, interim)

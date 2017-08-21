@@ -31,4 +31,9 @@
             </div>
         </div>
     {% endfor %}
+{% else %}
+    <p class="color-white">Pas d'annonces publiées pour l'instant.</p>
+    <a href="{{ path('home') }}" class="color-white adverts__homeLink"><span class="fa fa-home"
+                                                                             aria-hidden="true"></span>
+        Retourner au flux d'annonces général</a>
 {% endif %}
