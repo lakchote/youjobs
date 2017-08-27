@@ -1,7 +1,7 @@
 {% if astuces|length > 0 %}
     {% for astuce in astuces %}
         <div class="astuces__intro">
-            {{ astuce|generateAstucesProfilLink|raw }} a posté dans <span class="color-blue--light">
+            {{ astuce|generateAstucesProfilLink }} a posté dans <span class="color-blue--light">
                 {% if user is defined %}
                     <a href="{{ path('astuces_categorie_user', {'slug' : astuce.categorieAstuce.slug, 'slug_user' : user.slug }) }}">{{ astuce.categorieAstuce.titre }}</a>
                 {% else %}
@@ -25,7 +25,7 @@
                 {% endif %}
             </div>
             <div class="astuces__actions">
-                {{ astuce|generateAstucesActionsLinks|raw }}
+                {{ astuce|generateAstucesActionsLinks }}
                 <a href="#" class="shareAstuce" data-url="{{ path('astuce_view', {'id' : astuce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
                 {% if app.user == astuce.userAstuce or is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('astuce_delete', {'id' : astuce.id}) }}"><span class="fa fa-times" aria-hidden="true"></span> Supprimer</a>

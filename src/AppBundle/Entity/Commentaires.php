@@ -42,7 +42,12 @@ class Commentaires
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isFlagged = false;
+    private $flagged = false;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $countFlagged = 0;
 
     /**
      * @Gedmo\TreeLeft
@@ -151,54 +156,33 @@ class Commentaires
      */
     public function getFlagged()
     {
-        return $this->isFlagged;
+        return $this->flagged;
     }
 
     /**
-     * @param mixed $isFlagged
+     * @param boolean $isFlagged
      */
     public function setFlagged($isFlagged)
     {
-        $this->isFlagged = $isFlagged;
+        $this->flagged = $isFlagged;
     }
 
     /**
      * @return mixed
      */
-    public function getCountIsFlagged()
+    public function getCountFlagged()
     {
-        return $this->countIsFlagged;
+        return $this->countFlagged;
     }
 
-    public function setCountIsFlagged()
+    public function setCountFlagged()
     {
-        $this->countIsFlagged++;
+        $this->countFlagged++;
     }
 
-    public function resetCountIsFlagged()
+    public function resetCountFlagged()
     {
-        $this->countIsFlagged = 0;
-    }
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $countIsFlagged = 0;
-
-    /**
-     * @return mixed
-     */
-    public function getisFlagged()
-    {
-        return $this->isFlagged;
-    }
-
-    /**
-     * @param mixed $isFlagged
-     */
-    public function setIsFlagged($isFlagged)
-    {
-        $this->isFlagged = $isFlagged;
+        $this->countFlagged = 0;
     }
 
     /**

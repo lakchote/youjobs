@@ -143,11 +143,6 @@ class User implements UserInterface, \Serializable
     private $signalementsAstuces = [];
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $statut;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $messageAstucesLu = false;
@@ -478,20 +473,10 @@ class User implements UserInterface, \Serializable
                 return self::STATUT2;
             case $this->nbRemerciements <= 15 :
                 return self::STATUT3;
-            case $this->nbRemerciements <= 20 :
+            case $this->nbRemerciements < 30 :
                 return self::STATUT4;
-            case $this->nbRemerciements <= 30 :
-                return self::STATUT5;
         }
-        if (empty($this->nbRemerciements)) return self::STATUT1;
-    }
-
-    /**
-     * @param mixed $statut
-     */
-    public function setStatut($statut)
-    {
-        $this->statut = $statut;
+        return (empty($this->nbRemerciements)) ? self::STATUT1 : self::STATUT5;
     }
 
     /**

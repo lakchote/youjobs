@@ -31,12 +31,12 @@ class AppExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('generateAnnoncesActionsLinks', [$this, 'generateAnnoncesActionsLinks']),
-            new \Twig_SimpleFilter('generateAstucesActionsLinks', [$this, 'generateAstucesActionsLinks']),
+            new \Twig_SimpleFilter('generateAnnoncesActionsLinks', [$this, 'generateAnnoncesActionsLinks'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFilter('generateAstucesActionsLinks', [$this, 'generateAstucesActionsLinks'], ['is_safe' => ['html']]),
             new \Twig_SimpleFilter('countAnnoncesForACategorie', [$this, 'countAnnoncesForACategorie']),
             new \Twig_SimpleFilter('countAstucesForACategorie', [$this, 'countAstucesForACategorie']),
-            new \Twig_SimpleFilter('generateAnnoncesProfilLink', [$this, 'generateAnnoncesProfilLink']),
-            new \Twig_SimpleFilter('generateAstucesProfilLink', [$this, 'generateAstucesProfilLink']),
+            new \Twig_SimpleFilter('generateAnnoncesProfilLink', [$this, 'generateAnnoncesProfilLink'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFilter('generateAstucesProfilLink', [$this, 'generateAstucesProfilLink'], ['is_safe' => ['html']]),
             new \Twig_SimpleFilter('displayUserDescription', [$this, 'displayUserDescription']),
             new \Twig_SimpleFilter('countAnnoncesForACategorieAndAUser', [$this, 'countAnnoncesForACategorieAndAUser']),
             new \Twig_SimpleFilter('countAstucesForACategorieAndAUser', [$this, 'countAstucesForACategorieAndAUser']),

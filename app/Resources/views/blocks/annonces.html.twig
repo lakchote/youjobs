@@ -1,7 +1,7 @@
 {% if annonces|length > 0 %}
     {% for annonce in annonces %}
         <div class="advert__intro">
-            {{ annonce|generateAnnoncesProfilLink|raw }} a posté dans <span
+            {{ annonce|generateAnnoncesProfilLink }} a posté dans <span
                     class="advert__intro-categorie">
                 {% if user is defined %}
                     <a href="{{ path('annonces_categorie_user', {'slug' : annonce.categorie.slug, 'slug_user' : user.slug }) }}">{{ annonce.categorie.titre }}</a>
@@ -23,7 +23,7 @@
                     Lire la suite</a>
             </div>
             <div class="advert__actions">
-                {{ annonce|generateAnnoncesActionsLinks|raw }}
+                {{ annonce|generateAnnoncesActionsLinks }}
                 <a href="#" class="shareAdvert" data-url="{{ path('annonce_view', {'id' : annonce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
                 {% if app.user == annonce.user or is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('annonce_delete', {'id' : annonce.id}) }}"><span class="fa fa-times" aria-hidden="true"></span> Supprimer</a>

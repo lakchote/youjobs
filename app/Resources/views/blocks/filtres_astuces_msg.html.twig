@@ -1,0 +1,8 @@
+{% if user is defined %}
+    <h4 class="astuces__user">Astuces de {{ user.username }}</h4>
+{% elseif astucesFavorites is defined %}
+    <h4 class="astuces__user">Vos astuces favorites</h4>
+{% elseif astucesFiltre is defined %}
+    <h4 class="astuces__user">Astuces <span
+                class="small astuces__userCategorie">(Catégorie : {{ astucesFiltre.titre }})</span></h4>
+{% endif %}

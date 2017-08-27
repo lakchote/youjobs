@@ -34,7 +34,7 @@ class UserAnnoncesActions
         $this->em->flush();
     }
 
-    public function unThankUserAnnonce(User $currentUser, User $user, $id)
+    public function unThankUserAnnonce(User $currentUser, User $user, Annonce $id)
     {
         foreach($currentUser->getRemerciementsAnnonces() as $key => $value) {
             if($id->getId() == $value) {

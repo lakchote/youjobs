@@ -28,8 +28,10 @@ class UserAstucesActions
          * @var User $currentUser
          */
         $user->setNbRemerciements();
+        $astuce->setNbRemerciements();
         $currentUser->setRemerciementsAstuces($astuce->getId());
         $this->em->persist($user);
+        $this->em->persist($astuce);
         $this->em->persist($currentUser);
         $this->em->flush();
     }

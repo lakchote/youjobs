@@ -67,6 +67,7 @@ services:
                 clientId: "%facebook_clientid%"
                 clientSecret: "%facebook_clientsecret%"
                 graphApiVersion: v2.8
+                #you need to provide an absolute URL for your website
                 redirectUri: "http://localhost:8000/connect/facebook-check"
 
     AppBundle\Service\SendMail:

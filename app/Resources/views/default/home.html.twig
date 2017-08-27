@@ -46,19 +46,7 @@
                             l'accès et le retour sur le marché de l'emploi.</p>
                     </div>
                 {% endif %}
-                {% if user is defined %}
-                    {% if categorie is defined %}
-                        <h4 class="adverts__user">Annonces de {{ user.username }} <span
-                                    class="small adverts__userCategorie"> (Catégorie : {{ categorie.titre }} )</span>
-                        </h4>
-                    {% else %}
-                        <h4 class="adverts__user">Annonces de {{ user.username }}</h4>
-                    {% endif %}
-                {% elseif categorieFiltre is defined %}
-                    <h4 class="adverts__user">Annonces <span
-                                class="small adverts__userCategorie"> (Catégorie : {{ categorieFiltre.titre }} )</span>
-                    </h4>
-                {% endif %}
+                {{ include('blocks/filtres_annonces_msg.html.twig') }}
                     <span class="home--postAdvert bgcolor-accent color-white"> <span class="fa fa-plus"
                                                                                      aria-hidden="true"></span> <a
                                 href="#"
