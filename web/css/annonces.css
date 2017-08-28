@@ -1,95 +1,13 @@
-.home--postAdvert {
-    display: inline-block;
-    padding: 6px;
-    font-size:1.1em;
-    margin-bottom: 20px;
-}
-
-.advert__container {
-    background-color: #E8EAF6;
-    color: #3F51B5;
-    padding: 5px 8px 0;
-    margin-bottom: 20px;
-    border-bottom:1px solid #7986CB;
-}
-
-.adverts__user, .adverts__user--none {
-    color: #fff;
-}
-
-.adverts__user--none {
-    font-size: 1.1em;
-}
-
-.advert__intro {
-    background-color: #303F9F;
-    color:#fff;
-    padding:5px 8px 8px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom: 2px solid #fff;
-}
-
-.advert__intro a {
-    color: #fff;
-}
-
-.advert__actions {
-    padding-bottom: 10px;
-    font-size: 0.9em;
-}
-
-.advert__actions a {
-    color:#1A237E;
-    display:inline-block;
-    margin-right: 5px;
-}
-
-.advert__actions a:hover, .advert__content a:hover {
-    color:#536DFE;
-}
-
 .advert__intro-categorie a {
     color: #9FA8DA !important;
-}
-
-.adverts__userCategorie {
-    color: #8C9EFF !important;
-}
-
-.adverts__homeLink {
-    display:inline-block;
-    margin-bottom: 10px;
 }
 
 .advert__content {
     padding-bottom:20px;
 }
 
-.advert__photo {
-    width: 40px;
-    height: 40px;
-    margin-right: 5px;
-    margin-bottom: 2px;
-}
-
-.unThankUser, .unReportAdvert {
-    color:#536DFE !important;
-}
-
-.pagination > .active > span {
-    background-color: #3F51B5;
-    border-color: #3F51B5;
-}
 .pac-container { z-index: 100000; }
 
 .search-adverts {
     color:#fff;
-}
-
-@media screen and (max-width: 768px)
-{
-    .home--postAdvert {
-        font-size:1em;
-    }
 }

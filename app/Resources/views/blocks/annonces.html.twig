@@ -1,6 +1,6 @@
 {% if annonces|length > 0 %}
     {% for annonce in annonces %}
-        <div class="advert__intro">
+        <div class="content__intro">
             {{ annonce|generateAnnoncesProfilLink }} a posté dans <span
                     class="advert__intro-categorie">
                 {% if user is defined %}
@@ -15,14 +15,14 @@
                 <span class="color-blue--light">({{ annonce.type.type }})</span>
             </div>
         </div>
-        <div class="advert__container">
+        <div class="content__container">
             <div class="advert__content">
                 {{ annonce.contenu|truncate(400)|nl2br }}<a href="#"
                                                             class="loadAdvertFullText small color-accent"
                                                             data-url="{{ path('annonce_fulltext', {'id' : annonce.id }) }}">
                     Lire la suite</a>
             </div>
-            <div class="advert__actions">
+            <div class="actions">
                 {{ annonce|generateAnnoncesActionsLinks }}
                 <a href="#" class="shareAdvert" data-url="{{ path('annonce_view', {'id' : annonce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
                 {% if app.user == annonce.user or is_granted('ROLE_ADMIN') %}
@@ -33,7 +33,7 @@
     {% endfor %}
 {% else %}
     <p class="color-white">Pas d'annonces publiées pour l'instant.</p>
-    <a href="{{ path('home') }}" class="color-white adverts__homeLink"><span class="fa fa-home"
+    <a href="{{ path('home') }}" class="color-white homeLink"><span class="fa fa-home"
                                                                              aria-hidden="true"></span>
         Retourner au flux d'annonces général</a>
 {% endif %}

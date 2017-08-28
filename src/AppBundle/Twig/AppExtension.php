@@ -118,7 +118,7 @@ class AppExtension extends \Twig_Extension
     {
         $toReturn = '';
         ($annonce->getUser() == $this->tokenStorage->getToken()->getUser()) ? $route = $this->router->generate('profil') : $route = $this->router->generate('profil_user', ['slug' => $annonce->getUser()->getSlug()]);
-        ($annonce->getUser()->getPhoto()) ? $toReturn = '<a href="' . $route . '"><img class="advert__photo img img-responsive pull-left" alt="Photo de profil"
+        ($annonce->getUser()->getPhoto()) ? $toReturn = '<a href="' . $route . '"><img class="photo img img-responsive pull-left" alt="Photo de profil"
                                  src="'. $annonce->getUser()->getImgPath() . $annonce->getUser()->getPhoto()->getFileName() . '">' . $annonce->getUser()->getUsername() . '</a>' : $toReturn = '<a href="' . $route . '">' . $annonce->getUser()->getUsername() . '</a>';
         return $toReturn;
     }
@@ -127,7 +127,7 @@ class AppExtension extends \Twig_Extension
     {
         $toReturn = '';
         ($astuce->getUserAstuce() == $this->tokenStorage->getToken()->getUser()) ? $route = $this->router->generate('profil') : $route = $this->router->generate('profil_user', ['slug' => $astuce->getUserAstuce()->getSlug()]);
-        ($astuce->getUserAstuce()->getPhoto()) ? $toReturn = '<a href="' . $route . '"><img class="astuces__photo img img-responsive pull-left" alt="Photo de profil"
+        ($astuce->getUserAstuce()->getPhoto()) ? $toReturn = '<a href="' . $route . '"><img class="photo img img-responsive pull-left" alt="Photo de profil"
                                  src="'. $astuce->getUserAstuce()->getImgPath() . $astuce->getUserAstuce()->getPhoto()->getFileName() . '">' . $astuce->getUserAstuce()->getUsername() . '</a>' : $toReturn = '<a href="' . $route . '">' . $astuce->getUserAstuce()->getUsername() . '</a>';
         return $toReturn;
     }

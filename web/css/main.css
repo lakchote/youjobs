@@ -98,20 +98,16 @@ nav a:hover {
     border-color:#fff;
 }
 
-button, button:hover, .open>a:hover {
+button, button:hover, .open>a:hover, .modal-body a, .modal-body a:hover, .content__intro a, .filter__user {
     color:#fff !important;
 }
 
-.modal-header h4, .modal-header button {
+.filter__userCategorie {
+    color: #8C9EFF !important;
+}
+
+.modal-header h4, .modal-header button, label {
     color: #3F51B5 !important;
-}
-
-.modal-body a, .modal-body a:hover {
-    color:#fff !important;
-}
-
-label {
-    color:#3F51B5;
 }
 
 .alert-info {
@@ -136,6 +132,71 @@ label {
     background-color: #5C6BC0;
 }
 
+.post--action {
+    display: inline-block;
+    padding: 6px;
+    font-size:1.1em;
+    margin-bottom: 20px;
+}
+
+.content__intro {
+    background-color: #303F9F;
+    color:#fff;
+    padding:5px 8px 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 2px solid #fff;
+}
+
+.homeLink {
+    display:inline-block;
+    margin-bottom: 10px;
+}
+
+.actions {
+    padding-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.actions a {
+    color:#1A237E;
+    display:inline-block;
+    margin-right: 5px;
+}
+
+.actions a:hover {
+    color:#536DFE;
+}
+
+.photo {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
+.heading {
+    color:#fff;
+    margin-bottom: 20px;
+}
+
+.pagination > .active > span {
+    background-color: #3F51B5;
+    border-color: #3F51B5;
+}
+
+.unThankUserAstuce, .unReportAstuce, .unBookmarkAstuce, .astuces__comments--answer, .unThankUser, .unReportAdvert {
+    color:#536DFE !important;
+}
+
+.content__container {
+    background-color: #E8EAF6;
+    color: #3F51B5;
+    padding: 5px 8px 0;
+    margin-bottom: 20px;
+    border-bottom:1px solid #7986CB;
+}
+
 @media screen and (max-width:768px)
 {
     footer {
@@ -147,5 +208,9 @@ label {
 
     .dropdown-menu li a, .dropdown-header {
         color:#fff !important;
+    }
+
+    .post--action {
+        font-size: 1em;
     }
 }

@@ -1,6 +1,6 @@
 {% if astuces|length > 0 %}
     {% for astuce in astuces %}
-        <div class="astuces__intro">
+        <div class="content__intro">
             {{ astuce|generateAstucesProfilLink }} a posté dans <span class="color-blue--light">
                 {% if user is defined %}
                     <a href="{{ path('astuces_categorie_user', {'slug' : astuce.categorieAstuce.slug, 'slug_user' : user.slug }) }}">{{ astuce.categorieAstuce.titre }}</a>
@@ -13,7 +13,7 @@
                 le {{ astuce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
             </div>
         </div>
-        <div class="astuces__container">
+        <div class="content__container">
             <div class="astuces__content">
                 {{ astuce.contenu|nl2br }}
             </div>
@@ -24,7 +24,7 @@
                     <a href="#" data-toggle="modal" data-target="#postAcomment" class="modal-load-postAcomment color-accent" data-url="{{ path('modal_post_comment', {'id' : astuce.id}) }}">Poster un commentaire</a>
                 {% endif %}
             </div>
-            <div class="astuces__actions">
+            <div class="actions">
                 {{ astuce|generateAstucesActionsLinks }}
                 <a href="#" class="shareAstuce" data-url="{{ path('astuce_view', {'id' : astuce.id }) }}"><span class="fa fa-facebook" aria-hidden="true"></span> Partager</a>
                 {% if app.user == astuce.userAstuce or is_granted('ROLE_ADMIN') %}
@@ -35,7 +35,7 @@
     {% endfor %}
 {% else %}
     <p class="color-white">Pas d'astuces publiées pour l'instant.</p>
-    <a href="{{ path('astuces') }}" class="color-white astuces__homeLink"><span class="fa fa-home"
+    <a href="{{ path('astuces') }}" class="color-white homeLink"><span class="fa fa-home"
                                                                                 aria-hidden="true"></span>
         Retourner au flux d'astuces général</a>
 {% endif %}

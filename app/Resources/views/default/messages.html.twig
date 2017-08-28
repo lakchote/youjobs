@@ -13,23 +13,23 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12">
-                <h4 class="messages__heading">Messages</h4>
+                <h4 class="heading">Messages</h4>
                 {% if user.messages.empty %}
-                    <h5 class="messages__heading">Vous n'avez pas de messages pour l'instant.</h5>
+                    <h5 class="heading">Vous n'avez pas de messages pour l'instant.</h5>
                 {% else %}
                     <div class="row">
                         <div class="col-sm-6">
                     {% for message in messages %}
-                        <div class="message-intro">
+                        <div class="content__intro">
                             <a href="{{ path('profil_user', {'slug' : message.auteurMessage.slug}) }}">
                                 {% if message.auteurMessage.photo %}
                                     <img src="{{ asset(message.auteurMessage.imgPath ~ message.auteurMessage.photo.filename) }}" alt="Photo de profil de l'utilisateur"
-                                         class="img img-responsive messages__user-photo pull-left">
+                                         class="img img-responsive photo pull-left">
                                 {% endif %}
                                 {{ message.auteurMessage.username }}
                             </a>
                         </div>
-                        <div class="message-container">
+                        <div class="content__container">
                             {{ message|showMessageStatus }}
                             <a href="{{ path('message_view', {'id' : message.id })  }}" class="color-primary">{{ message.contenu|truncate(75) }} <span class="color-accent">Lire</span></a>
                             <br/>

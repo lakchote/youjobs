@@ -1,28 +1,12 @@
-#postAtip--action {
-    display: inline-block;
-    padding: 6px;
-    font-size:1.1em;
-    margin-bottom: 20px;
-}
-
 .bgcolor-astuces {
     background-color: #8C9EFF;
 }
 
-.astuces__intro {
+.content__intro {
     background-color: #7986CB;
-    color:#fff;
-    padding:5px 8px 8px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom: 2px solid #fff;
 }
 
-.astuces__intro a, .astuces__user--none, .astuces__user {
-    color: #fff;
-}
-
-.astuces__intro .color-blue--light a {
+.color-blue--light a {
     color: #C5CAE9;
 }
 
@@ -31,37 +15,8 @@
     border-color: #7986CB;
 }
 
-.astuces__userCategorie {
-    color: #8C9EFF !important;
-}
-
-.astuces__homeLink {
-    display:inline-block;
-    margin-bottom: 10px;
-}
-
 .astuces-comments__userName {
     color: #000;
-}
-
-.astuces__photo {
-    width: 40px;
-    height: 40px;
-    margin-right: 5px;
-    margin-bottom: 2px;
-}
-
-.astuces__container {
-    background-color: #E8EAF6;
-    color: #3F51B5;
-    padding: 5px 8px 0;
-    margin-bottom: 20px;
-    border-bottom:1px solid #7986CB;
-}
-
-.astuces__actions {
-    padding-bottom: 10px;
-    font-size: 0.9em;
 }
 
 .astuces__content {
@@ -72,24 +27,6 @@
     margin-bottom: 10px;
 }
 
-.astuces__actions a {
-    color:#1A237E;
-    display:inline-block;
-    margin-right: 5px;
-}
-
-.astuces__actions a:hover {
-    color:#536DFE;
-}
-
-.unThankUserAstuce, .unReportAstuce, .unBookmarkAstuce, .astuces__comments--answer {
-    color:#536DFE !important;
-}
-
-.astuces__user--none {
-    font-size: 1.1em;
-}
-
 .comments > .comments
 {
     margin-left:5%;
@@ -97,9 +34,6 @@
 }
 
 @media screen and (max-width: 768px) {
-    #postAtip--action {
-        font-size: 1em;
-    }
 
     .comments > .comments
     {

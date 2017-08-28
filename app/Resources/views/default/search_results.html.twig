@@ -24,8 +24,9 @@
                                     <li>Il n'y a pas d'annonces correspondant à votre intitulé de poste.</li>
                                 </ul>
                             </p>
+                        {% else %}
+                            {{ include ('blocks/annonces.html.twig') }}
                         {% endif %}
-                        {{ include ('blocks/annonces.html.twig') }}
                         <div class="navigation">
                             {{ knp_pagination_render(annonces) }}
                         </div>
