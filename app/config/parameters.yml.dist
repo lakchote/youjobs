@@ -24,7 +24,7 @@ parameters:
     facebook_clientId: ~
     facebook_clientSecret: ~
 
-    user_dir_photos: '%kernel.root_dir%\..\web\uploads\user'
+    user_dir_photos: '%kernel.root_dir%/../web/uploads/user'
 
     google_api_places_key: ~
 
