@@ -21,8 +21,7 @@ class SendMail
 
     public function sendContactMail($data)
     {
-        $message = new \Swift_Message();
-        $message
+        $message = \Swift_Message::newInstance()
             ->setSubject($data['sujet'])
             ->setFrom($data['email'])
             ->setTo($this->contactMail)
@@ -43,8 +42,7 @@ class SendMail
         $user->setResetPassword($resetPassword);
         $this->em->persist($user);
         $this->em->flush();
-        $message = new \Swift_Message();
-        $message
+        $message = \Swift_Message::newInstance()
             ->setSubject('Réinitialisation du mot de passe YouJobs')
             ->setFrom('noreply@youjobs.com')
             ->setTo($data['email'])
