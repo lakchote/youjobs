@@ -23,3 +23,6 @@ security:
                 entry_point: AppBundle\Security\LoginFormAuthenticator
             logout:
                 path: /logout
+
+    access_control:
+        - {path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https}
