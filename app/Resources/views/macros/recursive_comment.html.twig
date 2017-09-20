@@ -2,7 +2,7 @@
     <div class="comments">
         {% import _self as self %}
         {% if commentaire.userCommentaires.photo %}
-            <img src="{{ asset(commentaire.userCommentaires.imgPath ~ commentaire.userCommentaires.photo.filename) }}" alt="" class="img-responsive pull-left astuces__photo">
+            <img src="{{ asset(commentaire.userCommentaires.imgPath ~ commentaire.userCommentaires.photo.filename) }}" alt="" class="img-responsive pull-left photo">
         {% endif %}
         <div>
             <span class="astuces-comments__userName">{{ commentaire.userCommentaires.username }}</span><br/>

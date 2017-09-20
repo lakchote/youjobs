@@ -21,9 +21,9 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12">
-                <div class="astuces__intro">
+                <div class="content__intro">
                     {% if astuce.userAstuce.photo is not null %}
-                        <img class="astuces__photo img img-responsive pull-left" alt="Photo de profil"
+                        <img class="photo img img-responsive pull-left" alt="Photo de profil"
                              src="{{ asset(astuce.userAstuce.imgPath ~ astuce.userAstuce.photo.filename) }}">
                     {% endif %}
                     {{ astuce.userAstuce.username }} a posté une astuce
@@ -31,7 +31,7 @@
                         le {{ astuce.datePublication|localizeddate('none', 'none', null, null, 'dd MMMM') }}
                     </div>
                 </div>
-                <div class="astuces__container">
+                <div class="content__container">
                     <div class="astuces__content">
                         {{ astuce.contenu|nl2br }}
                     </div>
