@@ -8,6 +8,7 @@ use AppBundle\Entity\User;
 use AppBundle\Service\SetIntroMessagesAsRead;
 use Doctrine\ORM\EntityManager;
 use Knp\Component\Pager\Paginator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -23,6 +24,7 @@ class AstuceController extends Controller
 {
     /**
      * @Route("/astuces/read/intro-message", name="astuces_read_intro_message")
+     * @Method("GET")
      */
     public function astucesReadIntroMessageAction(Request $request, SetIntroMessagesAsRead $setIntroMessagesAsRead)
     {
@@ -34,6 +36,7 @@ class AstuceController extends Controller
     /**
      * @Route("/astuce/view/{id}", name="astuce_view")
      * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
+     * @Method("GET")
      */
     public function astuceViewAction(Astuce $id)
     {
@@ -44,6 +47,7 @@ class AstuceController extends Controller
 
     /**
      * @Route("/astuces/user/{slug}", name="astuces_user")
+     * @Method("GET")
      */
     public function astucesUserAction(User $id, EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -59,6 +63,7 @@ class AstuceController extends Controller
 
     /**
      * @Route("/astuces/favorites", name="astuces_favorites")
+     * @Method("GET")
      */
     public function astucesFavoritesAction(TokenStorage $tokenStorage, EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -75,6 +80,7 @@ class AstuceController extends Controller
      * @Route("/astuces/categorie/{slug}/user/{slug_user}", name="astuces_categorie_user")
      * @ParamConverter("categorie", options={"mapping" : {"slug" : "slug"}})
      * @ParamConverter("user", options={"mapping" : {"slug_user" : "slug"}})
+     * @Method("GET")
      */
     public function astucesCategorieUserAction(CategorieAstuce $categorie, User $user, EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -91,6 +97,7 @@ class AstuceController extends Controller
 
     /**
      * @Route("/astuces/categorie/{slug}", name="astuces_categorie")
+     * @Method("GET")
      */
     public function astucesCategorieAction(CategorieAstuce $id, EntityManager $em, Paginator $paginator, Request $request)
     {

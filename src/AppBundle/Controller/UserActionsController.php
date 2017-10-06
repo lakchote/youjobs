@@ -6,6 +6,7 @@ use AppBundle\Entity\Annonce;
 use AppBundle\Entity\Astuce;
 use AppBundle\Service\UserAnnoncesActions;
 use AppBundle\Service\UserAstucesActions;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +19,7 @@ class UserActionsController extends Controller
     /**
      * @Route("/thank/user/annonce/{id}", name="thank_user_annonce")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Method("GET")
      */
     public function thankUserAnnonceAction(Request $request, Annonce $id, UserAnnoncesActions $userActions, TokenStorage $tokenStorage)
     {
@@ -30,6 +32,7 @@ class UserActionsController extends Controller
     /**
      * @Route("/unthank/user/annonce/{id}", name="unthank_user_annonce")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Method("GET")
      */
     public function unThankUserAnnonceAction(Request $request, Annonce $id, UserAnnoncesActions $userActions, TokenStorage $tokenStorage)
     {
@@ -42,6 +45,7 @@ class UserActionsController extends Controller
     /**
      * @Route("/thank/user/astuce/{id}", name="thank_user_astuce")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Method("GET")
      */
     public function thankUserAstuceAction(Request $request, Astuce $id, UserAstucesActions $userActions, TokenStorage $tokenStorage)
     {
@@ -54,6 +58,7 @@ class UserActionsController extends Controller
     /**
      * @Route("/unthank/user/astuce/{id}", name="unthank_user_astuce")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Method("GET")
      */
     public function unThankUserAstuceAction(Request $request, Astuce $id, UserAstucesActions $userActions, TokenStorage $tokenStorage)
     {

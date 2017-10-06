@@ -8,6 +8,7 @@ use AppBundle\Form\Type\MessageFormType;
 use AppBundle\Manager\MessageManager;
 use Doctrine\ORM\EntityManager;
 use Knp\Component\Pager\Paginator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,7 +23,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 class MessageController extends Controller
 {
     /**
-     * @Route("/messages", name="messages")
+     * @Route("/messages", name="messages")$
+     * @Method("GET")
      */
     public function messagesAction(TokenStorage $tokenStorage, EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -38,6 +40,7 @@ class MessageController extends Controller
 
     /**
      * @Route("/message/envoi/user/{slug}/{message}", name="message_envoi", defaults={"message" : "newMessage"})
+     * @Method({"GET","POST"})
      */
     public function messageEnvoiAction(User $id, Request $request, MessageManager $messageManager, Router $router, EntityManager $em, $message)
     {
@@ -66,6 +69,7 @@ class MessageController extends Controller
 
     /**
      * @Route("/message/delete/{id}", name="message_delete")
+     * @Method("GET")
      */
     public function messageDeleteAction(Message $id, MessageManager $messageManager)
     {
@@ -76,6 +80,7 @@ class MessageController extends Controller
 
     /**
      * @Route("/message/view/{id}", name="message_view")
+     * @Method("GET")
      */
     public function messageViewAction(Message $id, MessageManager $messageManager)
     {

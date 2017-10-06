@@ -12,6 +12,7 @@ use AppBundle\Service\ResetPassword;
 use AppBundle\Service\SendMail;
 use AppBundle\Service\UserPhotoDelete;
 use Doctrine\ORM\EntityManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,6 +28,7 @@ class UserController extends Controller
 {
     /**
      * @Route("/login", name="login")
+     * @Method("GET")
      */
     public function loginAction()
     {
@@ -34,6 +36,7 @@ class UserController extends Controller
 
     /**
      * @Route("/logout", name="logout")
+     * @Method("GET")
      */
     public function logoutAction()
     {
@@ -41,6 +44,7 @@ class UserController extends Controller
 
     /**
      * @Route("/register", name="register")
+     * @Method({"GET","POST"})
      */
     public function registerAction(Request $request, EntityManager $em, Router $router, LoginFormAuthenticator $guard, GuardAuthenticatorHandler $guardHandler)
     {
@@ -65,6 +69,7 @@ class UserController extends Controller
 
     /**
      * @Route("/mdpOublieSend", name="mdp_oublie_send")
+     * @Method({"GET", "POST"})
      */
     public function mdpOublieSendAction(Request $request, SendMail $sendMail)
     {
@@ -88,6 +93,7 @@ class UserController extends Controller
     /**
      * @Route("/profil", name="profil")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Method({"GET","POST"})
      */
     public function profilAction(Request $request, TokenStorage $tokenStorage, EntityManager $em)
     {
@@ -105,6 +111,7 @@ class UserController extends Controller
 
     /**
      * @Route("/profil/user/{slug}", name="profil_user")
+     * @Method("GET")
      */
     public function profilUserAction(User $id, TokenStorage $tokenStorage)
     {
@@ -118,6 +125,7 @@ class UserController extends Controller
     /**
      * @Route("/profil/photo/delete", name="profil_photo_delete")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Method("GET")
      */
     public function profilPhotoDeleteAction(UserPhotoDelete $userPhotoDelete, TokenStorage $tokenStorage, Router $router, Request $request)
     {
@@ -130,6 +138,7 @@ class UserController extends Controller
 
     /**
      * @Route("/resetPassword", name="reset_password")
+     * @Method({"GET","POST"})
      */
     public function resetPasswordAction(Request $request, EntityManager $em, GuardAuthenticatorHandler $guard, LoginFormAuthenticator $authenticator, ResetPassword $resetPassword)
     {

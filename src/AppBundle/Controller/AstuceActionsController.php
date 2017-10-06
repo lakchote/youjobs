@@ -9,6 +9,7 @@ use AppBundle\Form\Type\NewCommentFormType;
 use AppBundle\Manager\CommentairesManager;
 use AppBundle\Service\PostAstuce;
 use AppBundle\Service\UserAstucesActions;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,7 @@ class AstuceActionsController extends Controller
 {
     /**
      * @Route("/astuce/post", name="astuce_post")
+     * @Method({"GET","POST"})
      */
     public function astucePostAction(Request $request, PostAstuce $postAstuce, Router $router)
     {
@@ -41,6 +43,7 @@ class AstuceActionsController extends Controller
 
     /**
      * @Route("/astuce/report/{id}", name="astuce_report")
+     * @Method("GET")
      */
     public function astuceReportAction(Request $request, Astuce $id, UserAstucesActions $userActions, TokenStorage $tokenStorage)
     {
@@ -52,6 +55,7 @@ class AstuceActionsController extends Controller
 
     /**
      * @Route("/astuce/unreport/{id}", name="astuce_unreport")
+     * @Method("GET")
      */
     public function astuceUnreportAction(Request $request, Astuce $id, UserAstucesActions $userActions, TokenStorage $tokenStorage)
     {
@@ -63,6 +67,7 @@ class AstuceActionsController extends Controller
 
     /**
      * @Route("/astuce/bookmark/{id}", name="astuce_bookmark")
+     * @Method("GET")
      */
     public function astuceBookmarkAction(Astuce $id, TokenStorage $tokenStorage, Request $request, UserAstucesActions $userAstuces)
     {
@@ -74,6 +79,7 @@ class AstuceActionsController extends Controller
 
     /**
      * @Route("/astuce/unbookmark/{id}", name="astuce_unbookmark")
+     * @Method("GET")
      */
     public function astuceUnbookmarkAction(Astuce $id, TokenStorage $tokenStorage, Request $request, UserAstucesActions $userAstuces)
     {
@@ -85,6 +91,7 @@ class AstuceActionsController extends Controller
 
     /**
      * @Route("/astuce/{id}/post/comment", name="astuce_post_comment")
+     * @Method({"GET","POST"})
      */
     public function astucePostCommentAction(Astuce $id, Request $request, CommentairesManager $commentsManager, Router $router)
     {
@@ -106,6 +113,7 @@ class AstuceActionsController extends Controller
 
     /**
      * @Route("/astuce/{id}/answer/comment/{comment_id}", name="astuce_answer_comment")
+     * @Method({"GET","POST"})
      */
     public function astuceAnswerCommentAction(Astuce $id, Commentaires $comment_id, Request $request, CommentairesManager $commentsManager, Router $router)
     {
@@ -129,6 +137,7 @@ class AstuceActionsController extends Controller
 
     /**
      * @Route("/astuce/delete/{id}", name="astuce_delete")
+     * @Method("GET")
      */
     public function annonceDeleteAction(Astuce $id, UserAstucesActions $userActions)
     {

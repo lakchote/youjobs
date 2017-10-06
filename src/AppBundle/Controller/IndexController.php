@@ -6,6 +6,7 @@ use AppBundle\Form\Type\ContactFormType;
 use AppBundle\Service\SendMail;
 use Doctrine\ORM\EntityManager;
 use Knp\Component\Pager\Paginator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,6 +16,7 @@ class IndexController extends Controller
 {
     /**
      * @Route("/", name="index")
+     * @Method("GET")
      */
     public function indexAction()
     {
@@ -23,6 +25,7 @@ class IndexController extends Controller
 
     /**
      * @Route("/lp", name="landing_page")
+     * @Method("GET")
      */
     public function landingPageAction()
     {
@@ -32,6 +35,7 @@ class IndexController extends Controller
     /**
      * @Route("/home", name="home")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Method("GET")
      */
     public function homeAction(EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -47,6 +51,7 @@ class IndexController extends Controller
     /**
      * @Route("/astuces", name="astuces")
      * @Security("is_granted('IS_AUTHENTICATED_REMEMBERED')")
+     * @Method("GET")
      */
     public function astucesAction(EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -61,6 +66,7 @@ class IndexController extends Controller
 
     /**
      * @Route("/contact", name="contact")
+     * @Method({"GET","POST"})
      */
     public function contactAction(Request $request, SendMail $sendMail)
     {
@@ -80,6 +86,7 @@ class IndexController extends Controller
 
     /**
      * @Route("/search", name="search")
+     * @Method("GET")
      */
     public function searchAction(Request $request, EntityManager $em, Paginator $paginator)
     {

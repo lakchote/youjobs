@@ -7,6 +7,7 @@ use AppBundle\Entity\Astuce;
 use AppBundle\Entity\User;
 use AppBundle\Manager\AdminManager;
 use Doctrine\ORM\EntityManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +19,7 @@ class AdminController extends Controller
 {
     /**
      * @Route("/admin/signalementsAnnonces", name="signalements_annonces")
+     * @Method("GET")
      */
     public function signalementsAnnoncesAction(EntityManager $em)
     {
@@ -29,6 +31,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/signalementsAstuces", name="signalements_astuces")
+     * @Method("GET")
      */
     public function signalementsAstucesAction(EntityManager $em)
     {
@@ -40,6 +43,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/signalement/remove/annonce/{id}", name="remove_signalement_annonce")
+     * @Method("GET")
      */
     public function removeSignalementAnnonceAction(Annonce $annonce, AdminManager $adminManager)
     {
@@ -50,6 +54,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/signalement/remove/astuce/{id}", name="remove_signalement_astuce")
+     * @Method("GET")
      */
     public function removeSignalementAstuceAction(Astuce $astuce, AdminManager $adminManager)
     {
@@ -60,6 +65,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/remove/annonce/{id}", name="remove_annonce")
+     * @Method("GET")
      */
     public function removeAnnonceAction(Annonce $annonce, AdminManager $adminManager)
     {
@@ -70,6 +76,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/remove/astuce/{id}", name="remove_astuce")
+     * @Method("GET")
      */
     public function removeAstuceAction(Astuce $astuce, AdminManager $adminManager)
     {
@@ -80,6 +87,7 @@ class AdminController extends Controller
 
     /**
      * @Route("/admin/user/remove/{id}/{referrer}", name="remove_user")
+     * @Method("GET")
      */
     public function removeUserAction(User $user, AdminManager $adminManager, $referrer)
     {

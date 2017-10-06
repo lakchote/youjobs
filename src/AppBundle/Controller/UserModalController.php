@@ -13,6 +13,7 @@ use AppBundle\Form\Type\MessageFormType;
 use AppBundle\Form\Type\NewCommentFormType;
 use AppBundle\Form\Type\RegisterFormType;
 use AppBundle\Form\Type\LoginFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,6 +24,7 @@ class UserModalController extends Controller
 {
     /**
      * @Route("/modal/login", name="modal_login")
+     * @Method("GET")
      */
     public function modalLoginAction(Request $request)
     {
@@ -35,6 +37,7 @@ class UserModalController extends Controller
 
     /**
      * @Route("/modal/mdpOublie", name="modal_mdpOublie")
+     * @Method("GET")
      */
     public function modalMdpOublieAction(Request $request)
     {
@@ -47,6 +50,7 @@ class UserModalController extends Controller
 
     /**
      * @Route("/modal/register", name="modal_register")
+     * @Method("GET")
      */
     public function modalRegisterAction(Request $request)
     {
@@ -59,6 +63,7 @@ class UserModalController extends Controller
 
     /**
      * @Route("/modal/postAdvert", name="modal_post_advert")
+     * @Method("GET")
      */
     public function modalPostAdvertAction(Request $request)
     {
@@ -71,6 +76,7 @@ class UserModalController extends Controller
 
     /**
      * @Route("/modal/postAtip", name="modal_post_tip")
+     * @Method("GET")
      */
     public function modalPostTipAction(Request $request)
     {
@@ -83,6 +89,7 @@ class UserModalController extends Controller
 
     /**
      * @Route("/modal/astuce/{id}/postAcomment", name="modal_post_comment")
+     * @Method("GET")
      */
     public function modalPostCommentAction(Astuce $id, Request $request)
     {
@@ -96,6 +103,7 @@ class UserModalController extends Controller
 
     /**
      * @Route("/modal/astuce/{id}/answerComment/{comment_id}", name="modal_answer_comment")
+     * @Method("GET")
      */
     public function modalAnswerCommentAction(Astuce $id, Commentaires $comment_id, Request $request)
     {
@@ -110,6 +118,7 @@ class UserModalController extends Controller
 
     /**
      * @Route("/modal/message/beneficiaire/{slug}", name="modal_message")
+     * @Method("GET")
      */
     public function modalMessageAction(User $id, Request $request)
     {
@@ -124,6 +133,7 @@ class UserModalController extends Controller
     /**
      * @Route("/modal/answer/{id}/message/{slug}", name="modal_answer_message")
      * @ParamConverter("user", options={"mapping" : {"slug" : "slug"}})
+     * @Method("GET")
      */
     public function modalAnswerMessageAction(Message $id, User $user, Request $request)
     {

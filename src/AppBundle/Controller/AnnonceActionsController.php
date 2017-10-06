@@ -7,6 +7,7 @@ use AppBundle\Form\Type\AnnonceFormType;
 use AppBundle\Service\PostAnnonce;
 use AppBundle\Service\UserAnnoncesActions;
 use Doctrine\ORM\EntityManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +19,7 @@ class AnnonceActionsController extends Controller
 {
     /**
      * @Route("/annonce/post", name="annonce_post")
+     * @Method({"GET", "POST"})
      */
     public function annoncePostAction(Request $request, PostAnnonce $postAnnonce, Router $router)
     {
@@ -39,6 +41,7 @@ class AnnonceActionsController extends Controller
 
     /**
      * @Route("/annonce/fulltext/{id}", name="annonce_fulltext")
+     * @Method("GET")
      */
     public function annonceFullTextAction(Request $request, EntityManager $em, Annonce $id)
     {
@@ -48,6 +51,7 @@ class AnnonceActionsController extends Controller
 
     /**
      * @Route("/annonce/report/{id}", name="annonce_report")
+     * @Method("GET")
      */
     public function annonceReportAction(Request $request, Annonce $id, UserAnnoncesActions $userActions, TokenStorage $tokenStorage)
     {
@@ -59,6 +63,7 @@ class AnnonceActionsController extends Controller
 
     /**
      * @Route("/annonce/unreport/{id}", name="annonce_unreport")
+     * @Method("GET")
      */
     public function annonceUnreportAction(Request $request, Annonce $id, UserAnnoncesActions $userActions, TokenStorage $tokenStorage)
     {
@@ -70,6 +75,7 @@ class AnnonceActionsController extends Controller
 
     /**
      * @Route("/annonce/delete/{id}", name="annonce_delete")
+     * @Method("GET")
      */
     public function annonceDeleteAction(Annonce $id, UserAnnoncesActions $userActions)
     {

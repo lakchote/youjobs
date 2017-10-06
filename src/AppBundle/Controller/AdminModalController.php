@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Annonce;
 use AppBundle\Entity\Astuce;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,7 @@ class AdminModalController extends Controller
 {
     /**
      * @Route("/admin/modal/signalement/annonce/{id}", name="admin_modal_signalement_annonce")
+     * @Method("GET")
      */
     public function adminModalSignalementAnnonceAction(Request $request, Annonce $annonce)
     {
@@ -24,6 +26,7 @@ class AdminModalController extends Controller
 
     /**
      * @Route("/admin/modal/signalement/astuce/{id}", name="admin_modal_signalement_astuce")
+     * @Method("GET")
      */
     public function adminModalSignalementAstuceAction(Request $request, Astuce $astuce)
     {

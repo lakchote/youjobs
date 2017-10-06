@@ -8,6 +8,7 @@ use AppBundle\Entity\User;
 use AppBundle\Service\SetIntroMessagesAsRead;
 use Doctrine\ORM\EntityManager;
 use Knp\Component\Pager\Paginator;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -23,6 +24,7 @@ class AnnonceController extends Controller
     /**
      * @Route("/annonce/view/{id}", name="annonce_view")
      * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
+     * @Method("GET")
      */
     public function annonceViewAction(Annonce $id)
     {
@@ -33,6 +35,7 @@ class AnnonceController extends Controller
 
     /**
      * @Route("/annonces/read/intro-message", name="annonces_read_intro_message")
+     * @Method("GET")
      */
     public function annoncesReadIntroMessageAction(Request $request, SetIntroMessagesAsRead $setIntroMessagesAsRead)
     {
@@ -43,6 +46,7 @@ class AnnonceController extends Controller
 
     /**
      * @Route("/annonces/categorie/{slug}", name="annonces_categorie")
+     * @Method("GET")
      */
     public function annoncesCategorieAction(Categorie $id, EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -58,6 +62,7 @@ class AnnonceController extends Controller
 
     /**
      * @Route("/annonces/user/{slug}", name="annonces_user")
+     * @Method("GET")
      */
     public function annoncesUserAction(User $id, EntityManager $em, Paginator $paginator, Request $request)
     {
@@ -75,6 +80,7 @@ class AnnonceController extends Controller
      * @Route("/annonces/categorie/{slug}/user/{slug_user}", name="annonces_categorie_user")
      * @ParamConverter("categorie", options={"mapping": {"slug" : "slug"}})
      * @ParamConverter("user", options={"mapping" : {"slug_user" : "slug"}})
+     * @Method("GET")
      */
     public function annoncesCategorieUserAction(Categorie $categorie, User $user, EntityManager $em, Paginator $paginator, Request $request)
     {
