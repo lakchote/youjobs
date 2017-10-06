@@ -11,7 +11,7 @@ Users can thank other users, send messages, post comments, report an advert or a
 
 Technical aspects
 ---
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/e8d7fac7-a902-4647-b5a1-1b6d9ccd1a63/small.png)](https://insight.sensiolabs.com/projects/e8d7fac7-a902-4647-b5a1-1b6d9ccd1a63)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/f157a0dc-08f0-43fe-8d5d-d924056ab6ed/small.png)](https://insight.sensiolabs.com/projects/f157a0dc-08f0-43fe-8d5d-d924056ab6ed)
 
 * Entirely made with the [Symfony framework](http://www.symfony.com) (v3.3)
 * User authentification system  
